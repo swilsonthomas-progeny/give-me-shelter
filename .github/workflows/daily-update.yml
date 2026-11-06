@@ -10,6 +10,9 @@ permissions:
   pull-requests: write
   id-token: write   # lets the job prove its identity to the Claude API; no stored key
 
+env:
+  BRANCH: auto/daily-update
+
 concurrency:
   group: ledger-update
   cancel-in-progress: false
@@ -20,10 +23,34 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      # If yesterday's update is still waiting for review, keep building on it so any
+      # edits made in that pull request survive. Otherwise start fresh from main.
+      - name: Start from the open review, if there is one
+        id: base
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          pr=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number // empty')
+          echo "pr=$pr" >> "$GITHUB_OUTPUT"
+          if [ -n "$pr" ]; then
+            git fetch origin "$BRANCH"
+            git checkout -B "$BRANCH" "origin/$BRANCH"
+            if ! git merge --no-edit origin/main; then
+              echo "::error::data.json was edited both on main and in pull request #$pr. Merge or close #$pr, then rerun."
+              exit 1
+            fi
+          else
+            git checkout -B "$BRANCH" origin/main
+          fi
 
       - name: Search for changes and draft an update
         env:
@@ -37,19 +64,27 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scripts/update.py
 
-      - name: Check for a proposed update
-        id: check
+      - name: Open or update the pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ steps.base.outputs.pr }}
         run: |
-          if [ -f CHANGES.md ]; then echo "changed=true" >> "$GITHUB_OUTPUT"; else echo "changed=false" >> "$GITHUB_OUTPUT"; fi
-
-      - name: Open a pull request for review
-        if: steps.check.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v6
-        with:
-          branch: auto/daily-update
-          delete-branch: true
-          add-paths: data.json
-          commit-message: "Daily ledger update"
-          title: "Ledger update for review"
-          body-path: CHANGES.md
-          labels: needs-review
+          if [ -f CHANGES.md ]; then
+            git add data.json
+            git commit -m "Daily ledger update $(date -u +%F)"
+          fi
+          if [ -n "$PR" ]; then
+            # Push today's changes (and anything merged from main) onto the open review.
+            git push origin "$BRANCH"
+            if [ -f CHANGES.md ]; then
+              gh pr view "$PR" --json body --jq .body > previous.md
+              { cat CHANGES.md; printf '\n\n---\n\n### Earlier in this review\n\n'; sed '/^### Earlier in this review$/d' previous.md; } | head -c 60000 > body.md
+              gh pr edit "$PR" --body-file body.md
+            fi
+          elif [ -f CHANGES.md ]; then
+            git push --force origin "$BRANCH"
+            gh pr create --base main --head "$BRANCH" --title "Ledger update for review" \
+              --body-file CHANGES.md --label needs-review
+          else
+            echo "No changes today."
+          fi

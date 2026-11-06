@@ -16,7 +16,7 @@ A public tracker of tiny houses, pallet shelters, emergency housing units and RV
 4. If anything changed, GitHub opens a pull request titled **Ledger update for review**, with a summary of each change and links to sources.
 5. You read it (GitHub's phone app works fine) and tap **Merge**. The site updates within a minute or two. Close the PR instead to reject it.
 
-If you skip a day, the next run starts from the last merged version and folds in anything still pending.
+If you don't merge a pull request the same day, the next run adds to it instead of replacing it, so any edits you made in the pull request are kept. Each day's summary is stacked at the top of the description. If you edit data.json on main while a review is open, the job stops and asks you to merge or close the open pull request first.
 
 ## One-time setup (about 20 minutes)
 
