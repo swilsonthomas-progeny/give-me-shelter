@@ -237,7 +237,7 @@
       "id": "spruce-street-village",
       "name": "Spruce Street Tiny House Village",
       "neighborhood": "Central District",
-      "address": "King County-owned land at the Judge Patricia H. Clark Children and Family Justice Center campus, near E Spruce Street. DJC gives 14th Ave and E Spruce St. The Urbanist gives 12th Ave and E Spruce St.",
+      "address": "12th Ave and E Spruce St, on the Judge Patricia H. Clark Children and Family Justice Center campus",
       "operator": "Low Income Housing Institute (LIHI)",
       "units": {
         "shelter": 0,
@@ -248,21 +248,21 @@
       },
       "status": "announced",
       "program": "other",
-      "program_note": "The sources describe this as a King County-funded project on county land. They do not tie it to the City's shelter acceleration or Neighbor by Neighbor effort.",
+      "program_note": "County-funded: King County Executive Girmay Zahilay proposed $5M for it in his Sept. 21 budget update",
       "dates": {
-        "announced": null,
+        "announced": "2026-09-21",
         "opened": null,
         "closed": null,
         "expected": null
       },
-      "notes": "The Urbanist reports the County Executive's budget update proposes $5M for an 80-unit village, with 30 homes set aside for families with children. DJC reports LIHI plans to open it in the first half of 2027. The exact announcement date is not given in the retrieved text, and neither is a specific expected month. The two sources give different cross streets.",
+      "notes": "80 tiny homes, 30 set aside for families with children, on an unused corner of county land. LIHI would run it with 24/7 staffing. Funding depends on the county budget. The DJC reports LIHI plans to open it in the first half of 2027; The DJC gives the cross street as 14th Ave.",
       "sources": [
         {
           "title": "LIHI to open 80 tiny homes on county-owned Central District site (Seattle DJC)",
           "url": "https://www.djc.com/news/bu/12178304.html"
         },
         {
-          "title": "Zahilay Announces More Than $19.5 Million in New Housing Investments (The Urbanist)",
+          "title": "Zahilay Announces More Than $19.5 Million in New Housing Investments (The Urbanist, Sept. 22, 2026)",
           "url": "https://www.theurbanist.org/zahilay-announces-more-than-19-5-million-in-new-housing-investments/"
         }
       ]
