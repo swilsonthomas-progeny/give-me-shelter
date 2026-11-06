@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "41 14 * * *"   # 14:41 UTC = 6:41am PST / 7:41am PDT
   workflow_dispatch: {}
+  push:                     # also run when the job itself changes, as a check
+    branches: [main]
+    paths: [".github/workflows/daily-update.yml", "scripts/update.py"]
 
 permissions:
   contents: write
@@ -27,11 +30,12 @@ jobs:
 
       - name: Search for changes and draft an update
         env:
-          # IDs from the Claude Console's workload identity wizard. They are not secrets.
-          ANTHROPIC_FEDERATION_RULE_ID: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID }}
-          ANTHROPIC_ORGANIZATION_ID: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
-          ANTHROPIC_SERVICE_ACCOUNT_ID: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
-          ANTHROPIC_WORKSPACE_ID: ${{ vars.ANTHROPIC_WORKSPACE_ID }}
+          # IDs from the Claude Console's workload identity wizard. They are not secrets;
+          # a repository variable with the same name overrides the value here.
+          ANTHROPIC_FEDERATION_RULE_ID: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID || 'fdrl_015NHkzYuELqGrqbBjQPvh4p' }}
+          ANTHROPIC_ORGANIZATION_ID: ${{ vars.ANTHROPIC_ORGANIZATION_ID || 'cc98e5e5-910e-4bcf-a650-b71071c61a07' }}
+          ANTHROPIC_SERVICE_ACCOUNT_ID: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID || 'svac_01DXEyPEby4K5Z9SFQVgQB55' }}
+          ANTHROPIC_WORKSPACE_ID: ${{ vars.ANTHROPIC_WORKSPACE_ID || 'wrkspc_017SABmkHdFMi7Qzv5dAH89V' }}
           # Fallback: if this secret exists it's used instead of the IDs above.
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scripts/update.py
