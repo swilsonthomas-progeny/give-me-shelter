@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05",
+  "updated": "2026-11-06",
   "baseline_date": "2026-01-01",
   "sites": [
     {
@@ -182,9 +182,9 @@
     {
       "id": "glassyard-commons",
       "name": "Glassyard Commons",
-      "neighborhood": "Highland Park / South Park",
-      "address": "7201 2nd Ave SW",
-      "operator": "Low Income Housing Institute",
+      "neighborhood": "South Park / southeast West Seattle",
+      "address": "7200 2nd Ave SW",
+      "operator": "Low Income Housing Institute (LIHI)",
       "units": {
         "shelter": 0,
         "pallet": 0,
@@ -194,15 +194,31 @@
       },
       "status": "construction",
       "program": "accelerated",
-      "program_note": "$3.3M KCRHA contract. The mayor cited it as a project whose permits the city is speeding up.",
+      "program_note": "The project was already in development (it appeared in permit filings in January 2026). Mayor Wilson's Executive Order 2026-09, signed Nov. 3, directs 2026 funding to speed up its opening, according to the Mayor's office and press reports.",
       "dates": {
         "announced": "2026-01-27",
         "opened": null,
         "closed": null,
-        "expected": "2026-11-15"
+        "expected": "2026-11-30"
       },
-      "notes": "72 RV spaces plus 20 tiny houses on state-owned land. First targeted to open before the World Cup; broke ground Sept 10; latest reported target is mid-November 2026. Would be Seattle's only RV safe lot.",
+      "notes": "Opening date changed. In September LIHI said mid-November. On Nov. 3 HSD Director Tanya Kim said it opens at the end of November. At an Oct. 28 neighborhood meeting an HSD staffer said \"right around Thanksgiving\". Only the month is known, so the expected date stays on the 15th. Space counts differ by source: most say 72 RV spaces and 20 tiny houses. HSD and KOMO give 92 total spaces. An Oct. 28 meeting report gives 70 RV spaces plus 20 tiny houses. LIHI says it will serve about 140 people. Wilson says the city has had no operating RV safe lot for over a year and a half.",
       "sources": [
+        {
+          "title": "Mayor Wilson vetoes controversial RV permit bill, pivoting to executive strategy and safe lot expansion (Westside Seattle)",
+          "url": "https://www.westsideseattle.com/robinson-papers/2026/11/03/mayor-wilson-vetoes-controversial-rv-permit-bill-pivoting-executive"
+        },
+        {
+          "title": "Seattle mayor orders new work group after vetoing RV camping bill (The Center Square)",
+          "url": "https://www.thecentersquare.com/washington/article_a0469544-5db2-4aa8-98d3-15c536167264.html"
+        },
+        {
+          "title": "Highland Park community examines Westcrest Bike Park proposal and Glassyard Commons opening (Westside Seattle)",
+          "url": "https://www.westsideseattle.com/robinson-papers/2026/10/28/highland-park-community-examines-westcrest-bike-park-proposal-and"
+        },
+        {
+          "title": "Seattle Mayor Katie Wilson orders new approach to RV homelessness after vetoing permit program (MyNorthwest)",
+          "url": "https://mynorthwest.com/mynorthwest-politics/seattle-wilson-rv-executive/4294279"
+        },
         {
           "title": "West Seattle Blog: Plan first spotted in permit filings",
           "url": "https://westseattleblog.com/2026/01/combined-rv-safe-lot-tiny-house-village-proposed-for-southeast-west-seattle-site-thats-seen-encampments-before/"
@@ -406,6 +422,29 @@
         }
       ],
       "short": "Faster permits"
+    },
+    {
+      "id": "p-two-safe-lots",
+      "made": "2026-11-03",
+      "made_label": "Nov. 3, 2026 (Executive Order 2026-09 and veto announcement)",
+      "text": "Open two RV safe lots: Glassyard Commons by the end of November 2026, and a second lot in 2027. The Mayor says the two lots would serve 182 vehicle residents. The proposed budget includes $3.5M for the second lot.",
+      "short": "2 RV safe lots",
+      "status": "in_progress",
+      "status_note": "Glassyard Commons is under construction. The city says it opens at the end of November. The second lot has no site or firm date, and the executive order gives no date. No target is set here because the sources give no firm date for the second lot and give the 182 figure as residents served, not spaces.",
+      "sources": [
+        {
+          "title": "Seattle mayor orders new work group after vetoing RV camping bill (The Center Square)",
+          "url": "https://www.thecentersquare.com/washington/article_a0469544-5db2-4aa8-98d3-15c536167264.html"
+        },
+        {
+          "title": "Mayor Wilson vetoes controversial RV permit bill, pivoting to executive strategy (Westside Seattle)",
+          "url": "https://www.westsideseattle.com/robinson-papers/2026/11/03/mayor-wilson-vetoes-controversial-rv-permit-bill-pivoting-executive"
+        },
+        {
+          "title": "Seattle Mayor Wilson vetoes RV permit bill due to 'efficacy concerns' (KOMO)",
+          "url": "https://komonews.com/news/local/seattle-mayor-wilson-vetoes-rv-permit-bill-due-to-efficacy-concerns-signs-4-others-homeless-camping-shelter-reosuces-budget-funding-council-safety-violence-drug-use-neighborhood"
+        }
+      ]
     }
   ],
   "events": [
@@ -600,8 +639,8 @@
       "id": "e-2026-vrap",
       "date": "2026-10-20",
       "type": "policy",
-      "title": "Council passes RV parking restrictions (VRAP), 8–1",
-      "detail": "Unpermitted RVs limited to two hours, no overnight parking from April 30, 2027; $5M toward safe lots, storage and outreach. Wilson says she has serious concerns; her signature is pending.",
+      "title": "Council passes RV parking restrictions (VRAP)",
+      "detail": "Unpermitted RVs limited to two hours, no overnight parking from April 30, 2027; $5M toward safe lots, storage and outreach. KOMO reports the package passed 8–1; KING 5, The Stranger and Capitol Hill Seattle report the RV permit bill (CB 121283) passed 6–3. Wilson said she had serious concerns.",
       "sources": [
         {
           "title": "KUOW",
@@ -610,6 +649,10 @@
         {
           "title": "Axios",
           "url": "https://www.axios.com/local/seattle/2026/10/22/seattle-homelessness-rv-parking-permit-program-ban"
+        },
+        {
+          "title": "Seattle council approves RV permit plan (KOMO)",
+          "url": "https://komonews.com/news/local/seattle-city-council-approves-vehicle-resident-assistance-program-homeless-rv-living-in-your-car-in-seattle-king-county-enforcement-recreational-vehicles"
         }
       ],
       "short": "Council RV limits"
@@ -645,6 +688,107 @@
         }
       ],
       "short": "City page still says 1,000"
+    },
+    {
+      "id": "e-2026-rv-veto",
+      "date": "2026-11-02",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Wilson vetoes RV permit bill, signs four others",
+      "short": "Wilson vetoes CB 121283",
+      "detail": "Mayor Wilson vetoed CB 121283, the RV permit program in Councilmember Strauss's Vehicle Resident Assistance Program (VRAP). She signed the other four ordinances in the package. One of them, CB 121279, widens the authority of the Finance and Administrative Services director to sign leases and open safe lots, storage sites and other resources for vehicle residents. Her veto letter cites the cost and complexity of a one-time census, legal issues around proof of ownership and impoundment, and storage costs. It is her first veto. Council has up to 30 days to override, and six votes are needed. The bill passed 6–3 per KING 5, The Stranger and Capitol Hill Seattle.",
+      "sources": [
+        {
+          "title": "Mayor Wilson to Sign Four out of Five RV Ordinances, Veto CB12183 (City of Seattle)",
+          "url": "https://content.govdelivery.com/accounts/WASEATTLE/bulletins/4316cd6"
+        },
+        {
+          "title": "CB 121283 Veto Letter (Office of the Mayor)",
+          "url": "https://wilson.seattle.gov/wp-content/uploads/sites/43/2026/11/CB-121283-Veto-Letter.pdf"
+        },
+        {
+          "title": "Seattle mayor announces executive order on RVs following permit program veto (KING 5)",
+          "url": "https://www.king5.com/article/news/politics/seattle-mayor-vetoes-permit-program-living-in-rv-new-executive-order/281-0cfbb121-72ce-49d3-84aa-1a593319f9ee"
+        },
+        {
+          "title": "Override? Council weighs next steps after Wilson veto (Capitol Hill Seattle Blog)",
+          "url": "https://www.capitolhillseattle.com/2026/11/override-council-weighs-next-steps-after-wilson-veto-of-rv-homeless-parking-permit-plan/"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-eo-rv-2026-09",
+      "date": "2026-11-03",
+      "date_precision": "day",
+      "type": "policy",
+      "site": "glassyard-commons",
+      "title": "Executive Order 2026-09 on vehicle residents and RVs",
+      "short": "EO 2026-09 on RVs",
+      "detail": "Mayor Wilson signed Executive Order 2026-09. It directs outreach and services for people living in vehicles, including connections to safe lots, RV storage and shelter. It directs the Human Services Department to deploy 2026 funding for outreach and to operate Glassyard Commons. It speeds up two RV safe lots and sets up a work group of city departments and community partners, including SPD. Press reports describe the work group as running 60 days. The Mayor said the proposed 2027–28 budget funds two safe lots expected to serve 182 vehicle residents. It includes $3.5M for a second lot, which has no date or location. Wilson told The Center Square that what changes in enforcement is \"to be determined.\"",
+      "sources": [
+        {
+          "title": "Mayor Wilson Announces Executive Order to Improve Outcomes for Vehicle Residents (Office of the Mayor)",
+          "url": "http://wilson.seattle.gov/2026/11/03/mayor-wilson-announces-executive-order-to-improve-outcomes-for-vehicle-residents-and-address-neighborhood-impacts-related-to-rvs/"
+        },
+        {
+          "title": "Seattle Mayor Katie Wilson orders new approach to RV homelessness (MyNorthwest)",
+          "url": "https://mynorthwest.com/mynorthwest-politics/seattle-wilson-rv-executive/4294279"
+        },
+        {
+          "title": "Seattle mayor orders new work group after vetoing RV camping bill (The Center Square)",
+          "url": "https://www.thecentersquare.com/washington/article_a0469544-5db2-4aa8-98d3-15c536167264.html"
+        },
+        {
+          "title": "Mayor Wilson vetoes controversial RV permit bill, pivoting to executive strategy (Westside Seattle)",
+          "url": "https://www.westsideseattle.com/robinson-papers/2026/11/03/mayor-wilson-vetoes-controversial-rv-permit-bill-pivoting-executive"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-saka-veto-support",
+      "date": "2026-11-03",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Saka says he will not vote to override RV veto",
+      "short": "Saka backs RV veto",
+      "detail": "Councilmember Rob Saka voted for the RV bill in October. He appeared with Wilson at her Nov. 3 press conference and said he would no longer provide the sixth vote to override. PubliCola reports the veto stands unless he changes his mind again. The Stranger reports the council has until Dec. 2 to vote. Councilmember Strauss said he wants a vote within about two weeks. No override vote had been scheduled as of Nov. 4.",
+      "sources": [
+        {
+          "title": "Councilmember Saka Says He'll Provide Crucial Vote for Mayor Wilson's Veto (PubliCola)",
+          "url": "https://publicola.com/2026/11/03/councilmember-saka-says-hell-provide-crucial-vote-for-mayor-wilsons-veto-of-legislation-to-ban-rvs-from-seattle/"
+        },
+        {
+          "title": "Councilmember Rob Saka Backs Katie Wilson's RV Ban Veto (The Stranger)",
+          "url": "https://www.thestranger.com/news/councilmember-rob-saka-backs-katie-wilsons-rv-ban-veto/"
+        },
+        {
+          "title": "Seattle mayor announces executive order on RVs following permit program veto (KING 5)",
+          "url": "https://www.king5.com/article/news/politics/seattle-mayor-vetoes-permit-program-living-in-rv-new-executive-order/281-0cfbb121-72ce-49d3-84aa-1a593319f9ee"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-balancing-package",
+      "date": "2026-11-03",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Council budget chair releases 2027–28 Balancing Package",
+      "short": "Balancing Package",
+      "detail": "Budget Chair Dan Strauss released the Balancing Package for the 2027–28 budget. The council release says it protects funding to expand shelter and housing for people experiencing homelessness. It also says it fully funds the Vehicle Resident Assistance Program, including a second new safe lot. The package includes $250,000 in 2028 (HSD-021-B) for an operational and siting plan for a veterans' shelter and services campus in West Seattle. That item has no site, unit count or date. The package is not final, and committee voting follows.",
+      "sources": [
+        {
+          "title": "Budget Chair Strauss releases balanced budget proposal (Seattle City Council)",
+          "url": "https://council.seattle.gov/2026/11/03/budget-chair-strauss-releases-balanced-budget-proposal-focused-on-public-safety-and-affordability/"
+        },
+        {
+          "title": "FOLLOWUP: Alki package, Delridge art wall, veterans-shelter planning... (West Seattle Blog)",
+          "url": "https://westseattleblog.com/2026/11/followup-alki-package-delridge-art-wall-veterans-shelter-planning-and-which-other-budget-changes-from-councilmember-saka-made-balancing-package-cut/"
+        },
+        {
+          "title": "West Seattle neighborhoods win targeted funding in Seattle budget package (Westside Seattle)",
+          "url": "https://www.westsideseattle.com/robinson-papers/2026/11/05/west-seattle-neighborhoods-win-targeted-funding-seattle-budget-package"
+        }
+      ]
     }
   ],
   "city_counts": [
@@ -712,6 +856,26 @@
         {
           "title": "Mayor's office: Shelter action plan (Sept 14)",
           "url": "https://content.govdelivery.com/accounts/WASEATTLE/bulletins/42aad71"
+        }
+      ]
+    },
+    {
+      "id": "u-second-safe-lot",
+      "title": "Second RV safe lot",
+      "timing": "2027 (no date stated)",
+      "detail": "The proposed 2027–28 budget includes $3.5M for a second RV safe lot. Executive Order 2026-09 speeds it up but names no date or site. Wilson said she was not sure of the opening timeline. HSD Director Kim said the city is accelerating plans to open it in 2027. The Mayor says the two safe lots together are expected to serve 182 vehicle residents. The Balancing Package says it funds a second new safe lot.",
+      "sources": [
+        {
+          "title": "Seattle mayor orders new work group after vetoing RV camping bill (The Center Square)",
+          "url": "https://www.thecentersquare.com/washington/article_a0469544-5db2-4aa8-98d3-15c536167264.html"
+        },
+        {
+          "title": "Mayor Wilson vetoes controversial RV permit bill, pivoting to executive strategy (Westside Seattle)",
+          "url": "https://www.westsideseattle.com/robinson-papers/2026/11/03/mayor-wilson-vetoes-controversial-rv-permit-bill-pivoting-executive"
+        },
+        {
+          "title": "Seattle mayor announces executive order on RVs following permit program veto (KING 5)",
+          "url": "https://www.king5.com/article/news/politics/seattle-mayor-vetoes-permit-program-living-in-rv-new-executive-order/281-0cfbb121-72ce-49d3-84aa-1a593319f9ee"
         }
       ]
     }
