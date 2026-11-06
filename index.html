@@ -169,7 +169,7 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
     <div class="sec-head"><h2>How this is counted</h2></div>
     <div class="method">
       <div><b>Categories</b><p>Microshelter: tiny houses and pallet units, combined on the chart and listed separately in each site's details. Emergency housing: rooms or apartments in a building leased whole. RV safe lot: parking spaces.</p></div>
-      <div><b>What counts</b><p>Sites inside Seattle city limits. A unit counts from the day its site opens to residents and comes off the day it closes.</p></div>
+      <div><b>What counts</b><p>Sites inside Seattle city limits. A unit counts from the day its site opens to residents and comes off the day it closes. On the project bars, a dashed bar is still pending and a blurred end marks an approximate opening date.</p></div>
       <div><b>Goals</b><p>Goals include projections the city makes about how many units will open by a date. Each goal is marked at its target and due date. An arrow runs to it from the day it was set, starting at our count on that day. Missed and previous goals stay on the chart so the changes are visible. A deadline given as a season, such as the end of summer, is marked on its last day.</p></div>
       <div><b>City counts</b><p>When the city states how many units it has added, the figure appears in the full record beside our own count for that date. We show both even when they don't match.</p></div>
       <div><b>Program notes</b><p>Each site says whether it is part of the mayor's new shelter initiative, an earlier project the city says it sped up, or neither, repeating what the city and operators say.</p></div>
@@ -378,7 +378,7 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
       const x = X(ch.date), y = Y(run), col = ch.sign>0 ? "var(--ok)" : "var(--bad)";
       g += `<g class="mk" tabindex="0" role="button" data-id="s:${esc(ch.site.id)}" aria-label="${ch.sign>0?"Opened":"Closed"}: ${esc(ch.site.name)}, ${sum(ch.units)} units, ${fdate(ch.date)}">
         <circle class="ring" cx="${x}" cy="${y}" r="5.5" fill="var(--sheet)" stroke="${col}" stroke-width="2"/>
-        <text x="${x-7}" y="${y-8}" text-anchor="end" font-size="11" font-weight="700" fill="var(--ink)">${ch.sign>0?"+":"−"}${sum(ch.units)}</text></g>`;
+        </g>`;
     });
     // marker tracks
     const track = (y, entries) => {
@@ -403,7 +403,6 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
 
     // projects
     g += monthLines(PT + 26, sites.length*RH, PT + 26 + sites.length*RH + 15);
-    g += `<text x="${XS+4}" y="${PT+16}" font-size="10.5" fill="var(--muted)">Bar runs from announcement to opening. Dashed: still pending. Blurred end: approximate date. Ticks: milestones.</text>`;
     sites.forEach((s,i)=>{
       const y = PT + 26 + i*RH, cy = y + RH/2, col = GROUPS[mainGroup(s.units)].color;
       const pending = !s.dates.opened;
@@ -431,7 +430,6 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
 
     // today
     g += `<line x1="${xT}" x2="${xT}" y1="${CT}" y2="${H-24}" stroke="var(--ink)" stroke-width="1.5"/>`;
-    g += `<text x="${xT+6}" y="${CT+12}" font-size="11" class="mono" fill="var(--ink)">Today</text>`;
     g += `<text x="${xT+8}" y="${Y(countOn(today))+4}" font-size="14" font-weight="700" fill="var(--ink)">${fmt(countOn(today))}</text>`;
     g += `</svg>`;
     const keep = first ? null : plotEl.scrollLeft;
