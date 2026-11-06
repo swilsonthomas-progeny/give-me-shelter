@@ -62,6 +62,9 @@ Rules:
 - Every item needs at least one source URL you actually retrieved. Report only what sources state.
   Never estimate unit counts or dates. If a date is only known to the month, use the 15th and set
   "date_precision": "month".
+  For a site's expected opening given only as a vague period ("first half of 2027", "spring"), set
+  "expected" to the last day of that period and "expected_label" to the period in the source's words
+  (the chart draws it as approximate). "End of November" is specific enough: use 2026-11-30, no label.
 - "program" for a site: "initiative" if the city or operator says it is part of Wilson's shelter
   acceleration / Shelter Accelerator / Neighbor by Neighbor effort or funded by it; "accelerated" if it
   was already in development and the city says it expedited it; otherwise "other". Put the stated basis
@@ -103,7 +106,8 @@ Reply with exactly one fenced ```json block and nothing after it, shaped like:
       "operator": "...", "units": {{"shelter": 0, "pallet": 0, "tiny_house": 0, "emergency_housing": 0, "rv": 0}},
       "status": "announced|construction|open|closed", "program": "initiative|accelerated|other",
       "program_note": "...", "dates": {{"announced": "YYYY-MM-DD|null", "opened": "YYYY-MM-DD|null",
-      "closed": "YYYY-MM-DD|null", "expected": "YYYY-MM-DD|null"}}, "notes": "...",
+      "closed": "YYYY-MM-DD|null", "expected": "YYYY-MM-DD|null",
+      "expected_label": "only for a vague period, e.g. first half of 2027"}}, "notes": "...",
       "sources": [{{"title": "...", "url": "https://..."}}] }} ],
   "event_adds": [ {{ "id": "e-YYYY-short-slug", "date": "YYYY-MM-DD", "date_precision": "day|month",
       "type": "campaign|goal|policy|site|context", "site": "site-id or omit", "title": "...",
