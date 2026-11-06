@@ -60,7 +60,7 @@
         "opened": "2026-06-07",
         "closed": null
       },
-      "notes": "Opened with 50 pallet units; the remaining 25 were scheduled for installation by the end of June. About 15 residents a week after opening.",
+      "notes": "Opened with 50 pallet units; the remaining 25 were scheduled to be added by the end of June.",
       "sources": [
         {
           "title": "FOX 13: Interbay tiny home village opens, falls short of goal",
@@ -126,7 +126,7 @@
         "opened": "2026-07-30",
         "closed": null
       },
-      "notes": "LIHI planned 32 houses; Seattle Times reported 31 at opening. Reported to replace tiny houses from Friendship Heights Village, which is being redeveloped as senior housing, so the net gain may be smaller.",
+      "notes": "31 tiny houses. Built to replace Friendship Heights Village, which LIHI is redeveloping as senior housing, so the net gain may be smaller.",
       "sources": [
         {
           "title": "LIHI: Belmont Village groundbreaking",
@@ -194,14 +194,14 @@
       },
       "status": "construction",
       "program": "accelerated",
-      "program_note": "The project was already in development (it appeared in permit filings in January 2026). Mayor Wilson's Executive Order 2026-09, signed Nov. 3, directs 2026 funding to speed up its opening, according to the Mayor's office and press reports.",
+      "program_note": "In development before Wilson took office. Her Nov. 3 executive order directs 2026 funding to speed its opening.",
       "dates": {
         "announced": "2026-01-27",
         "opened": null,
         "closed": null,
         "expected": "2026-11-30"
       },
-      "notes": "Opening date changed. In September LIHI said mid-November. On Nov. 3 HSD Director Tanya Kim said it opens at the end of November. At an Oct. 28 neighborhood meeting an HSD staffer said \"right around Thanksgiving\". Only the month is known, so the expected date stays on the 15th. Space counts differ by source: most say 72 RV spaces and 20 tiny houses. HSD and KOMO give 92 total spaces. An Oct. 28 meeting report gives 70 RV spaces plus 20 tiny houses. LIHI says it will serve about 140 people. Wilson says the city has had no operating RV safe lot for over a year and a half.",
+      "notes": "72 RV spaces and 20 tiny houses, serving about 140 people. The city expects it to open at the end of November; LIHI had earlier said mid-November. Wilson says Seattle has gone more than a year and a half without an operating RV safe lot.",
       "sources": [
         {
           "title": "Mayor Wilson vetoes controversial RV permit bill, pivoting to executive strategy and safe lot expansion (Westside Seattle)",
@@ -248,7 +248,7 @@
       },
       "status": "announced",
       "program": "other",
-      "program_note": "County-funded: King County Executive Girmay Zahilay proposed $5M for it in his Sept. 21 budget update",
+      "program_note": "County-funded. King County Executive Girmay Zahilay proposed $5M for it in his Sept. 21 budget update.",
       "dates": {
         "announced": "2026-09-21",
         "opened": null,
@@ -256,7 +256,7 @@
         "expected": "2027-06-30",
         "expected_label": "first half of 2027"
       },
-      "notes": "80 tiny homes, 30 set aside for families with children, on an unused corner of county land. LIHI would run it with 24/7 staffing. Funding depends on the county budget. The DJC reports LIHI plans to open it in the first half of 2027 and gives the cross street as 14th Ave.",
+      "notes": "80 tiny houses, 30 reserved for families with children, on an unused corner of the county's Children and Family Justice Center campus. LIHI would run it with 24/7 staff and hopes to open in the first half of 2027. Funding depends on the King County budget.",
       "sources": [
         {
           "title": "LIHI to open 80 tiny homes on county-owned Central District site (Seattle DJC)",
@@ -272,8 +272,8 @@
   "watch": [
     {
       "id": "friendship-heights-village",
-      "title": "Friendship Heights Village (12245 Aurora Ave N) — replacement reported, closure date not confirmed",
-      "detail": "Capitol Hill Seattle Blog reports Belmont Village (opened July 2026) was built to replace Friendship Heights Village. It also reports LIHI is building 90 senior housing units on the Aurora Ave N site. LIHI's own village page still lists Friendship Heights Village as open with 42 tiny houses. LIHI's construction announcement says the property 'most recently held' the village. None of the retrieved sources gives a closing date or a final unit count.",
+      "title": "Friendship Heights Village (12245 Aurora Ave N)",
+      "detail": "Belmont Village, which opened in July 2026, was built to replace this 42-house village, and LIHI is building 90 senior apartments on the site. LIHI still lists the village as open, and no closing date has been announced.",
       "sources": [
         {
           "title": "'Record time' — Belmont Village opens with 31 new shelter homes on Capitol Hill (Capitol Hill Seattle Blog)",
@@ -292,7 +292,7 @@
     {
       "id": "kcrha-689-beds",
       "title": "689 shelter beds closed countywide (KCRHA)",
-      "detail": "KCRHA's CEO attributed the rise in unsheltered homelessness in the 2026 count to the closure of 689 shelter beds across King County. The agency has not published which Seattle sites closed or when.",
+      "detail": "KCRHA's CEO attributed the rise in unsheltered homelessness in the 2026 count to the closure of 689 shelter beds across King County. The agency has not said which Seattle sites closed or when.",
       "sources": [
         {
           "title": "PubliCola, June 29, 2026",
@@ -302,8 +302,8 @@
     },
     {
       "id": "westside-neighbors-shelter",
-      "title": "Westside Neighbors Shelter (West Seattle, 3618 SW Alaska St) — status for the 2026-27 cold-weather season unclear",
-      "detail": "The shelter's website says it is closed for the time being. It also says it normally opens as a cold-weather shelter from November through March. A board statement dated Aug. 26, 2026 says the shelter is 'in transition.' In August the operator said it is a seasonal shelter and is not permanently closed. No bed count or confirmed reopening date was found. It is a privately run, volunteer-operated shelter, not a City-contracted site.",
+      "title": "Westside Neighbors Shelter (3618 SW Alaska St, West Seattle)",
+      "detail": "A volunteer-run cold-weather shelter that normally opens November through March. Its website says it is closed for now, and its board describes it as \"in transition.\" It has not said whether it will open this winter. It is not a city-contracted site.",
       "sources": [
         {
           "title": "Westside Neighbors Shelter",
@@ -323,7 +323,7 @@
       "made_label": "2025 campaign",
       "text": "4,000 new units of emergency housing and shelter over four years.",
       "status": "revised",
-      "status_note": "Replaced in September 2026 by a target of 960 beds by the end of 2027. No four-year figure has been restated.",
+      "status_note": "Replaced in September 2026 by a target of 960 beds by the end of 2027. The administration has not restated a four-year figure.",
       "sources": [
         {
           "title": "FOX 13: Wilson's platform",
@@ -370,7 +370,7 @@
         "by": "2026-09-22"
       },
       "status": "missed",
-      "status_note": "165 units were open when summer ended Sept 22. The city gave no exact date for the end of summer; this tracker uses Sept 22.",
+      "status_note": "165 units were open on Sept. 22, the last day of summer.",
       "sources": [
         {
           "title": "The Stranger",
@@ -381,7 +381,7 @@
     {
       "id": "p-1000-2026",
       "made": "2026-03-04",
-      "made_label": "March 2026 (also described as a campaign pledge)",
+      "made_label": "March 2026",
       "text": "1,000 new shelter units in her first year (2026).",
       "target": {
         "units": 1000,
@@ -411,7 +411,7 @@
         "by": "2026-12-31"
       },
       "status": "in_progress",
-      "status_note": "The city has not said which sites count toward this number. Projected by the mayor's office Oct 21.",
+      "status_note": "Projected by the mayor's office Oct. 21. The city has not said which sites count toward it.",
       "sources": [
         {
           "title": "KOMO: Mayor reveals new strategy",
@@ -430,7 +430,7 @@
         "by": "2027-12-31"
       },
       "status": "in_progress",
-      "status_note": "Depends on the City Council approving the 2027–28 budget. Locations named for 4 of 11 planned projects as of September.",
+      "status_note": "Depends on the City Council approving the 2027–28 budget. As of September, locations were named for 4 of 11 planned projects.",
       "sources": [
         {
           "title": "Real Change: 960 beds under new plan",
@@ -480,11 +480,11 @@
     {
       "id": "p-two-safe-lots",
       "made": "2026-11-03",
-      "made_label": "Nov. 3, 2026 (Executive Order 2026-09 and veto announcement)",
-      "text": "Open two RV safe lots: Glassyard Commons by the end of November 2026, and a second lot in 2027. The Mayor says the two lots would serve 182 vehicle residents. The proposed budget includes $3.5M for the second lot.",
+      "made_label": "Nov. 3, 2026",
+      "text": "Open two RV safe lots serving 182 vehicle residents: Glassyard Commons at the end of November 2026 and a second lot in 2027.",
       "short": "2 RV safe lots",
       "status": "in_progress",
-      "status_note": "Glassyard Commons is under construction. The city says it opens at the end of November. The second lot has no site or firm date, and the executive order gives no date. No target is set here because the sources give no firm date for the second lot and give the 182 figure as residents served, not spaces.",
+      "status_note": "Glassyard Commons is under construction. The second lot has no site or date yet.",
       "sources": [
         {
           "title": "Seattle mayor orders new work group after vetoing RV camping bill (The Center Square)",
@@ -503,11 +503,11 @@
     {
       "id": "p-rv-workgroup",
       "made": "2026-11-03",
-      "made_label": "Nov. 3, 2026 (Executive Order 2026-09)",
-      "text": "Executive Order 2026-09 sets up a city and community work group on vehicle residents and RVs. It is to give recommendations within 60 days. The Mayor expects to send any needed legislation to the council by March 31, 2027.",
+      "made_label": "Nov. 3, 2026",
+      "text": "A work group of city departments and community partners will recommend changes to the city's RV programs, policies and laws within 60 days. Any legislation goes to the council by March 31, 2027.",
       "short": "RV work group, 60 days",
       "status": "in_progress",
-      "status_note": "The order was signed Nov. 3, 2026. Sources say the 60-day recommendations are due about early January 2027, and any legislation is due by 2027-03-31. The sources give no unit counts for this item, so it has no unit target.",
+      "status_note": "Recommendations due in early January 2027.",
       "sources": [
         {
           "title": "Seattle Mayor Katie Wilson orders new approach to RV homelessness after vetoing permit program - MyNorthwest.com",
@@ -714,7 +714,7 @@
       "date": "2026-10-20",
       "type": "policy",
       "title": "Council passes RV parking restrictions (VRAP)",
-      "detail": "Unpermitted RVs limited to two hours, no overnight parking from April 30, 2027; $5M toward safe lots, storage and outreach. KOMO reports the package passed 8–1; KING 5, The Stranger and Capitol Hill Seattle report the RV permit bill (CB 121283) passed 6–3. Wilson said she had serious concerns.",
+      "detail": "Limits unpermitted RVs to two hours and bans overnight parking starting April 30, 2027, and directs $5M to safe lots, storage and outreach. The RV permit bill (CB 121283) passed 6–3. Wilson said she had serious concerns.",
       "sources": [
         {
           "title": "KUOW",
@@ -754,7 +754,7 @@
       "date": "2026-11-05",
       "type": "context",
       "title": "City's shelter expansion page still shows the original goal",
-      "detail": "As of Nov 5 the page lists the goal of 1,000 units in the mayor's first year and publishes no progress count or site list.",
+      "detail": "As of Nov. 5, the city's shelter expansion page lists the goal of 1,000 units in the mayor's first year, with no progress count or site list.",
       "sources": [
         {
           "title": "Neighbor by Neighbor: Accelerated Shelter Expansion",
@@ -770,7 +770,7 @@
       "type": "policy",
       "title": "Wilson vetoes RV permit bill, signs four others",
       "short": "Wilson vetoes CB 121283",
-      "detail": "Mayor Wilson vetoed CB 121283, the RV permit program in Councilmember Strauss's Vehicle Resident Assistance Program (VRAP). She signed the other four ordinances in the package. One of them, CB 121279, widens the authority of the Finance and Administrative Services director to sign leases and open safe lots, storage sites and other resources for vehicle residents. Her veto letter cites the cost and complexity of a one-time census, legal issues around proof of ownership and impoundment, and storage costs. It is her first veto. Council has up to 30 days to override, and six votes are needed. The bill passed 6–3 per KING 5, The Stranger and Capitol Hill Seattle.",
+      "detail": "Wilson vetoed CB 121283, the RV permit program in Councilmember Strauss's Vehicle Resident Assistance Program, and signed the other four bills, including one that gives the city more authority to lease land for safe lots and RV storage. Her veto letter cites the cost of a one-time census, legal problems with proof of ownership and impoundment, and storage costs. It is her first veto. Overriding it takes six council votes within 30 days.",
       "sources": [
         {
           "title": "Mayor Wilson to Sign Four out of Five RV Ordinances, Veto CB12183 (City of Seattle)",
@@ -798,7 +798,7 @@
       "site": "glassyard-commons",
       "title": "Executive Order 2026-09 on vehicle residents and RVs",
       "short": "EO 2026-09 on RVs",
-      "detail": "Mayor Wilson signed Executive Order 2026-09. It directs outreach and services for people living in vehicles, including connections to safe lots, RV storage and shelter. It directs the Human Services Department to deploy 2026 funding for outreach and to operate Glassyard Commons. It speeds up two RV safe lots and sets up a work group of city departments and community partners, including SPD. Press reports describe the work group as running 60 days. The Mayor said the proposed 2027–28 budget funds two safe lots expected to serve 182 vehicle residents. It includes $3.5M for a second lot, which has no date or location. Wilson told The Center Square that what changes in enforcement is \"to be determined.\"",
+      "detail": "Directs outreach and services for people living in vehicles, including safe lots, RV storage and shelter. Assigns the Human Services Department to run Glassyard Commons, speeds up two RV safe lots, and creates a 60-day work group of city departments and community partners, including SPD. Wilson said changes to enforcement are \"to be determined.\"",
       "sources": [
         {
           "title": "Mayor Wilson Announces Executive Order to Improve Outcomes for Vehicle Residents (Office of the Mayor)",
@@ -825,7 +825,7 @@
       "type": "policy",
       "title": "Saka says he will not vote to override RV veto",
       "short": "Saka backs RV veto",
-      "detail": "Councilmember Rob Saka voted for the RV bill in October. He appeared with Wilson at her Nov. 3 press conference and said he would no longer provide the sixth vote to override. PubliCola reports the veto stands unless he changes his mind again. The Stranger reports the council has until Dec. 2 to vote. Councilmember Strauss said he wants a vote within about two weeks. No override vote had been scheduled as of Nov. 4.",
+      "detail": "Saka voted for the RV permit bill in October. At Wilson's Nov. 3 press conference he said he would not be the sixth vote to override her veto. The council has until Dec. 2 to act.",
       "sources": [
         {
           "title": "Councilmember Saka Says He'll Provide Crucial Vote for Mayor Wilson's Veto (PubliCola)",
@@ -848,7 +848,7 @@
       "type": "policy",
       "title": "Council budget chair releases 2027–28 Balancing Package",
       "short": "Balancing Package",
-      "detail": "Budget Chair Dan Strauss released the Balancing Package for the 2027–28 budget. The council release says it protects funding to expand shelter and housing for people experiencing homelessness. It also says it fully funds the Vehicle Resident Assistance Program, including a second new safe lot. The package includes $250,000 in 2028 (HSD-021-B) for an operational and siting plan for a veterans' shelter and services campus in West Seattle. That item has no site, unit count or date. The package is not final, and committee voting follows.",
+      "detail": "Budget Chair Dan Strauss's proposed changes to the 2027–28 budget. The council says the package protects shelter funding and fully funds the Vehicle Resident Assistance Program, including a second safe lot. It adds $250,000 in 2028 to plan a veterans' shelter and services campus in West Seattle. Committee votes follow.",
       "sources": [
         {
           "title": "Budget Chair Strauss releases balanced budget proposal (Seattle City Council)",
@@ -871,7 +871,7 @@
       "type": "policy",
       "title": "Strauss says he will seek a vote to override the RV permit veto",
       "short": "Override vote sought",
-      "detail": "Councilmember Strauss said he plans to ask for a vote to override the Mayor's veto of the RV permit bill. KOMO reports an override needs six councilmembers voting yes within 30 days of the veto. The Charter window for considering an override runs from 5 to 30 days after the veto. The Center Square reports the bill passed 6-3 in October. The Stranger reports that Councilmember Saka's reversal, together with the three progressive members, would be enough to sustain the veto. As of Nov. 5-6 no override vote had been reported.",
+      "detail": "Strauss said he will ask the council to override Wilson's veto of the RV permit bill. An override needs six votes within 30 days of the veto. With Saka's reversal, enough members oppose an override to sustain the veto, according to The Stranger.",
       "sources": [
         {
           "title": "Seattle mayor and city councilmembers clash over RV permit program, new executive order (KOMO)",
@@ -898,7 +898,7 @@
       "type": "policy",
       "title": "Council Balancing Package funds a second RV safe lot",
       "short": "Council funds 2nd lot",
-      "detail": "The council budget chair's Balancing Package fully funds the Vehicle Resident Assistance Program, including a second new safe lot. The Center Square puts the package's spending above the mayor's proposal at about $7.12M for an RV safe lot. The mayor's proposed budget had $3.5M for the second lot. A Center Square report on the executive order says it sets no opening date for the second lot. HSD Director Tanya Kim said the city is accelerating plans to open the second lot in 2027. The package is an initial proposal. The council's final budget vote is expected in late November.",
+      "detail": "The Balancing Package puts about $7.12M toward a second RV safe lot, compared with $3.5M in the mayor's proposal. HSD Director Tanya Kim says the city plans to open it in 2027. The council's final budget vote is expected in late November.",
       "sources": [
         {
           "title": "Budget Chair Strauss releases balanced budget proposal focused on public safety and affordability - Seattle City Council Blog",
@@ -925,7 +925,7 @@
       "date": "2026-09-14",
       "kind": "count",
       "units": 187,
-      "statement": "187 additional emergency shelter beds added under the Wilson administration, as reported with the September plan reset. No site list published.",
+      "statement": "187 emergency shelter beds added under the Wilson administration, as of the September plan. The city has not published a site list.",
       "sources": [
         {
           "title": "KOMO",
@@ -990,8 +990,8 @@
     {
       "id": "u-second-safe-lot",
       "title": "Second RV safe lot",
-      "timing": "2027 (no date stated)",
-      "detail": "The proposed 2027–28 budget includes $3.5M for a second RV safe lot. Executive Order 2026-09 speeds it up but names no date or site. Wilson said she was not sure of the opening timeline. HSD Director Kim said the city is accelerating plans to open it in 2027. The Mayor says the two safe lots together are expected to serve 182 vehicle residents. The Balancing Package says it funds a second new safe lot.",
+      "timing": "2027",
+      "detail": "The mayor's proposed 2027–28 budget includes $3.5M for it, and the council's Balancing Package about $7.12M. HSD says it will open in 2027. No site has been named.",
       "sources": [
         {
           "title": "Seattle mayor orders new work group after vetoing RV camping bill (The Center Square)",
