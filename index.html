@@ -169,7 +169,7 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
     <div class="sec-head"><h2>How this is counted</h2></div>
     <div class="method">
       <div><b>Categories</b><p>Microshelter: tiny houses and pallet units, combined on the chart and listed separately in each site's details. Emergency housing: rooms or apartments in a building leased whole. RV safe lot: parking spaces.</p></div>
-      <div><b>What counts</b><p>Sites inside Seattle city limits. A unit counts from the day its site opens to residents and comes off the day it closes. On the project bars, a dashed outline means announced, stripes mean under construction, a solid bar means open, and a blurred end marks an approximate opening date.</p></div>
+      <div><b>What counts</b><p>Sites inside Seattle city limits. A unit counts from the day its site opens to residents and comes off the day it closes. The dotted line ahead of today adds each named project on its expected opening date, using the same dates as the project bars; projects without a date and unnamed plans aren't included, and ~ marks an approximate date. On the project bars, a dashed outline means announced, stripes mean under construction, a solid bar means open, and a blurred end marks an approximate opening date.</p></div>
       <div><b>Goals</b><p>Goals include projections the city makes about how many units will open by a date. Each goal is marked at its target and due date. An arrow runs to it from the day it was set, starting at our count on that day. Missed and previous goals stay on the chart so the changes are visible. A deadline given as a season, such as the end of summer, is marked on its last day.</p></div>
       <div><b>City counts</b><p>When the city states how many units it has added, the figure appears in the full record beside our own count for that date. We show both even when they don't match.</p></div>
       <div><b>Program notes</b><p>Each site says whether it is part of the mayor's new shelter initiative, an earlier project the city says it sped up, or neither, repeating what the city and operators say.</p></div>
@@ -244,6 +244,7 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
       + `<span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="var(--sheet)" stroke="var(--info)" stroke-width="2"/></svg>Current goal</span>`
       + `<span><svg width="14" height="14" aria-hidden="true"><path d="M3,3 l8,8 M11,3 l-8,8" stroke="var(--bad)" stroke-width="2.2"/></svg>Missed goal</span>`
       + `<span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="2 2"/></svg>Previous goal</span>`
+      + `<span><svg width="30" height="14" aria-hidden="true"><path d="M2,11 H14 V4 H28" fill="none" stroke="var(--muted)" stroke-width="1.75" stroke-dasharray="2 3.5" stroke-linecap="round"/></svg>Expected openings</span>`
       + `<span><svg width="30" height="14" aria-hidden="true"><path d="M4,12 Q4,4 24,4" fill="none" stroke="var(--info)" stroke-width="1.75"/><path d="M19,1 L24,4 L19,7" fill="none" stroke="var(--info)" stroke-width="1.5"/><circle cx="4" cy="12" r="3" fill="var(--info)"/></svg>Day a goal was set</span>`;
     document.getElementById("unnamed").innerHTML=(D.unnamed||[]).map(w=>`<article><div class="when"><span class="kind">${esc(w.timing)}</span></div><h3>${esc(w.title)}</h3><p>${esc(w.detail)}</p>${srcs(w.sources)}</article>`).join("") || `<p class="prog">None right now.</p>`;
     document.getElementById("watch").innerHTML=(D.watch||[]).map(w=>`<article><h3>${esc(w.title)}</h3><p>${esc(w.detail)}</p>${srcs(w.sources)}</article>`).join("") || `<p class="prog">Nothing on the watch list.</p>`;
@@ -342,6 +343,23 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
     line += ` H${xT}`;
     g += `<path d="${line}" fill="none" stroke="var(--ink)" stroke-width="2.25" stroke-linejoin="round"/>`;
 
+    // expected: pending sites with an expected opening date, stepped up from today's count
+    const ahead = D.sites.filter(st=>!st.dates.opened && st.status!=="closed" && st.dates.expected)
+      .map(st=>({st, date: st.dates.expected < today ? today : st.dates.expected}))
+      .filter(o=>o.date <= END).sort((a,b)=>a.date.localeCompare(b.date));
+    if (ahead.length) {
+      let pv = v, pl = `M${xT},${Y(pv)}`, marks = "";
+      ahead.forEach(o=>{
+        const x = X(o.date); pl += ` H${x}`; pv += sum(o.st.units); pl += ` V${Y(pv)}`;
+        const approx = !!o.st.dates.expected_label;
+        marks += `<g class="mk" tabindex="0" role="button" data-id="s:${esc(o.st.id)}" aria-label="Expected: ${esc(o.st.name)}, ${sum(o.st.units)} units, ${approx?esc(o.st.dates.expected_label):fdate(o.st.dates.expected)}. Total ${pv}.">
+          <circle class="ring" cx="${x}" cy="${Y(pv)}" r="4.5" fill="var(--sheet)" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="2 2"/>
+          <text x="${x+8}" y="${Y(pv)+17}" font-size="12.5" font-weight="700" fill="var(--muted)">${approx?"~":""}${pv}</text></g>`;
+      });
+      pl += ` H${X(END)}`;
+      g += `<path d="${pl}" fill="none" stroke="var(--muted)" stroke-width="1.75" stroke-dasharray="2 4" stroke-linecap="round" stroke-linejoin="round"/>` + marks;
+    }
+
     // goals: a mark at the target and due date
     D.promises.filter(q=>q.target && q.target.by <= END).forEach(q=>{
       const x2 = X(q.target.by), y2 = Y(q.target.units);
@@ -432,7 +450,7 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
 
     // today
     g += `<line x1="${xT}" x2="${xT}" y1="${CT}" y2="${H-24}" stroke="var(--ink)" stroke-width="1.5"/>`;
-    g += `<text x="${xT+8}" y="${Y(countOn(today))+4}" font-size="14" font-weight="700" fill="var(--ink)">${fmt(countOn(today))}</text>`;
+    g += `<text x="${xT+8}" y="${Y(countOn(today))+(ahead.length?19:4)}" font-size="14" font-weight="700" fill="var(--ink)">${fmt(countOn(today))}</text>`;
     g += `</svg>`;
     const keep = first ? null : plotEl.scrollLeft;
     plotEl.innerHTML = g;
