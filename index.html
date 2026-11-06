@@ -1,0 +1,568 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Give Me Shelter</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Shelter beds, tiny houses, emergency housing and RV safe lot spaces opened and closed in Seattle since January 1, 2026, against Mayor Katie Wilson's goals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: one horizontal time axis. Pinned left column (scales, track and project names), scrolling plot, overview strip to navigate on small screens. */
+:root{
+  --paper:#e4eaed; --sheet:#f4f7f8; --ink:#102a3b; --muted:#4f6573; --faint:#d3dce1; --rule:#c4d0d6; --hi:#fbefc7;
+  --accent:#1f63b5;
+  --c-shelter:#2e7c8a; --c-tiny:#2d6a55; --c-housing:#3e5f8a; --c-rv:#b9861b;
+  --ok:#2d6a55; --warn:#9a6a00; --bad:#b42b3a; --info:#1f63b5; --future:#d7e0e5;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0e1a22; --sheet:#14232d; --ink:#e2eaee; --muted:#93a6b1; --faint:#1c2c36; --rule:#2a3b46; --hi:#3a3216;
+  --accent:#7faeea; --c-shelter:#5fb3bf; --c-tiny:#5fae92; --c-housing:#8aa8d6; --c-rv:#e0b04a;
+  --ok:#5fae92; --warn:#e0b04a; --bad:#ef7f8a; --info:#7faeea; --future:#12212a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0e1a22; --sheet:#14232d; --ink:#e2eaee; --muted:#93a6b1; --faint:#1c2c36; --rule:#2a3b46; --hi:#3a3216;
+  --accent:#7faeea; --c-shelter:#5fb3bf; --c-tiny:#5fae92; --c-housing:#8aa8d6; --c-rv:#e0b04a;
+  --ok:#5fae92; --warn:#e0b04a; --bad:#ef7f8a; --info:#7faeea; --future:#12212a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 64px;display:flex;flex-direction:column;gap:28px}
+a{color:inherit;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-body);text-wrap:balance;margin:0;line-height:1.15;font-weight:700}
+.label{font-size:.9rem;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;flex:none}
+
+header.mast{display:flex;justify-content:space-between;align-items:flex-end;gap:12px 16px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:12px}
+header.mast h1{font-size:clamp(1.8rem,5vw,2.4rem);letter-spacing:-.01em}
+.sub{margin:6px 0 0;color:var(--muted);max-width:60ch}
+header.mast .meta{font-size:.85rem;color:var(--muted)}
+
+.strip{display:flex}
+.tally{display:flex;flex-direction:column;gap:2px}
+.t-open{font-size:clamp(3.4rem,13vw,5.5rem);font-weight:700;line-height:1;letter-spacing:-.02em}
+.t-open span{font-size:inherit}
+.t-sum{font-size:clamp(1.4rem,4.6vw,1.9rem);font-weight:700;color:var(--muted);padding-left:.12em}
+.t-note{font-size:.95rem;color:var(--muted);margin-top:4px}
+.big{font-weight:700;font-size:clamp(3rem,11vw,4.5rem);line-height:1;letter-spacing:-.02em}
+.big.muted{color:var(--muted)}
+.cap{font-size:1rem;color:var(--ink)}
+.fig{display:flex;flex-direction:column;gap:4px}
+.fig b{font-family:var(--f-body);font-size:1.8rem;font-weight:750;line-height:1}
+.fig small{font-size:.8rem;color:var(--muted);max-width:26ch}
+
+
+.sec-head{border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:10px;display:flex;justify-content:space-between;gap:6px 12px;flex-wrap:wrap;align-items:baseline}
+.sec-head h2{font-size:1.35rem;font-weight:750;}
+.sec-head p{margin:0;color:var(--muted);font-size:.85rem;max-width:70ch}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;margin-bottom:8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+
+/* chart: pinned left column + scrolling plot */
+.chart{display:grid;grid-template-columns:auto minmax(0,1fr);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.pin{background:var(--paper);border-right:1px solid var(--rule);position:relative;z-index:2}
+.pin svg,.plot svg{display:block}
+.plot{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin;overscroll-behavior-x:contain}
+svg text{font-family:var(--f-body)}
+svg .mono{font-variant-numeric:tabular-nums}
+.mk{cursor:pointer}
+.mk:focus{outline:none}
+.mk:focus-visible .ring,.mk:hover .ring,.mk.sel .ring{stroke:var(--accent);stroke-width:3}
+
+/* overview strip */
+.nav{margin-top:10px;display:flex;flex-direction:column;gap:4px}
+.nav[hidden]{display:none}
+.nav svg{display:block;width:100%;height:46px;touch-action:none;cursor:grab;border:1px solid var(--rule);border-radius:4px;background:var(--sheet)}
+.nav .navhint{font-size:.76rem;color:var(--muted)}
+.navbtns{display:flex;gap:6px;flex-wrap:wrap}
+.navbtns button{font:inherit;font-size:.78rem;background:transparent;color:var(--ink);border:1px solid var(--rule);border-radius:99px;padding:3px 11px;cursor:pointer}
+
+/* detail panel */
+#panel{position:fixed;z-index:20;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(380px,calc(100vw - 32px));max-height:min(70vh,560px);overflow:auto;background:var(--sheet);border:1px solid var(--rule);border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.2);padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px}
+#panel[hidden]{display:none}
+#panel .close{position:absolute;top:8px;right:8px;font:inherit;font-size:.8rem;background:transparent;border:1px solid var(--rule);border-radius:99px;padding:2px 10px;color:var(--ink);cursor:pointer}
+#panel h3{font-family:var(--f-body);font-size:1.02rem;font-weight:600;padding-right:56px}
+#panel p{margin:0;font-size:.9rem;color:var(--muted)}
+@media (max-width:600px){#panel{left:max(8px,env(safe-area-inset-left,0px));right:max(8px,env(safe-area-inset-right,0px));width:auto;bottom:calc(8px + env(safe-area-inset-bottom,0px))}}
+.when{font-size:.8rem;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.kind{font-weight:600;color:var(--ink)}
+.pill{font-size:.8rem;font-weight:600}
+.pill.missed{color:var(--bad)} .pill.revised{color:var(--warn)} .pill.in_progress{color:var(--info)} .pill.delivered{color:var(--ok)}
+.srcs{font-size:.76rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:2px 12px}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{font-size:.74rem;padding:1px 7px;border-radius:3px;border:1px solid var(--rule);display:inline-flex;gap:5px;align-items:center}
+.prog{font-size:.82rem;font-style:italic;color:var(--muted)}
+
+/* record */
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.filters button{font:inherit;font-size:.8rem;background:transparent;color:var(--ink);border:1px solid var(--rule);border-radius:99px;padding:4px 12px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.record{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.record li{display:flex;flex-direction:column;gap:3px;padding:10px 0;border-top:1px solid var(--rule)}
+.record h3{font-family:var(--f-body);font-size:.95rem;font-weight:600}
+.record p{margin:0;font-size:.86rem;color:var(--muted)}
+.hist{list-style:none;margin:2px 0;padding:0 0 0 12px;border-left:2px solid var(--rule);display:flex;flex-direction:column;gap:2px;font-size:.84rem}
+.record .hist li,.hist li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;padding:0;border:0}
+.hist li .num{font-family:var(--f-body);font-size:.74rem;color:var(--muted);padding-top:1px}
+.record li.site-card h3{font-size:1.02rem}
+
+.watch{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.watch article{border-top:1px solid var(--rule);padding-top:10px}
+
+.watch h3{font-family:var(--f-body);font-size:.95rem;font-weight:600}
+.watch p{margin:4px 0;font-size:.85rem;color:var(--muted)}
+.method{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;font-size:.88rem}
+.method p{margin:4px 0 0;color:var(--muted)}
+footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:12px}
+.err{padding:16px;border:1px solid var(--bad);color:var(--bad)}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div>
+      <h1>Give Me Shelter</h1>
+      <p class="sub">Tracking new shelter in Seattle.</p>
+    </div>
+    <div class="meta num" id="updated"></div>
+  </header>
+
+  <section class="strip" aria-label="Totals">
+    <div class="tally num" aria-label="Units open, announced and total">
+      <div class="t-open"><span id="total">—</span> open</div>
+      <div class="t-sum">+<span id="pending">—</span> announced = <span id="grand">—</span></div>
+      <div class="t-note">New shelter units since January 1, 2026</div>
+    </div>
+  </section>
+
+  <section aria-labelledby="g-h">
+    <div class="sec-head"><h2 id="g-h">Pace of Progress</h2></div>
+    <div class="legend" id="legend"></div>
+    <div class="chart" id="chart">
+      <div class="pin" id="pin"></div>
+      <div class="plot" id="plot" tabindex="0" aria-label="Timeline, scrolls sideways"></div>
+    </div>
+    <div class="nav" id="nav" hidden>
+      <svg id="navsvg" role="slider" aria-label="Move through the timeline" tabindex="0"></svg>
+      <div class="navbtns"><button type="button" id="go-start">Campaign</button><button type="button" id="go-2026">Jan 2026</button><button type="button" id="go-today">Today</button><button type="button" id="go-end">2027 goals</button></div>
+      <span class="navhint">Swipe the chart or drag the window in this strip to move through time.</span>
+    </div>
+  </section>
+
+  <section aria-labelledby="u-h">
+    <div class="sec-head"><h2 id="u-h">Announced, not yet named</h2><p>Projects the city has announced without a location or unit count. They join the chart once details are public.</p></div>
+    <div class="watch unnamed" id="unnamed"></div>
+  </section>
+
+  <section aria-labelledby="r-h">
+    <div class="sec-head"><h2 id="r-h">Full record</h2><p>Newest first. Each site appears once, with its own history.</p></div>
+    <div class="filters" id="filters" role="group" aria-label="Filter the record"></div>
+    <ol class="record" id="record"></ol>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Closures to watch</h2><p>Reported, not confirmed. Not subtracted from totals.</p></div>
+    <div class="watch" id="watch"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>How this is counted</h2></div>
+    <div class="method">
+      <div><b>Categories</b><p>Microshelter: tiny houses and pallet units, combined on the chart and listed separately in each site's details. Emergency housing: rooms or apartments in a building leased whole. RV safe lot: parking spaces.</p></div>
+      <div><b>What counts</b><p>Sites inside Seattle city limits. A unit counts from the day its site opens to residents and comes off the day it closes.</p></div>
+      <div><b>Goals</b><p>Goals include projections the city makes about how many units will open by a date. Each goal is marked at its target and due date. An arrow runs to it from the day it was set, starting at our count on that day. Missed and previous goals stay on the chart so the changes are visible.</p></div>
+      <div><b>City counts</b><p>When the city states how many units it has added, it appears at the top of the page and in the record, beside our own count for that date. We show both even when they don't match.</p></div>
+      <div><b>Program notes</b><p>Each site says whether it is part of the mayor's new shelter initiative, an earlier project the city says it sped up, or neither, repeating what the city and operators say.</p></div>
+      <div><b>Updates</b><p>A daily job reads news, city and provider feeds and drafts changes. A person reviews every change before it publishes.</p></div>
+    </div>
+  </section>
+
+  <footer>Independent tracker. Corrections welcome. <span id="foot-updated"></span></footer>
+</div>
+
+<aside id="panel" aria-live="polite" hidden></aside>
+
+<script>
+(function(){
+  const CAT = {
+    tiny_house:{label:"Tiny houses", color:"var(--c-tiny)"},
+    pallet:{label:"Pallet shelter units", color:"var(--c-tiny)"},
+    shelter:{label:"Shelter beds", color:"var(--c-shelter)"},
+    emergency_housing:{label:"Emergency housing", color:"var(--c-housing)"},
+    rv:{label:"RV safe lot", color:"var(--c-rv)"}
+  };
+  // what the chart stacks: tiny houses and pallet units together as microshelter
+  const GROUPS = {
+    micro:{label:"Microshelter (tiny houses, pallet units)", keys:["tiny_house","pallet"], color:"var(--c-tiny)"},
+    shelter:{label:"Shelter beds", keys:["shelter"], color:"var(--c-shelter)"},
+    emergency_housing:{label:"Emergency housing", keys:["emergency_housing"], color:"var(--c-housing)"},
+    rv:{label:"RV safe lot", keys:["rv"], color:"var(--c-rv)"}
+  };
+  const GKEYS = Object.keys(GROUPS);
+  const gval = (u, gk) => GROUPS[gk].keys.reduce((a,k)=>a+((u||{})[k]||0),0);
+  const mainGroup = u => GKEYS.slice().sort((a,b)=>gval(u,b)-gval(u,a))[0];
+  const CATKEYS = Object.keys(CAT);
+  const PSTATUS = {missed:"Missed", revised:"Previous goal", in_progress:"Current", delivered:"Delivered"};
+  const PROGRAM = {initiative:"Part of the new shelter initiative", accelerated:"Earlier project the city says it sped up", other:"Not part of the initiative"};
+  const TTYPE = {campaign:"Campaign", goal:"Goal change", policy:"Policy", context:"Context", site:"Site milestone"};
+  const STATUS = {open:"Open", closed:"Closed", construction:"Under construction", announced:"Announced"};
+  const ECOL = {campaign:"var(--accent)", goal:"var(--bad)", policy:"var(--info)", context:"var(--muted)", site:"var(--muted)"};
+
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const fmt = n => n.toLocaleString("en-US");
+  const pd = s => { const [y,m,d]=s.split("-").map(Number); return Date.UTC(y,m-1,d); };
+  const fdate = (s, prec) => !s ? "" : new Date(pd(s)).toLocaleDateString("en-US", prec==="month" ? {month:"long",year:"numeric",timeZone:"UTC"} : {month:"short",day:"numeric",year:"numeric",timeZone:"UTC"});
+  const mon = s => new Date(pd(s)).toLocaleDateString("en-US",{month:"short",timeZone:"UTC"});
+  const sum = u => CATKEYS.reduce((a,k)=>a+((u||{})[k]||0),0);
+  const srcs = list => `<div class="srcs">${(list||[]).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>`).join("")}</div>`;
+  const chips = u => `<div class="chips">${CATKEYS.filter(k=>(u||{})[k]>0).map(k=>`<span class="chip"><span class="sw" style="background:${CAT[k].color}"></span>${u[k]} ${CAT[k].label.toLowerCase()}</span>`).join("")}</div>`;
+
+  const STUB0 = "2025-03-01", Y0 = "2026-01-01", END = "2027-12-31";
+  let D, base, ITEMS = {}, CHANGES = [], countOn, lastW = 0, S = {};
+
+  function render(data){
+    D = data; base = D.baseline_date || "2026-01-01";
+    const today = D.updated;
+    const openedSince = s => s.dates.opened && s.dates.opened >= base;
+    CHANGES = [];
+    D.sites.forEach(s=>{
+      if (openedSince(s)) CHANGES.push({date:s.dates.opened, units:s.units, sign:1, site:s});
+      if (s.status==="closed" && s.dates.closed && s.dates.closed>=base) CHANGES.push({date:s.dates.closed, units:s.units, sign:-1, site:s});
+    });
+    CHANGES.sort((a,b)=>a.date.localeCompare(b.date));
+    countOn = date => CHANGES.filter(c=>c.date<=date).reduce((a,c)=>a+c.sign*sum(c.units),0);
+    const total = countOn("9999-12-31");
+    const pending = D.sites.filter(s=>s.status==="announced"||s.status==="construction");
+    const lost = CHANGES.filter(c=>c.sign<0).reduce((a,c)=>a+sum(c.units),0);
+
+    document.getElementById("updated").textContent = "Updated " + fdate(today);
+    document.getElementById("foot-updated").textContent = "Data current as of " + fdate(today) + ".";
+    document.getElementById("total").textContent = fmt(total);
+    document.getElementById("pending").textContent = fmt(pending.reduce((a,s)=>a+sum(s.units),0));
+    document.getElementById("grand").textContent = fmt(total + pending.reduce((a,s)=>a+sum(s.units),0));
+    document.getElementById("legend").innerHTML = GKEYS.filter(k=>k!=="shelter" || D.sites.some(st=>gval(st.units,"shelter")>0)).map(k=>`<span><span class="sw" style="background:${GROUPS[k].color}"></span>${GROUPS[k].label}</span>`).join("")
+      + `<span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="var(--sheet)" stroke="var(--info)" stroke-width="2"/></svg>Current goal</span>`
+      + `<span><svg width="14" height="14" aria-hidden="true"><path d="M3,3 l8,8 M11,3 l-8,8" stroke="var(--bad)" stroke-width="2.2"/></svg>Missed goal</span>`
+      + `<span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="2 2"/></svg>Previous goal</span>`
+      + `<span><svg width="30" height="14" aria-hidden="true"><path d="M4,12 Q4,4 24,4" fill="none" stroke="var(--info)" stroke-width="1.75"/><path d="M19,1 L24,4 L19,7" fill="none" stroke="var(--info)" stroke-width="1.5"/><circle cx="4" cy="12" r="3" fill="var(--info)"/></svg>Day a goal was set</span>`;
+    document.getElementById("unnamed").innerHTML=(D.unnamed||[]).map(w=>`<article><div class="when"><span class="kind">${esc(w.timing)}</span></div><h3>${esc(w.title)}</h3><p>${esc(w.detail)}</p>${srcs(w.sources)}</article>`).join("") || `<p class="prog">None right now.</p>`;
+    document.getElementById("watch").innerHTML=(D.watch||[]).map(w=>`<article><h3>${esc(w.title)}</h3><p>${esc(w.detail)}</p>${srcs(w.sources)}</article>`).join("") || `<p class="prog">Nothing on the watch list.</p>`;
+
+    // items that open in the detail panel
+    ITEMS = {};
+    D.events.forEach(e=>ITEMS["e:"+e.id]={type:"event",obj:e});
+    D.promises.forEach(p=>ITEMS["p:"+p.id]={type:"promise",obj:p});
+    D.sites.forEach(s=>ITEMS["s:"+s.id]={type:"site",obj:s});
+    (D.city_counts||[]).forEach(c=>ITEMS["c:"+c.id]={type:"city",obj:c, ours:countOn(c.date)});
+
+    layout(true);
+    record();
+  }
+
+  // ---------- chart ----------
+  function layout(first){
+    const chartEl = document.getElementById("chart"), plotEl = document.getElementById("plot");
+    const W = chartEl.clientWidth; if (!W) return;
+    lastW = W;
+    const today = D.updated;
+    const narrow = W < 900;
+    const LEFT = narrow ? 112 : 196;
+    const avail = W - LEFT - 1;
+    const STUBW = narrow ? 64 : 84, GAPW = 16, PADL = 10, PADR = narrow ? 30 : 18;
+    const days = (pd(END)-pd(Y0))/864e5;
+    const dayPx = narrow ? 1.7 : Math.max(1, (avail - PADL - STUBW - GAPW - PADR)/days);
+    const PW = Math.max(avail, Math.round(PADL + STUBW + GAPW + days*dayPx + PADR));
+    const XS = PADL + STUBW + GAPW;
+    const X = s => s < Y0 ? PADL + Math.max(0,(pd(s)-pd(STUB0))/(pd(Y0)-pd(STUB0)))*STUBW : XS + (pd(s)-pd(Y0))/864e5*dayPx;
+    const R = PW - PADR;
+    S = {X, PW, avail, narrow};
+
+    const CT = 26, CH = narrow ? 230 : 290, CB = CT + CH, YMAX = 1000;
+    const Y = v => CB - v/YMAX*CH;
+    const TR1 = CB + 84;
+    const sites = D.sites.slice().sort((a,b)=>{
+      const ka = a.dates.opened || ("z"+(a.dates.expected||a.dates.announced||"")), kb = b.dates.opened || ("z"+(b.dates.expected||b.dates.announced||""));
+      return ka.localeCompare(kb);
+    });
+    const PT = CB + 40, RH = narrow ? 50 : 40, H = PT + 26 + sites.length*RH + 30;
+
+    // ---- pinned column
+    let p = `<svg width="${LEFT}" height="${H}" aria-hidden="true">`;
+    [0,250,500,750,1000].forEach(v=>{ p += `<text x="${LEFT-8}" y="${Y(v)+4}" text-anchor="end" font-size="11" class="mono" fill="var(--muted)">${fmt(v)}</text>`; });
+    p += `<text x="${LEFT-8}" y="${CT-10}" text-anchor="end" font-size="11" class="mono" fill="var(--muted)">units open</text>`;
+    const two = (y, a, b) => `<text x="${LEFT-8}" y="${y-2}" text-anchor="end" font-size="${narrow?11.5:12.5}" font-weight="600" fill="var(--ink)">${esc(a)}</text><text x="${LEFT-8}" y="${y+12}" text-anchor="end" font-size="10.5" fill="var(--muted)">${esc(b)}</text>`;
+    p += `<text x="${LEFT-8}" y="${PT+16}" text-anchor="end" font-size="${narrow?11.5:12.5}" font-weight="600" fill="var(--ink)">Projects</text>`;
+    sites.forEach((s,i)=>{
+      const cy = PT + 26 + i*RH + RH/2, id = "s:"+s.id;
+      const nm = narrow ? s.name.replace(/ (Tiny House )?Village| Enhanced Shelter| Commons/,"") : s.name.replace(" Tiny House Village"," Village");
+      const hood = s.neighborhood.split(" / ")[0];
+      p += `<g class="mk" tabindex="0" role="button" data-id="${id}" aria-label="${esc(s.name)} details">` + (narrow
+        ? `<text x="${LEFT-8}" y="${cy-9}" text-anchor="end" font-size="11.5" font-weight="600" fill="var(--ink)">${esc(nm)}</text><text x="${LEFT-8}" y="${cy+4}" text-anchor="end" font-size="10.5" fill="var(--ink)">${esc(hood)}</text><text x="${LEFT-8}" y="${cy+17}" text-anchor="end" font-size="10.5" fill="var(--muted)">${sum(s.units)} units</text>`
+        : two(cy, nm, `${hood}, ${sum(s.units)} units`)) + `</g>`;
+    });
+    p += `</svg>`;
+    document.getElementById("pin").innerHTML = p;
+    document.getElementById("pin").style.width = LEFT + "px";
+
+    // ---- plot
+    let g = `<svg width="${PW}" height="${H}" role="img" aria-label="Running total of units open in Seattle since January 2026, with goals, policy moves, announcements and each project's timeline. The full record follows in text.">`;
+    const xT = X(today);
+    g += `<rect x="${xT}" y="${CT}" width="${R-xT}" height="${CH}" fill="var(--future)"/>`;
+    // month grid + labels (top and above projects)
+    const monthLines = (y, h, labelY) => {
+      let t = `<rect x="${PADL}" y="${y}" width="${STUBW}" height="${h}" fill="var(--faint)" opacity=".5"/>`;
+      if (labelY) t += `<text x="${PADL+3}" y="${labelY}" font-size="11" class="mono" fill="var(--muted)">2025</text>`;
+      for (let yr of [2026,2027]) for (let m=0;m<12;m++){
+        const s = `${yr}-${String(m+1).padStart(2,"0")}-01`, x = X(s);
+        t += `<line x1="${x}" x2="${x}" y1="${y}" y2="${y+h}" stroke="var(--faint)" stroke-width="${m===0?1.5:1}"/>`;
+        if (labelY && (narrow || m%3===0)) t += `<text x="${x+3}" y="${labelY}" font-size="11" class="mono" fill="${m===0?"var(--ink)":"var(--muted)"}" font-weight="${m===0?600:400}">${m===0?yr:mon(s)}</text>`;
+      }
+      return t;
+    };
+    g += monthLines(CT, CH, CB + 15);
+    [250,500,750,1000].forEach(v=>{ g += `<line x1="${XS}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--faint)"/>`; });
+    g += `<line x1="${PADL}" x2="${R}" y1="${CB}" y2="${CB}" stroke="var(--rule)"/>`;
+
+    // stacked areas
+    const pts = [{date:Y0, c:Object.fromEntries(GKEYS.map(k=>[k,0]))}];
+    CHANGES.forEach(ch=>{ const c = {...pts[pts.length-1].c}; GKEYS.forEach(k=>c[k]+=ch.sign*gval(ch.units,k)); pts.push({date:ch.date, c}); });
+    GKEYS.forEach((k,i)=>{
+      if (!pts.some(q=>q.c[k]>0)) return;
+      const lower = q => GKEYS.slice(0,i).reduce((a,kk)=>a+q.c[kk],0), upper = q => lower(q)+q.c[k];
+      let top = `M${XS},${Y(upper(pts[0]))}`;
+      pts.forEach((q,j)=>{ if (j>0) top += ` H${X(q.date)} V${Y(upper(q))}`; });
+      top += ` H${xT}`;
+      const rev = pts.slice().reverse(); let back = ` V${Y(lower(rev[0]))}`;
+      rev.forEach((q,j)=>{ back += ` H${j===rev.length-1 ? XS : X(q.date)}`; if (j<rev.length-1) back += ` V${Y(lower(rev[j+1]))}`; });
+      g += `<path d="${top}${back} Z" fill="${GROUPS[k].color}" opacity=".78"/>`;
+    });
+    let line = `M${XS},${Y(0)}`, v = 0;
+    CHANGES.forEach(ch=>{ line += ` H${X(ch.date)}`; v += ch.sign*sum(ch.units); line += ` V${Y(v)}`; });
+    line += ` H${xT}`;
+    g += `<path d="${line}" fill="none" stroke="var(--ink)" stroke-width="2.25" stroke-linejoin="round"/>`;
+
+    // goals: a mark at the target and due date
+    D.promises.filter(q=>q.target && q.target.by <= END).forEach(q=>{
+      const x2 = X(q.target.by), y2 = Y(q.target.units);
+      const live = q.status==="in_progress", missed = q.status==="missed";
+      const col = live ? "var(--info)" : missed ? "var(--bad)" : "var(--muted)";
+      // arrow from the day the goal was set, at that day's count, up to the goal
+      if (q.made >= Y0 && q.made < q.target.by) {
+        const x1 = X(q.made), y1 = Y(countOn(q.made)), ex = x2 - 10;
+        if (ex - x1 > 12) {
+          g += `<g class="mk" data-id="p:${esc(q.id)}" aria-hidden="true">
+            <path d="M${x1},${y1} Q${x1},${y2} ${ex},${y2}" fill="none" stroke="${col}" stroke-width="${live?1.75:1.25}" stroke-dasharray="${live?"0":"3 3"}" stroke-linecap="round"/>
+            <path d="M${ex-7},${y2-4} L${ex},${y2} L${ex-7},${y2+4}" fill="none" stroke="${col}" stroke-width="${live?1.75:1.25}" stroke-linejoin="round"/>
+            <circle cx="${x1}" cy="${y1}" r="4" fill="${col}" stroke="var(--sheet)" stroke-width="1.5"/></g>`;
+        }
+      }
+      const sh = q.short || q.text, mm = sh.match(/^([\d,+]+)\s+(.*)$/);
+      const l1 = mm ? mm[1] : sh, l2 = mm ? mm[2] : "";
+      const anchor = x2 > R-170 ? "end" : "start", lx = anchor==="end" ? x2-12 : x2+12;
+      // label placement: right of the mark; under it near the right edge; above it if it would run into Today
+      const tw = Math.max(l1.length*8, l2.length*6.3);
+      let tx = lx, ty = y2-1, ta = anchor;
+      if (anchor==="end") { tx = x2+7; ty = y2+24; }
+      else if (x2 < xT && lx + tw > xT - 4) { tx = x2+6; ty = y2-30; ta = "end"; }
+      const mark = missed ? `<circle class="ring" cx="${x2}" cy="${y2}" r="9" fill="var(--sheet)" fill-opacity=".01" stroke="none"/><path d="M${x2-6},${y2-6} l12,12 M${x2+6},${y2-6} l-12,12" stroke="${col}" stroke-width="2.5"/>`
+        : live ? `<circle class="ring" cx="${x2}" cy="${y2}" r="7" fill="var(--sheet)" stroke="${col}" stroke-width="2.5"/>`
+        : `<circle class="ring" cx="${x2}" cy="${y2}" r="7" fill="none" stroke="${col}" stroke-width="1.5" stroke-dasharray="2.5 2.5"/>`;
+      g += `<g class="mk" tabindex="0" role="button" data-id="p:${esc(q.id)}" aria-label="Goal: ${esc(q.text)} ${PSTATUS[q.status]}">${mark}
+        <text x="${tx}" y="${ty}" text-anchor="${ta}" fill="${col}"><tspan font-size="14" font-weight="700">${esc(l1)}</tspan>${l2?`<tspan x="${tx}" dy="14" font-size="11.5">${esc(l2)}</tspan>`:""}</text></g>`;
+    });
+    // openings, closings
+    let run = 0;
+    CHANGES.forEach(ch=>{
+      run += ch.sign*sum(ch.units);
+      const x = X(ch.date), y = Y(run), col = ch.sign>0 ? "var(--ok)" : "var(--bad)";
+      g += `<g class="mk" tabindex="0" role="button" data-id="s:${esc(ch.site.id)}" aria-label="${ch.sign>0?"Opened":"Closed"}: ${esc(ch.site.name)}, ${sum(ch.units)} units, ${fdate(ch.date)}">
+        <circle class="ring" cx="${x}" cy="${y}" r="5.5" fill="var(--sheet)" stroke="${col}" stroke-width="2"/>
+        <text x="${x-7}" y="${y-8}" text-anchor="end" font-size="11" font-weight="700" fill="var(--ink)">${ch.sign>0?"+":"−"}${sum(ch.units)}</text></g>`;
+    });
+    // marker tracks
+    const track = (y, entries) => {
+      let t = `<line x1="${PADL}" x2="${R}" y1="${y}" y2="${y}" stroke="var(--rule)" stroke-width="1.5"/>`;
+      const offs = [-12, 24, -26, 38, -40, 52], ends = offs.map(()=>-1e9);
+      entries.sort((a,b)=>a.date.localeCompare(b.date)).forEach(e=>{
+        const x = X(e.date), w = e.label.length*5.9 + 8;
+        const lvl = ends.findIndex(end => end < x-3);
+        if (lvl >= 0) ends[lvl] = x + w;
+        const off = lvl >= 0 ? offs[lvl] : null, ly = off===null ? 0 : y + off;
+        t += `<g class="mk" tabindex="0" role="button" data-id="${e.id}" aria-label="${esc(e.aria)}">
+          <line x1="${x}" x2="${x}" y1="${y}" y2="${off===null?y:(off<0?ly+4:ly-11)}" stroke="var(--rule)"/>
+          ${e.square?`<rect class="ring" x="${x-5}" y="${y-5}" width="10" height="10" fill="${e.color}" stroke="var(--sheet)" stroke-width="1.5"/>`
+            :`<circle class="ring" cx="${x}" cy="${y}" r="5.5" fill="${e.color}" stroke="var(--sheet)" stroke-width="1.5"/>`}
+          ${off===null?"":`<text x="${x+2}" y="${ly}" font-size="10.5" fill="var(--ink)">${esc(e.label)}</text>`}</g>`;
+      });
+      return t;
+    };
+    const policy = [];
+    D.events.filter(e=>e.type!=="site" && e.id!=="e-2025-campaign-launch").forEach(e=>policy.push({id:"e:"+e.id, date:e.date, label:e.short||e.title, color:ECOL[e.type]||"var(--muted)", aria:`${TTYPE[e.type]}: ${e.title}, ${fdate(e.date,e.date_precision)}`}));
+    D.promises.forEach(q=>policy.push({id:"p:"+q.id, date:q.made, label:q.target?`Goal: ${q.short||q.text}`:(q.short||q.text), color:"var(--ink)", square:true, aria:`${q.target?"Goal set":"Promise"}: ${q.text}`}));
+
+    // projects
+    g += monthLines(PT + 26, sites.length*RH, PT + 26 + sites.length*RH + 15);
+    g += `<text x="${XS+4}" y="${PT+16}" font-size="10.5" fill="var(--muted)">Bar runs from announcement to opening. Dashed: still pending. Ticks: milestones.</text>`;
+    sites.forEach((s,i)=>{
+      const y = PT + 26 + i*RH, cy = y + RH/2, col = GROUPS[mainGroup(s.units)].color;
+      const pending = !s.dates.opened;
+      const a = s.dates.announced ? X(s.dates.announced) : X(s.dates.opened||today);
+      const b = s.dates.opened ? X(s.dates.opened) : X(s.dates.expected || today);
+      const before = s.dates.announced && s.dates.announced < STUB0;
+      const days = s.dates.announced && s.dates.opened ? Math.round((pd(s.dates.opened)-pd(s.dates.announced))/864e5) : null;
+      const note = pending ? (s.dates.expected?`expected ${fdate(s.dates.expected).replace(/, \d{4}/,"")}`:"no date") : before ? `since ${fdate(s.dates.announced,"month")}` : `${days} days`;
+      g += `<g class="mk" tabindex="0" role="button" data-id="s:${esc(s.id)}" aria-label="${esc(s.name)}: ${sum(s.units)} units, ${STATUS[s.status]}">
+        <rect x="0" y="${y}" width="${PW}" height="${RH}" fill="transparent"/>
+        <line x1="0" x2="${PW}" y1="${y}" y2="${y}" stroke="var(--faint)"/>
+        <rect x="${a}" y="${cy-6}" width="${Math.max(4,b-a)}" height="12" rx="2" fill="${pending?"none":col}" fill-opacity="${pending?0:.35}" stroke="${col}" stroke-width="1.5" stroke-dasharray="${pending?"5 3":"0"}"/>
+        ${before?`<path d="M${a+8},${cy-4} l-6,4 l6,4" fill="none" stroke="${col}" stroke-width="1.5"/>`:""}
+        <circle class="ring" cx="${b}" cy="${cy}" r="6.5" fill="${pending?"var(--sheet)":col}" stroke="${col}" stroke-width="2"/>
+        ${s.status==="closed"&&s.dates.closed?`<path d="M${X(s.dates.closed)-5},${cy-5} l10,10 M${X(s.dates.closed)+5},${cy-5} l-10,10" stroke="var(--bad)" stroke-width="2"/>`:
+          !pending?`<line x1="${b}" x2="${xT}" y1="${cy}" y2="${cy}" stroke="${col}" stroke-width="1" stroke-opacity=".5"/>`:""}
+        <text x="${b+11}" y="${cy-7}" font-size="10.5" class="mono" fill="var(--muted)">${esc(note)}</text></g>`;
+      D.events.filter(e=>e.type==="site" && e.site===s.id && e.date!==s.dates.announced).forEach(e=>{
+        const mx = X(e.date);
+        g += `<g class="mk" tabindex="0" role="button" data-id="e:${esc(e.id)}" aria-label="${esc(e.title)}, ${fdate(e.date)}"><rect class="ring" x="${mx-2}" y="${cy-10}" width="4" height="20" rx="1" fill="${col}" stroke="var(--sheet)" stroke-width="1"/><text x="${mx}" y="${cy+21}" text-anchor="middle" font-size="9.5" fill="var(--muted)">${esc(e.short||"")}</text></g>`;
+      });
+    });
+
+    // today
+    g += `<line x1="${xT}" x2="${xT}" y1="${CT}" y2="${H-24}" stroke="var(--ink)" stroke-width="1.5"/>`;
+    g += `<text x="${xT+6}" y="${CT+12}" font-size="11" class="mono" fill="var(--ink)">Today</text>`;
+    g += `<text x="${xT+8}" y="${Y(countOn(today))+4}" font-size="14" font-weight="700" fill="var(--ink)">${fmt(countOn(today))}</text>`;
+    g += `</svg>`;
+    const keep = first ? null : plotEl.scrollLeft;
+    plotEl.innerHTML = g;
+
+    // overview strip
+    const navEl = document.getElementById("nav");
+    const scrollable = PW > avail + 4;
+    navEl.hidden = !scrollable;
+    if (scrollable) drawNav(today);
+    if (first || keep == null) scrollToDate(today, 0.72); else plotEl.scrollLeft = keep;
+    updateWindow();
+  }
+
+  function scrollToDate(d, frac){
+    const plotEl = document.getElementById("plot");
+    plotEl.scrollLeft = Math.max(0, S.X(d) - S.avail*frac);
+  }
+
+  // overview: whole timeline squeezed into the strip width
+  let NAV = {};
+  function drawNav(today){
+    const svg = document.getElementById("navsvg");
+    const NW = svg.clientWidth || S.avail, NH = 46, k = NW / S.PW;
+    const ny = v => NH - 6 - v/1000*(NH-12);
+    let n = `<rect x="${S.X(today)*k}" y="0" width="${(S.PW - S.X(today))*k}" height="${NH}" fill="var(--future)"/>`;
+    ["2026-01-01","2027-01-01"].forEach(s=>{ const x = S.X(s)*k; n += `<line x1="${x}" x2="${x}" y1="0" y2="${NH}" stroke="var(--rule)"/><text x="${x+3}" y="11" font-size="9.5" class="mono" fill="var(--muted)">${s.slice(0,4)}</text>`; });
+    let path = `M${S.X(Y0)*k},${ny(0)}`, v = 0;
+    CHANGES.forEach(ch=>{ path += ` H${S.X(ch.date)*k}`; v += ch.sign*sum(ch.units); path += ` V${ny(v)}`; });
+    path += ` H${S.X(today)*k}`;
+    n += `<path d="${path} V${ny(0)} Z" fill="var(--c-tiny)" opacity=".45"/><path d="${path}" fill="none" stroke="var(--ink)" stroke-width="1.5"/>`;
+    D.promises.filter(q=>q.target && q.target.by<=END).forEach(q=>{ n += `<circle cx="${S.X(q.target.by)*k}" cy="${ny(q.target.units)}" r="2.5" fill="none" stroke="${q.status==="in_progress"?"var(--info)":"var(--muted)"}"/>`; });
+    n += `<line x1="${S.X(today)*k}" x2="${S.X(today)*k}" y1="0" y2="${NH}" stroke="var(--ink)"/>`;
+    n += `<rect id="navwin" x="0" y="1" width="10" height="${NH-2}" rx="3" fill="var(--accent)" fill-opacity=".12" stroke="var(--accent)" stroke-width="2"/>`;
+    svg.setAttribute("viewBox", `0 0 ${NW} ${NH}`);
+    svg.innerHTML = n;
+    NAV = {k, NW};
+  }
+  function updateWindow(){
+    const win = document.getElementById("navwin"); if (!win || !NAV.k) return;
+    const plotEl = document.getElementById("plot");
+    win.setAttribute("x", plotEl.scrollLeft * NAV.k);
+    win.setAttribute("width", Math.max(14, plotEl.clientWidth * NAV.k));
+    document.getElementById("navsvg").setAttribute("aria-valuenow", Math.round(plotEl.scrollLeft));
+  }
+  function navTo(clientX){
+    const svg = document.getElementById("navsvg"), plotEl = document.getElementById("plot");
+    const r = svg.getBoundingClientRect();
+    const x = (clientX - r.left) / r.width * NAV.NW;
+    plotEl.scrollLeft = x / NAV.k - plotEl.clientWidth/2;
+  }
+
+  // ---------- full record ----------
+  let filter = "all";
+  function siteHistory(s){
+    const rows = [];
+    if (s.dates.announced) rows.push([s.dates.announced, "Announced"]);
+    D.events.filter(e=>e.type==="site" && e.site===s.id && e.date!==s.dates.announced).forEach(e=>rows.push([e.date, e.title, e.date_precision]));
+    if (s.dates.opened) rows.push([s.dates.opened, `Opened${s.dates.announced?` (${Math.round((pd(s.dates.opened)-pd(s.dates.announced))/864e5)} days after announcement)`:""}`]);
+    if (!s.dates.opened && s.dates.expected) rows.push([s.dates.expected, "Expected to open"]);
+    if (s.dates.closed) rows.push([s.dates.closed, "Closed"]);
+    rows.sort((a,b)=>a[0].localeCompare(b[0]));
+    return `<ol class="hist">${rows.map(([d,t,pr])=>`<li><span class="num">${fdate(d,pr)}</span><span>${esc(t)}</span></li>`).join("")}</ol>`;
+  }
+  function siteSources(s){
+    const seen = new Set(), all = [];
+    [...(s.sources||[]), ...D.events.filter(e=>e.site===s.id).flatMap(e=>e.sources||[])].forEach(x=>{ if(!seen.has(x.url)){ seen.add(x.url); all.push(x); } });
+    return srcs(all);
+  }
+  const siteLast = s => [s.dates.closed, s.dates.opened, ...D.events.filter(e=>e.site===s.id).map(e=>e.date), s.dates.announced].filter(Boolean).sort().pop() || "";
+
+  function record(){
+    const out = [];
+    D.promises.forEach(q=>out.push({date:q.made, f:"goals", html:card(ITEMS["p:"+q.id])}));
+    D.events.filter(e=>e.type!=="site").forEach(e=>out.push({date:e.date, f: e.type==="goal"?"goals":"policy", html:card(ITEMS["e:"+e.id])}));
+    (D.city_counts||[]).forEach(c=>out.push({date:c.date, f:"city", html:card(ITEMS["c:"+c.id])}));
+    // one entry per site, filed under its latest change
+    D.sites.forEach(st=>out.push({date:siteLast(st), f:"sites", site:true, status:st.status, html:card(ITEMS["s:"+st.id])}));
+    const F = [["all","Everything"],["goals","Promises & goals"],["policy","Policy"],["sites","Sites"],["city","City counts"]];
+    const fEl = document.getElementById("filters");
+    fEl.innerHTML = F.map(([k,l])=>`<button type="button" id="rf-${k}" data-k="${k}" aria-pressed="${k===filter}">${l}</button>`).join("");
+    fEl.onclick = e=>{ const b=e.target.closest("button"); if(!b) return; filter=b.dataset.k; record(); };
+    let list = out.filter(e=>filter==="all"||e.f===filter);
+    const rank = {announced:0, construction:0, open:1, closed:2};
+    if (filter==="sites") list.sort((a,b)=>(rank[a.status]-rank[b.status]) || b.date.localeCompare(a.date));
+    else list.sort((a,b)=>b.date.localeCompare(a.date));
+    document.getElementById("record").innerHTML = list.map(e=>`<li${e.site?' class="site-card"':""}>${e.site ? e.html : e.html.replace('<div class="when">', `<div class="when"><span class="num">${fdate(e.date)}</span>`)}</li>`).join("");
+  }
+
+  // ---------- detail content ----------
+  function card(it, siteMode){
+    const o = it.obj;
+    if (it.type==="promise") return `<div class="when"><span class="kind">${o.target?"Goal":"Promise"}</span><span class="pill ${o.status}">${PSTATUS[o.status]}</span></div><h3>${esc(o.text)}</h3>${o.target?`<p>Target: ${fmt(o.target.units)} units by ${fdate(o.target.by)}. Set ${esc(o.made_label||fdate(o.made))}.</p>`:""}<p>${esc(o.status_note)}</p>${srcs(o.sources)}`;
+    if (it.type==="event") return `<div class="when"><span class="kind">${TTYPE[o.type]||esc(o.type)}</span></div><h3>${esc(o.title)}</h3><p>${esc(o.detail)}</p>${srcs(o.sources)}`;
+    if (it.type==="city") return `<div class="when"><span class="kind">City ${o.kind==="count"?"count":"projection"}</span></div><h3>${fmt(o.units)} units ${o.kind==="count"?"added, per the city":"projected"}${o.kind!=="count"&&o.by?` by ${fdate(o.by)}`:""}</h3><p>${esc(o.statement)}</p>${o.kind==="count"?`<p>Our count for that date: ${fmt(it.ours)}.</p>`:""}${srcs(o.sources)}`;
+    const s = o, pill = {open:"delivered", closed:"missed", construction:"in_progress", announced:"in_progress"}[s.status];
+    return `<div class="when"><span class="kind">Site</span><span class="pill ${pill}">${esc(STATUS[s.status])}</span><span>${esc(s.neighborhood)}</span></div><h3>${esc(s.name)}: ${fmt(sum(s.units))} units</h3>${chips(s.units)}<p>${esc(s.address)}, ${esc(s.operator)}</p>${siteHistory(s)}<p>${esc(s.notes)}</p><div class="prog">${esc(PROGRAM[s.program]||"")}${s.program_note?". "+esc(s.program_note):""}</div>${siteSources(s)}`;
+  }
+
+  // ---------- interaction ----------
+  const panel = document.getElementById("panel");
+  function open(id){
+    const it = ITEMS[id]; if (!it) return;
+    document.querySelectorAll(".mk.sel").forEach(n=>n.classList.remove("sel"));
+    document.querySelectorAll(".mk").forEach(n=>{ if (n.dataset.id===id) n.classList.add("sel"); });
+    panel.innerHTML = `<button type="button" class="close" id="panel-close">Close</button>${card(it)}`;
+    panel.hidden = false;
+  }
+  function close(){ panel.hidden = true; document.querySelectorAll(".mk.sel").forEach(n=>n.classList.remove("sel")); }
+  document.addEventListener("click", e=>{
+    if (e.target.closest("#panel-close")) return close();
+    if (e.target.closest("a")) return;
+    const mk = e.target.closest(".mk"); if (mk) return open(mk.dataset.id);
+  });
+  document.addEventListener("keydown", e=>{
+    if (e.key==="Escape" && !panel.hidden) return close();
+    const mk = e.target.closest && e.target.closest(".mk");
+    if (mk && (e.key==="Enter"||e.key===" ")) { e.preventDefault(); open(mk.dataset.id); }
+    if (e.target.id==="navsvg" && (e.key==="ArrowLeft"||e.key==="ArrowRight")) { e.preventDefault(); document.getElementById("plot").scrollLeft += (e.key==="ArrowLeft"?-1:1)*120; }
+  });
+  document.getElementById("plot").addEventListener("scroll", updateWindow, {passive:true});
+  const navsvg = document.getElementById("navsvg"); let dragging = false;
+  navsvg.addEventListener("pointerdown", e=>{ dragging = true; navsvg.setPointerCapture(e.pointerId); navTo(e.clientX); });
+  navsvg.addEventListener("pointermove", e=>{ if (dragging) navTo(e.clientX); });
+  navsvg.addEventListener("pointerup", ()=>{ dragging = false; });
+  navsvg.addEventListener("pointercancel", ()=>{ dragging = false; });
+  const jump = (id, d, f) => document.getElementById(id).addEventListener("click", ()=>{ if (d==="end") document.getElementById("plot").scrollLeft = 1e9; else scrollToDate(d, f); });
+  jump("go-start","2025-03-01",0); jump("go-2026","2026-01-01",0.04); jump("go-end","end");
+  document.getElementById("go-today").addEventListener("click", ()=>scrollToDate(D.updated, 0.72));
+  let rt; window.addEventListener("resize", ()=>{ clearTimeout(rt); rt = setTimeout(()=>{ if (D && document.getElementById("chart").clientWidth !== lastW) layout(false); }, 150); });
+
+  const inline = document.getElementById("ledger-data");
+  if (inline) { render(JSON.parse(inline.textContent)); return; }
+  fetch("data.json", {cache:"no-store"}).then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); }).then(render)
+    .catch(err=>{ document.querySelector(".wrap").insertAdjacentHTML("afterbegin", `<div class="err">The data file didn't load (${esc(err.message)}). Reload the page; if it keeps failing, data.json is missing from the site.</div>`); });
+})();
+</script>

@@ -1,0 +1,52 @@
+name: Daily ledger update
+
+on:
+  schedule:
+    - cron: "41 14 * * *"   # 14:41 UTC = 6:41am PST / 7:41am PDT
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write   # lets the job prove its identity to the Claude API; no stored key
+
+concurrency:
+  group: ledger-update
+  cancel-in-progress: false
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Search for changes and draft an update
+        env:
+          # IDs from the Claude Console's workload identity wizard. They are not secrets.
+          ANTHROPIC_FEDERATION_RULE_ID: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID }}
+          ANTHROPIC_ORGANIZATION_ID: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
+          ANTHROPIC_SERVICE_ACCOUNT_ID: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
+          ANTHROPIC_WORKSPACE_ID: ${{ vars.ANTHROPIC_WORKSPACE_ID }}
+        run: python scripts/update.py
+
+      - name: Check for a proposed update
+        id: check
+        run: |
+          if [ -f CHANGES.md ]; then echo "changed=true" >> "$GITHUB_OUTPUT"; else echo "changed=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Open a pull request for review
+        if: steps.check.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: auto/daily-update
+          delete-branch: true
+          add-paths: data.json
+          commit-message: "Daily ledger update"
+          title: "Ledger update for review"
+          body-path: CHANGES.md
+          labels: needs-review

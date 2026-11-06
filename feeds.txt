@@ -1,0 +1,25 @@
+# RSS/Atom feeds the daily job reads before it searches. One URL per line; # starts a comment.
+# A feed that fails to load is listed in the pull request so you can fix or remove it.
+
+# City
+https://news.seattle.gov/feed/
+https://wilson.seattle.gov/feed/
+https://council.seattle.gov/feed/
+
+# Providers and agencies
+https://www.lihihousing.org/blog-feed.xml
+https://kcrha.org/feed/
+
+# Local news
+https://westseattleblog.com/feed/
+https://www.capitolhillseattle.com/feed/
+https://publicola.com/feed/
+https://www.theurbanist.org/feed/
+https://www.thestranger.com/feed/
+https://www.myballard.com/feed/
+https://southseattleemerald.org/feed
+https://www.seattletimes.com/seattle-news/homeless/feed/
+https://www.realchangenews.org/rss.xml
+
+# Catch-all: Google News search across every outlet
+https://news.google.com/rss/search?q=Seattle+(shelter+OR+%22tiny+house%22+OR+%22safe+lot%22+OR+homelessness)+when:3d&hl=en-US&gl=US&ceid=US:en

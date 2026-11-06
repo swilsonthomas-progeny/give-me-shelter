@@ -1,0 +1,719 @@
+{
+  "updated": "2026-11-05",
+  "baseline_date": "2026-01-01",
+  "sites": [
+    {
+      "id": "olympic-hills-village",
+      "name": "Olympic Hills Tiny House Village",
+      "neighborhood": "Lake City",
+      "address": "3121 NE 133rd St",
+      "operator": "Low Income Housing Institute with Purpose. Dignity. Action.",
+      "units": {
+        "shelter": 0,
+        "pallet": 0,
+        "tiny_house": 45,
+        "emergency_housing": 0,
+        "rv": 0
+      },
+      "status": "open",
+      "program": "other",
+      "program_note": "Funded by the City Council in the 2025 budget, before Wilson took office.",
+      "dates": {
+        "announced": "2025-08-01",
+        "opened": "2026-02-19",
+        "closed": null
+      },
+      "notes": "45 tiny houses run as enhanced 24/7 shelter for individuals, couples and people with pets.",
+      "sources": [
+        {
+          "title": "LIHI: Grand opening of Olympic Hills Village",
+          "url": "https://www.lihihousing.org/post/crowd-of-supporters-celebrated-grand-opening-of-olympic-hills-tiny-house-village"
+        },
+        {
+          "title": "KOMO: Tiny house village opens in Lake City",
+          "url": "https://komonews.com/news/project-seattle/more-help-for-homeless-as-tiny-house-village-opens-in-seattles-lake-city-homelessness-tent-camping-rv-drug-addiction-neighborhood-safety-resources-shelter"
+        },
+        {
+          "title": "LIHI: City awards funding for two new villages (Aug 2025)",
+          "url": "https://www.lihihousing.org/post/the-city-of-seattle-awards-lihi-funding-for-two-new-tiny-house-villages"
+        }
+      ]
+    },
+    {
+      "id": "bayside-enhanced-shelter",
+      "name": "Bayside Enhanced Shelter",
+      "neighborhood": "Interbay",
+      "address": "1551 W Armory Way",
+      "operator": "Everyone Deserves Housing (units built by Pallet)",
+      "units": {
+        "shelter": 0,
+        "pallet": 75,
+        "tiny_house": 0,
+        "emergency_housing": 0,
+        "rv": 0
+      },
+      "status": "open",
+      "program": "initiative",
+      "program_note": "First site opened under the mayor's shelter acceleration plan.",
+      "dates": {
+        "announced": "2026-04-08",
+        "opened": "2026-06-07",
+        "closed": null
+      },
+      "notes": "Opened with 50 pallet units; the remaining 25 were scheduled for installation by the end of June. About 15 residents a week after opening.",
+      "sources": [
+        {
+          "title": "FOX 13: Interbay tiny home village opens, falls short of goal",
+          "url": "https://www.fox13seattle.com/news/seattle-tiny-home-village"
+        },
+        {
+          "title": "KOMO: Newest shelter opens with 15 residents",
+          "url": "https://komonews.com/news/project-seattle/new-questions-as-seattles-newest-75-unit-shelter-opens-with-15-residents-armory-way-nonprofit-mayor-katie-wilson-housing-administration-everett-pallet-shelter-dan-wise"
+        },
+        {
+          "title": "My Ballard: Micro-shelter replaces proposed pickleball hotel",
+          "url": "https://www.myballard.com/?p=270825"
+        }
+      ]
+    },
+    {
+      "id": "brighton-village",
+      "name": "Brighton Village",
+      "neighborhood": "Rainier Valley",
+      "address": "S Orchard St & Rainier Ave S",
+      "operator": "Nickelsville",
+      "units": {
+        "shelter": 0,
+        "pallet": 0,
+        "tiny_house": 14,
+        "emergency_housing": 0,
+        "rv": 0
+      },
+      "status": "open",
+      "program": "accelerated",
+      "program_note": "Pipeline project funded through KCRHA. The mayor's office says its permits were flagged for expedited review.",
+      "dates": {
+        "announced": "2023-11-01",
+        "opened": "2026-06-27",
+        "closed": null
+      },
+      "notes": "Self-managed, sobriety-required village of 14 tiny houses. Canceled by the Harrell administration in 2024, reinstated in 2025. Ribbon-cutting June 27; fully open in July.",
+      "sources": [
+        {
+          "title": "South Seattle Emerald: Nickelsville to open Rainier Valley village",
+          "url": "https://southseattleemerald.org/news/2026/06/26/nickelsville-to-open-rainier-valley-tiny-house-village-after-long-delays"
+        }
+      ]
+    },
+    {
+      "id": "belmont-village",
+      "name": "Belmont Tiny House Village",
+      "neighborhood": "Capitol Hill",
+      "address": "1737 Belmont Ave",
+      "operator": "Low Income Housing Institute",
+      "units": {
+        "shelter": 0,
+        "pallet": 0,
+        "tiny_house": 31,
+        "emergency_housing": 0,
+        "rv": 0
+      },
+      "status": "open",
+      "program": "accelerated",
+      "program_note": "Already in development when Wilson took office; the mayor's office lists it among projects it accelerated.",
+      "dates": {
+        "announced": "2026-04-20",
+        "opened": "2026-07-30",
+        "closed": null
+      },
+      "notes": "LIHI planned 32 houses; Seattle Times reported 31 at opening. Reported to replace tiny houses from Friendship Heights Village, which is being redeveloped as senior housing, so the net gain may be smaller.",
+      "sources": [
+        {
+          "title": "LIHI: Belmont Village groundbreaking",
+          "url": "https://www.lihihousing.org/post/belmont-thv-breaks-ground-seattle-city-council-vote-to-expand-tiny-house-villages"
+        },
+        {
+          "title": "Capitol Hill Seattle: Wilson slows homelessness plan (Belmont opened with 31)",
+          "url": "https://www.capitolhillseattle.com/2026/09/wilson-slows-homelessness-plan-including-shelter-goals-in-roll-out-of-2027-budget-proposal/"
+        },
+        {
+          "title": "Prism News: Belmont replaces Friendship Heights houses",
+          "url": "https://www.prismnews.com/hobbies/tiny-houses/belmont-tiny-house-village-breaks-ground-adds-32-homes-on"
+        }
+      ]
+    },
+    {
+      "id": "cloverleaf-village",
+      "name": "Cloverleaf Tiny House Village",
+      "neighborhood": "South Park",
+      "address": "9128 10th Ave S",
+      "operator": "Low Income Housing Institute",
+      "units": {
+        "shelter": 0,
+        "pallet": 0,
+        "tiny_house": 90,
+        "emergency_housing": 0,
+        "rv": 0
+      },
+      "status": "open",
+      "program": "initiative",
+      "program_note": "Paid for with about $2.8M from the Shelter Accelerator Fund, a City of Seattle and Challenge Seattle partnership.",
+      "dates": {
+        "announced": "2026-05-07",
+        "opened": "2026-10-27",
+        "closed": null
+      },
+      "notes": "90 insulated 8x12 tiny houses with 24/7 staff. LIHI's largest village.",
+      "sources": [
+        {
+          "title": "Mayor's office: Cloverleaf opens 90 units (Oct 27)",
+          "url": "https://content.govdelivery.com/accounts/WASEATTLE/bulletins/430b2c8"
+        },
+        {
+          "title": "The Urbanist: Largest tiny house village opens",
+          "url": "https://www.theurbanist.org/seattle-opens-its-largest-tiny-house-village-yet-in-south-park/"
+        },
+        {
+          "title": "West Seattle Blog: Mayor announces South Park village",
+          "url": "https://westseattleblog.com/2026/05/mayor-announces-another-new-tiny-home-village-will-go-up-in-district-1/"
+        }
+      ]
+    },
+    {
+      "id": "glassyard-commons",
+      "name": "Glassyard Commons",
+      "neighborhood": "Highland Park / South Park",
+      "address": "7201 2nd Ave SW",
+      "operator": "Low Income Housing Institute",
+      "units": {
+        "shelter": 0,
+        "pallet": 0,
+        "tiny_house": 20,
+        "emergency_housing": 0,
+        "rv": 72
+      },
+      "status": "construction",
+      "program": "accelerated",
+      "program_note": "$3.3M KCRHA contract. The mayor cited it as a project whose permits the city is speeding up.",
+      "dates": {
+        "announced": "2026-01-27",
+        "opened": null,
+        "closed": null,
+        "expected": "2026-11-15"
+      },
+      "notes": "72 RV spaces plus 20 tiny houses on state-owned land. First targeted to open before the World Cup; broke ground Sept 10; latest reported target is mid-November 2026. Would be Seattle's only RV safe lot.",
+      "sources": [
+        {
+          "title": "West Seattle Blog: Plan first spotted in permit filings",
+          "url": "https://westseattleblog.com/2026/01/combined-rv-safe-lot-tiny-house-village-proposed-for-southeast-west-seattle-site-thats-seen-encampments-before/"
+        },
+        {
+          "title": "West Seattle Blog: Official announcement",
+          "url": "https://westseattleblog.com/2026/02/followup-site-name-religious-sponsor-revealed-in-official-announcement-of-west-seattle-rv-tiny-house-site/"
+        },
+        {
+          "title": "Westside Seattle: On schedule for mid-November (via OpenVan)",
+          "url": "https://openvan.camp/en/news/opening/construction-advances-glassyard-commons-rv-tiny"
+        }
+      ]
+    }
+  ],
+  "watch": [
+    {
+      "id": "friendship-heights-village",
+      "title": "Friendship Heights Village (Aurora Ave N) — closure reported, not confirmed",
+      "detail": "Reporting says LIHI is moving houses from this 42-house village to Belmont while the site becomes senior housing. No closure date confirmed yet, so it is not subtracted from the totals.",
+      "sources": [
+        {
+          "title": "Prism News",
+          "url": "https://www.prismnews.com/hobbies/tiny-houses/belmont-tiny-house-village-breaks-ground-adds-32-homes-on"
+        },
+        {
+          "title": "LIHI: Friendship Heights Village",
+          "url": "https://lihihousing.org/villages/friendshipheights"
+        }
+      ]
+    },
+    {
+      "id": "kcrha-689-beds",
+      "title": "689 shelter beds closed countywide (KCRHA)",
+      "detail": "KCRHA's CEO attributed the rise in unsheltered homelessness in the 2026 count to the closure of 689 shelter beds across King County. The agency has not published which Seattle sites closed or when.",
+      "sources": [
+        {
+          "title": "PubliCola, June 29, 2026",
+          "url": "https://publicola.com/2026/06/29/kcrha-spins-the-news-that-homelessness-is-growing/"
+        }
+      ]
+    }
+  ],
+  "promises": [
+    {
+      "id": "p-4000-term",
+      "made": "2025-03-29",
+      "made_label": "2025 campaign",
+      "text": "4,000 new units of emergency housing and shelter over four years.",
+      "status": "revised",
+      "status_note": "Replaced in September 2026 by a target of 960 beds by the end of 2027. No four-year figure has been restated.",
+      "sources": [
+        {
+          "title": "FOX 13: Wilson's platform",
+          "url": "https://www.fox13seattle.com/news/who-katie-wilson"
+        },
+        {
+          "title": "Real Change: Wilson scales back shelter goal",
+          "url": "https://www.realchangenews.org/news/2026/09/23/mayor-wilson-scales-back-shelter-goal-aiming-960-beds-under-new-plan"
+        }
+      ],
+      "short": "4,000 in 4 years"
+    },
+    {
+      "id": "p-500-worldcup",
+      "made": "2026-01-15",
+      "made_label": "January 2026",
+      "text": "500 new shelter units before the World Cup in June.",
+      "target": {
+        "units": 500,
+        "by": "2026-06-01"
+      },
+      "status": "missed",
+      "status_note": "The first initiative site, 75 units at Bayside, opened June 7. Wilson acknowledged on June 3 the goal would not be met.",
+      "sources": [
+        {
+          "title": "PubliCola: Executive orders, 500 before World Cup",
+          "url": "https://publicola.com/2026/01/15/wilson-issues-orders-to-speed-up-transit-and-shelter-will-replace-more-harrell-appointees/"
+        },
+        {
+          "title": "KUOW: Wilson falls short on shelter bed goal",
+          "url": "https://www.kuow.org/governing/2026-06-04/seattle-mayor-wilson-homeless-shelter-beds-world-cup-deadline"
+        }
+      ],
+      "short": "500 by World Cup"
+    },
+    {
+      "id": "p-303-summer",
+      "made": "2026-06-07",
+      "made_label": "June 2026",
+      "short": "303 by end of summer",
+      "text": "303 shelter units open by the end of summer: 165 new and 138 already in the pipeline when Wilson took office.",
+      "target": {
+        "units": 303,
+        "by": "2026-09-22"
+      },
+      "status": "missed",
+      "status_note": "165 units were open when summer ended Sept 22. The city gave no exact date for the end of summer; this tracker uses Sept 22.",
+      "sources": [
+        {
+          "title": "The Stranger",
+          "url": "https://www.thestranger.com/news/seattle-mayor-katie-wilson-unveils-new-75-unit-shelter/"
+        }
+      ]
+    },
+    {
+      "id": "p-1000-2026",
+      "made": "2026-03-04",
+      "made_label": "March 2026 (also described as a campaign pledge)",
+      "text": "1,000 new shelter units in her first year (2026).",
+      "target": {
+        "units": 1000,
+        "by": "2026-12-31"
+      },
+      "status": "revised",
+      "status_note": "Pushed to the end of 2027 and cut to 960. The administration now projects about 400 units by the end of 2026.",
+      "sources": [
+        {
+          "title": "The Urbanist: Neighbor by Neighbor rollout",
+          "url": "https://www.theurbanist.org/2026/03/05/wilson-rolls-out-bills-expediting-emergency-housing-for-homeless/"
+        },
+        {
+          "title": "KOMO: Mayor reveals new strategy",
+          "url": "https://komonews.com/news/local/seattle-mayor-katie-wilson-new-plan-reduce-homelessness-affordable-housing-shelter-units-tiny-homes-beds-crime-budget-gap-city-council"
+        }
+      ],
+      "short": "1,000 in 2026"
+    },
+    {
+      "id": "p-400-2026",
+      "made": "2026-10-21",
+      "made_label": "October 2026",
+      "text": "More than 400 shelter units open by the end of 2026.",
+      "target": {
+        "units": 400,
+        "by": "2026-12-31"
+      },
+      "status": "in_progress",
+      "status_note": "The city has not said which sites count toward this number. Projected by the mayor's office Oct 21.",
+      "sources": [
+        {
+          "title": "KOMO: Mayor reveals new strategy",
+          "url": "https://komonews.com/news/local/story/seattle-mayor-katie-wilson-new-plan-reduce-homelessness-affordable-housing-shelter-units-tiny-homes-beds-crime-budget-gap-city-council"
+        }
+      ],
+      "short": "400+ by end of 2026"
+    },
+    {
+      "id": "p-960-2027",
+      "made": "2026-09-14",
+      "made_label": "September 2026",
+      "text": "About 960 new shelter beds by the end of 2027, serving roughly 1,750 people a year, for about $37M and with no new revenue.",
+      "target": {
+        "units": 960,
+        "by": "2027-12-31"
+      },
+      "status": "in_progress",
+      "status_note": "Depends on the City Council approving the 2027–28 budget. Locations named for 4 of 11 planned projects as of September.",
+      "sources": [
+        {
+          "title": "Real Change: 960 beds under new plan",
+          "url": "https://www.realchangenews.org/news/2026/09/23/mayor-wilson-scales-back-shelter-goal-aiming-960-beds-under-new-plan"
+        },
+        {
+          "title": "Capitol Hill Seattle: Eight sites slated for 2027",
+          "url": "https://www.capitolhillseattle.com/2026/10/wilson-plan-shifts-seattles-encampment-strategy-to-prioritize-sidewalks-parks-and-shelter/"
+        }
+      ],
+      "short": "960 by end of 2027"
+    },
+    {
+      "id": "p-larger-villages",
+      "made": "2025-11-26",
+      "made_label": "Campaign; legislation March 2026",
+      "text": "Allow bigger tiny house villages: 150 people per site, and one site per council district up to 250.",
+      "status": "delivered",
+      "status_note": "The City Council voted to temporarily allow larger tiny house villages and vehicle safe lots.",
+      "sources": [
+        {
+          "title": "West Seattle Blog: Council committee hears proposal",
+          "url": "https://westseattleblog.com/2026/04/video-how-will-mayor-add-shelter-space-city-council-committee-gets-one-big-hint/"
+        },
+        {
+          "title": "Axios Seattle: Council vote",
+          "url": "https://www.axios.com/newsletters/axios-seattle-1bb7ba82-e5c3-4117-9af0-2641df93f131"
+        }
+      ],
+      "short": "Bigger villages"
+    },
+    {
+      "id": "p-expedite-permits",
+      "made": "2026-01-15",
+      "made_label": "January 2026",
+      "text": "Use every administrative tool to expedite permits for shelter and affordable housing.",
+      "status": "delivered",
+      "status_note": "Executive order issued Jan 15 creating an interdepartmental team, with a March deadline for recommendations.",
+      "sources": [
+        {
+          "title": "Mayor's office: Executive orders",
+          "url": "https://wilson.seattle.gov/2026/01/15/mayor-wilson-announces-executive-orders-to-accelerate-shelter-and-improve-transit/"
+        }
+      ],
+      "short": "Faster permits"
+    }
+  ],
+  "events": [
+    {
+      "id": "e-2025-campaign-launch",
+      "date": "2025-03-29",
+      "type": "campaign",
+      "title": "Wilson launches mayoral campaign",
+      "detail": "Platform includes 4,000 new units of emergency housing and shelter in four years.",
+      "sources": [
+        {
+          "title": "FOX 13",
+          "url": "https://www.fox13seattle.com/news/who-katie-wilson"
+        }
+      ],
+      "short": "Campaign launch"
+    },
+    {
+      "id": "e-2025-brighton",
+      "date": "2025-04-03",
+      "type": "campaign",
+      "title": "Brighton Village reinstated after campaign pressure",
+      "detail": "The Harrell administration reversed its 2024 cancellation of the Nickelsville village; Wilson had made it a talking point.",
+      "sources": [
+        {
+          "title": "South Seattle Emerald",
+          "url": "https://southseattleemerald.org/news/2026/06/26/nickelsville-to-open-rainier-valley-tiny-house-village-after-long-delays"
+        }
+      ],
+      "short": "Brighton reinstated"
+    },
+    {
+      "id": "e-2025-elected",
+      "date": "2025-11-26",
+      "type": "campaign",
+      "title": "Wilson wins by about 2,000 votes",
+      "detail": "Mayor-elect repeats the pledge to open 4,000 units of emergency housing by the end of her first term.",
+      "sources": [
+        {
+          "title": "The Urbanist",
+          "url": "https://www.theurbanist.org/2025/11/26/katie-wilson-charts-new-course-on-public-safety-and-homelessness/"
+        }
+      ],
+      "short": "Wins election"
+    },
+    {
+      "id": "e-2026-eo",
+      "date": "2026-01-15",
+      "type": "policy",
+      "title": "Executive order to accelerate shelter and housing",
+      "detail": "Creates an interdepartmental team to find permitting, financial and policy changes, due in March. Wilson also sets a short-term goal of 500 units before the World Cup.",
+      "sources": [
+        {
+          "title": "Mayor's office",
+          "url": "https://wilson.seattle.gov/2026/01/15/mayor-wilson-announces-executive-orders-to-accelerate-shelter-and-improve-transit/"
+        },
+        {
+          "title": "PubliCola",
+          "url": "https://publicola.com/2026/01/15/wilson-issues-orders-to-speed-up-transit-and-shelter-will-replace-more-harrell-appointees/"
+        }
+      ],
+      "short": "Executive order"
+    },
+    {
+      "id": "e-2026-glassyard-permits",
+      "date": "2026-01-27",
+      "type": "site",
+      "site": "glassyard-commons",
+      "title": "RV safe lot plan surfaces in permit filings",
+      "detail": "Up to 72 RVs plus tiny houses on state land at 7201 2nd Ave SW.",
+      "sources": [
+        {
+          "title": "West Seattle Blog",
+          "url": "https://westseattleblog.com/2026/01/combined-rv-safe-lot-tiny-house-village-proposed-for-southeast-west-seattle-site-thats-seen-encampments-before/"
+        }
+      ],
+      "short": "Glassyard in permits"
+    },
+    {
+      "id": "e-2026-neighbor",
+      "date": "2026-03-04",
+      "type": "policy",
+      "title": "Neighbor by Neighbor Initiative and three shelter bills",
+      "detail": "Legislation to expedite emergency housing plus a citywide volunteer push. Wilson restates 1,000 new units in 2026.",
+      "sources": [
+        {
+          "title": "The Urbanist",
+          "url": "https://www.theurbanist.org/2026/03/05/wilson-rolls-out-bills-expediting-emergency-housing-for-homeless/"
+        },
+        {
+          "title": "West Seattle Blog",
+          "url": "https://westseattleblog.com/2026/03/video-mayor-launches-all-hands-on-deck-citywide-volunteerism-campaign-as-part-of-push-to-shelter-1000-more-homeless-people-this-year"
+        }
+      ],
+      "short": "Neighbor by Neighbor"
+    },
+    {
+      "id": "e-2026-worldcup-miss",
+      "date": "2026-06-03",
+      "type": "goal",
+      "title": "Wilson concedes 500-by-World-Cup goal will be missed",
+      "detail": "Says the city is still working toward 1,000 by year end.",
+      "sources": [
+        {
+          "title": "KUOW",
+          "url": "https://www.kuow.org/governing/2026-06-04/seattle-mayor-wilson-homeless-shelter-beds-world-cup-deadline"
+        }
+      ],
+      "short": "Concedes 500 miss"
+    },
+    {
+      "id": "e-2026-pit",
+      "date": "2026-06-23",
+      "type": "context",
+      "title": "Point-in-Time Count: unsheltered homelessness up",
+      "detail": "King County's unsheltered count rose from about 9,800 to 11,800 since 2024.",
+      "sources": [
+        {
+          "title": "South Seattle Emerald",
+          "url": "https://southseattleemerald.org/news/2026/06/26/nickelsville-to-open-rainier-valley-tiny-house-village-after-long-delays"
+        }
+      ],
+      "short": "PIT count up"
+    },
+    {
+      "id": "e-2026-kcrha-contracts",
+      "date": "2026-07-15",
+      "date_precision": "month",
+      "type": "policy",
+      "title": "City and county pull service contracts from KCRHA",
+      "detail": "Wilson and Executive Zahilay move about 75% of KCRHA's budget back to their own governments; Seattle reclaims roughly $112M in contracts.",
+      "sources": [
+        {
+          "title": "KIRO 7",
+          "url": "https://www.kiro7.com/news/local/nearly-17m-missing-king-co-homelessness-authority-calls-organization-dismantle/GG2ZKZDR7FDFXNPLZESRCQYDGE/"
+        },
+        {
+          "title": "Real Change",
+          "url": "https://www.realchangenews.org/news/2026/09/23/mayor-wilson-scales-back-shelter-goal-aiming-960-beds-under-new-plan"
+        }
+      ],
+      "short": "KCRHA contracts pulled"
+    },
+    {
+      "id": "e-2026-glassyard-ground",
+      "date": "2026-09-10",
+      "type": "site",
+      "site": "glassyard-commons",
+      "title": "Glassyard Commons breaks ground",
+      "detail": "Opening slips from World Cup to November.",
+      "sources": [
+        {
+          "title": "West Seattle Blog (via OpenVan)",
+          "url": "https://openvan.camp/en/news/opening/groundbreaking-ceremony-tomorrow-glassyard"
+        }
+      ],
+      "short": "Glassyard groundbreaking"
+    },
+    {
+      "id": "e-2026-reset",
+      "date": "2026-09-14",
+      "type": "goal",
+      "title": "Shelter goal reset: 960 beds by end of 2027",
+      "detail": "Replaces 1,000 per year. About $37M from existing funds, no new revenue. The mayor's office counted 187 beds added under the administration at that point.",
+      "sources": [
+        {
+          "title": "Real Change",
+          "url": "https://www.realchangenews.org/news/2026/09/23/mayor-wilson-scales-back-shelter-goal-aiming-960-beds-under-new-plan"
+        },
+        {
+          "title": "KOMO",
+          "url": "https://komonews.com/news/local/mayor-katie-wilson-walks-back-1k-shelter-beds-a-year-promise-as-seattle-budget-gap-grows-homeless-houseless-housingcrisis-camping-rv-drugs-addiction-mental-health-unsheltered-resources-tiny-home-taxes-taxpayer-deficit-funding"
+        }
+      ],
+      "short": "Goal reset to 960"
+    },
+    {
+      "id": "e-2026-budget",
+      "date": "2026-09-22",
+      "type": "policy",
+      "title": "Proposed 2027–28 budget",
+      "detail": "$183M for homelessness, including $37M for shelter expansion and $11.2M for prevention in 2027.",
+      "sources": [
+        {
+          "title": "Mayor's office (Cloverleaf release)",
+          "url": "https://content.govdelivery.com/accounts/WASEATTLE/bulletins/430b2c8"
+        }
+      ],
+      "short": "Budget: $37M shelter"
+    },
+    {
+      "id": "e-2026-vrap",
+      "date": "2026-10-20",
+      "type": "policy",
+      "title": "Council passes RV parking restrictions (VRAP), 8–1",
+      "detail": "Unpermitted RVs limited to two hours, no overnight parking from April 30, 2027; $5M toward safe lots, storage and outreach. Wilson says she has serious concerns; her signature is pending.",
+      "sources": [
+        {
+          "title": "KUOW",
+          "url": "https://kuow.org/governing/2026-10-20/seattle-city-council-restricts-overnight-rv-parking-adds-shelter-space"
+        },
+        {
+          "title": "Axios",
+          "url": "https://www.axios.com/local/seattle/2026/10/22/seattle-homelessness-rv-parking-permit-program-ban"
+        }
+      ],
+      "short": "Council RV limits"
+    },
+    {
+      "id": "e-2026-streets-to-housing",
+      "date": "2026-10-21",
+      "type": "policy",
+      "title": "Streets to Housing goes citywide",
+      "detail": "Expands the Pioneer Square pilot (70 of 80 people placed). Administration projects 400+ shelter units by the end of 2026.",
+      "sources": [
+        {
+          "title": "KUOW",
+          "url": "https://www.kuow.org/governing/2026-10-21/wilson-wants-to-emulate-denver-houston-with-new-homelessness-strategy"
+        },
+        {
+          "title": "FOX 13",
+          "url": "https://www.fox13seattle.com/news/seattle-homelessness-plan-wilson-pilot-citywide"
+        }
+      ],
+      "short": "Streets to Housing"
+    },
+    {
+      "id": "e-2026-11-citypage",
+      "date": "2026-11-05",
+      "type": "context",
+      "title": "City's shelter expansion page still shows the original goal",
+      "detail": "As of Nov 5 the page lists the goal of 1,000 units in the mayor's first year and publishes no progress count or site list.",
+      "sources": [
+        {
+          "title": "Neighbor by Neighbor: Accelerated Shelter Expansion",
+          "url": "https://seattle.gov/mayor/vision-and-values/shelter-expansion"
+        }
+      ],
+      "short": "City page still says 1,000"
+    }
+  ],
+  "city_counts": [
+    {
+      "id": "cc-2026-09-187",
+      "date": "2026-09-14",
+      "kind": "count",
+      "units": 187,
+      "statement": "187 additional emergency shelter beds added under the Wilson administration, as reported with the September plan reset. No site list published.",
+      "sources": [
+        {
+          "title": "KOMO",
+          "url": "https://komonews.com/news/local/mayor-katie-wilson-walks-back-1k-shelter-beds-a-year-promise-as-seattle-budget-gap-grows-homeless-houseless-housingcrisis-camping-rv-drugs-addiction-mental-health-unsheltered-resources-tiny-home-taxes-taxpayer-deficit-funding"
+        }
+      ]
+    }
+  ],
+  "unnamed": [
+    {
+      "id": "u-pda-shelter",
+      "title": "New shelter run by Purpose. Dignity. Action.",
+      "timing": "Later in 2026",
+      "detail": "Listed in the city's September plan as opening later in 2026. No location or unit count published.",
+      "sources": [
+        {
+          "title": "Mayor's office: Shelter action plan (Sept 14)",
+          "url": "https://content.govdelivery.com/accounts/WASEATTLE/bulletins/42aad71"
+        }
+      ]
+    },
+    {
+      "id": "u-three-expansions",
+      "title": "Expansions at three existing shelters",
+      "timing": "Later in 2026",
+      "detail": "The September plan says three existing shelters will add capacity in 2026. The sites and unit counts are not named.",
+      "sources": [
+        {
+          "title": "Mayor's office: Shelter action plan (Sept 14)",
+          "url": "https://content.govdelivery.com/accounts/WASEATTLE/bulletins/42aad71"
+        }
+      ]
+    },
+    {
+      "id": "u-eight-2027",
+      "title": "Eight new shelters",
+      "timing": "2027",
+      "detail": "Eight more sites are planned for 2027 under the 960-bed plan. None is named yet.",
+      "sources": [
+        {
+          "title": "Mayor's office: Shelter action plan (Sept 14)",
+          "url": "https://content.govdelivery.com/accounts/WASEATTLE/bulletins/42aad71"
+        },
+        {
+          "title": "Capitol Hill Seattle",
+          "url": "https://www.capitolhillseattle.com/2026/10/wilson-plan-shifts-seattles-encampment-strategy-to-prioritize-sidewalks-parks-and-shelter/"
+        }
+      ]
+    },
+    {
+      "id": "u-preserve",
+      "title": "Existing beds at risk of closing",
+      "timing": "Not stated",
+      "detail": "The plan says it will preserve existing units at risk of closing. No number or sites given.",
+      "sources": [
+        {
+          "title": "Mayor's office: Shelter action plan (Sept 14)",
+          "url": "https://content.govdelivery.com/accounts/WASEATTLE/bulletins/42aad71"
+        }
+      ]
+    }
+  ]
+}
