@@ -445,6 +445,25 @@
           "url": "https://komonews.com/news/local/seattle-mayor-wilson-vetoes-rv-permit-bill-due-to-efficacy-concerns-signs-4-others-homeless-camping-shelter-reosuces-budget-funding-council-safety-violence-drug-use-neighborhood"
         }
       ]
+    },
+    {
+      "id": "p-rv-workgroup",
+      "made": "2026-11-03",
+      "made_label": "Nov. 3, 2026 (Executive Order 2026-09)",
+      "text": "Executive Order 2026-09 sets up a city and community work group on vehicle residents and RVs. It is to give recommendations within 60 days. The Mayor expects to send any needed legislation to the council by March 31, 2027.",
+      "short": "RV work group, 60 days",
+      "status": "in_progress",
+      "status_note": "The order was signed Nov. 3, 2026. Sources say the 60-day recommendations are due about early January 2027, and any legislation is due by 2027-03-31. The sources give no unit counts for this item, so it has no unit target.",
+      "sources": [
+        {
+          "title": "Seattle Mayor Katie Wilson orders new approach to RV homelessness after vetoing permit program - MyNorthwest.com",
+          "url": "https://mynorthwest.com/mynorthwest-politics/seattle-wilson-rv-executive/4294279"
+        },
+        {
+          "title": "Seattle doesn't know how many RVs line its streets - KVI",
+          "url": "https://kvi.com/2026/11/05/seattle-doesnt-know-how-many-rvs-line-its-streets-but-katie-wilson-insists-nurses-veterans-and-tourists-are-inside"
+        }
+      ]
     }
   ],
   "events": [
