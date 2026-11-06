@@ -4,9 +4,6 @@ on:
   schedule:
     - cron: "41 14 * * *"   # 14:41 UTC = 6:41am PST / 7:41am PDT
   workflow_dispatch: {}
-  push:                     # also run when the job itself changes, as a check
-    branches: [main]
-    paths: [".github/workflows/daily-update.yml", "scripts/update.py"]
 
 permissions:
   contents: write

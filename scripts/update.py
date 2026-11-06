@@ -158,6 +158,10 @@ def _date(s):
         return None
 
 
+# Some sites (Real Change) refuse requests that don't start like a browser's.
+FEED_UA = "Mozilla/5.0 (compatible; GiveMeShelter/1.0; +https://github.com/swilsonthomas-progeny/give-me-shelter)"
+
+
 def parse_feed(raw):
     """Return [(date, title, link, summary)] from RSS or Atom bytes."""
     root = ET.fromstring(raw)
@@ -181,7 +185,7 @@ def read_feeds(since):
     leads, failed, seen = [], [], set()
     for url in urls:
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "SeattleShelterLedger/1.0 (feed reader)"})
+            req = urllib.request.Request(url, headers={"User-Agent": FEED_UA})
             with urllib.request.urlopen(req, timeout=25) as r:
                 items = parse_feed(r.read())
         except Exception as exc:  # network errors, bad XML: report and move on

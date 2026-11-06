@@ -18,8 +18,10 @@ https://www.theurbanist.org/feed/
 https://www.thestranger.com/feed/
 https://www.myballard.com/feed/
 https://southseattleemerald.org/feed
-https://www.seattletimes.com/seattle-news/homeless/feed/
 https://www.realchangenews.org/rss.xml
+
+# Seattle Times blocks automated readers, so read it through Google News
+https://news.google.com/rss/search?q=site:seattletimes.com+(shelter+OR+homeless+OR+homelessness+OR+%22tiny+house%22+OR+%22safe+lot%22+OR+RV)+when:3d&hl=en-US&gl=US&ceid=US:en
 
 # Catch-all: Google News search across every outlet
 https://news.google.com/rss/search?q=Seattle+(shelter+OR+%22tiny+house%22+OR+%22safe+lot%22+OR+homelessness)+when:3d&hl=en-US&gl=US&ceid=US:en

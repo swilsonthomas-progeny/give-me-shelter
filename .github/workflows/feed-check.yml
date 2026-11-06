@@ -5,13 +5,15 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: |
-          for ua in "SeattleShelterLedger/1.0 (feed reader)" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"; do
-          echo "=== UA: $ua"
-          for u in https://www.seattletimes.com/seattle-news/homeless/feed/ https://www.seattletimes.com/feed/ https://www.seattletimes.com/seattle-news/feed/ https://www.seattletimes.com/seattle-news/politics/feed/ https://www.realchangenews.org/rss.xml https://www.realchangenews.org/feed https://www.realchangenews.org/news/rss.xml https://www.realchangenews.org/index.rss; do
-            out=$(curl -sL -A "$ua" -o /tmp/b -w '%{http_code} %{content_type}' --max-time 20 "$u"); echo "$u -> $out :: $(head -c 120 /tmp/b | tr '\n' ' ')"
-          done; done
-          echo "=== Real Change homepage feed links"
-          curl -sL -A "Mozilla/5.0" https://www.realchangenews.org/ | grep -oiE '<link[^>]+(rss|atom)[^>]*>' | head
-          echo "=== Seattle Times homeless page feed links"
-          curl -sL -A "Mozilla/5.0" https://www.seattletimes.com/seattle-news/homeless/ | grep -oiE '<link[^>]+(rss|atom)[^>]*>' | head
+          python3 - <<'PY'
+          import sys, urllib.request; sys.path.insert(0, "scripts")
+          import update
+          for u in [l.strip() for l in open("feeds.txt") if l.strip() and not l.startswith("#")]:
+              try:
+                  raw = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": update.FEED_UA}), timeout=25).read()
+                  print("OK  ", len(update.parse_feed(raw)), "items", u)
+              except Exception as e:
+                  print("FAIL", type(e).__name__, e, u)
+          PY
