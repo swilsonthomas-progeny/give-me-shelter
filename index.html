@@ -306,6 +306,7 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
 
     // ---- plot
     let g = `<svg width="${PW}" height="${H}" role="img" aria-label="Running total of units open in Seattle since January 2026, with goals, policy moves, announcements and each project's timeline. The full record follows in text.">`;
+    g += `<defs><filter id="fuzz" x="-60%" y="-120%" width="220%" height="340%"><feGaussianBlur stdDeviation="5"/></filter></defs>`;
     const xT = X(today);
     g += `<rect x="${xT}" y="${CT}" width="${R-xT}" height="${CH}" fill="var(--future)"/>`;
     // month grid + labels (top and above projects)
@@ -410,16 +411,18 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
       const b = s.dates.opened ? X(s.dates.opened) : X(s.dates.expected || today);
       const before = s.dates.announced && s.dates.announced < STUB0;
       const days = s.dates.announced && s.dates.opened ? Math.round((pd(s.dates.opened)-pd(s.dates.announced))/864e5) : null;
-      const note = pending ? (s.dates.expected?`expected ${fdate(s.dates.expected).replace(/, \d{4}/,"")}`:"no date") : before ? `since ${fdate(s.dates.announced,"month")}` : `${days} days`;
+      const fuzzy = pending && s.dates.expected && s.dates.expected_label;
+      const note = pending ? (fuzzy ? `expected ${s.dates.expected_label}` : s.dates.expected?`expected ${fdate(s.dates.expected).replace(/, \d{4}/,"")}`:"no date") : before ? `since ${fdate(s.dates.announced,"month")}` : `${days} days`;
       g += `<g class="mk" tabindex="0" role="button" data-id="s:${esc(s.id)}" aria-label="${esc(s.name)}: ${sum(s.units)} units, ${STATUS[s.status]}">
         <rect x="0" y="${y}" width="${PW}" height="${RH}" fill="transparent"/>
         <line x1="0" x2="${PW}" y1="${y}" y2="${y}" stroke="var(--faint)"/>
-        <rect x="${a}" y="${cy-6}" width="${Math.max(4,b-a)}" height="12" rx="2" fill="${pending?"none":col}" fill-opacity="${pending?0:.35}" stroke="${col}" stroke-width="1.5" stroke-dasharray="${pending?"5 3":"0"}"/>
+        <rect x="${a}" y="${cy-6}" width="${Math.max(4,(fuzzy?b-16:b)-a)}" height="12" rx="2" fill="${pending?"none":col}" fill-opacity="${pending?0:.35}" stroke="${col}" stroke-width="1.5" stroke-dasharray="${pending?"5 3":"0"}"/>
+        ${fuzzy?`<rect x="${b-26}" y="${cy-8}" width="52" height="16" rx="8" fill="${col}" fill-opacity=".6" filter="url(#fuzz)"/>`:""}
         ${before?`<path d="M${a+8},${cy-4} l-6,4 l6,4" fill="none" stroke="${col}" stroke-width="1.5"/>`:""}
-        <circle class="ring" cx="${b}" cy="${cy}" r="6.5" fill="${pending?"var(--sheet)":col}" stroke="${col}" stroke-width="2"/>
+        <circle class="ring" cx="${b}" cy="${cy}" r="6.5" fill="${pending?"var(--sheet)":col}" stroke="${col}" stroke-width="2" ${fuzzy?'opacity="0"':""}/>
         ${s.status==="closed"&&s.dates.closed?`<path d="M${X(s.dates.closed)-5},${cy-5} l10,10 M${X(s.dates.closed)+5},${cy-5} l-10,10" stroke="var(--bad)" stroke-width="2"/>`:
           !pending?`<line x1="${b}" x2="${xT}" y1="${cy}" y2="${cy}" stroke="${col}" stroke-width="1" stroke-opacity=".5"/>`:""}
-        <text x="${b+11}" y="${cy-7}" font-size="10.5" class="mono" fill="var(--muted)">${esc(note)}</text></g>`;
+        <text x="${b+(fuzzy?22:11)}" y="${cy-7}" font-size="10.5" class="mono" fill="var(--muted)">${esc(note)}</text></g>`;
       D.events.filter(e=>e.type==="site" && e.site===s.id && e.date!==s.dates.announced).forEach(e=>{
         const mx = X(e.date);
         g += `<g class="mk" tabindex="0" role="button" data-id="e:${esc(e.id)}" aria-label="${esc(e.title)}, ${fdate(e.date)}"><rect class="ring" x="${mx-2}" y="${cy-10}" width="4" height="20" rx="1" fill="${col}" stroke="var(--sheet)" stroke-width="1"/><text x="${mx}" y="${cy+21}" text-anchor="middle" font-size="9.5" fill="var(--muted)">${esc(e.short||"")}</text></g>`;
@@ -488,10 +491,10 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
     if (s.dates.announced) rows.push([s.dates.announced, "Announced"]);
     D.events.filter(e=>e.type==="site" && e.site===s.id && e.date!==s.dates.announced).forEach(e=>rows.push([e.date, e.title, e.date_precision]));
     if (s.dates.opened) rows.push([s.dates.opened, `Opened${s.dates.announced?` (${Math.round((pd(s.dates.opened)-pd(s.dates.announced))/864e5)} days after announcement)`:""}`]);
-    if (!s.dates.opened && s.dates.expected) rows.push([s.dates.expected, "Expected to open"]);
+    if (!s.dates.opened && s.dates.expected) rows.push([s.dates.expected, s.dates.expected_label ? "Expected to open (approximate)" : "Expected to open", s.dates.expected_label ? {label:s.dates.expected_label} : undefined]);
     if (s.dates.closed) rows.push([s.dates.closed, "Closed"]);
     rows.sort((a,b)=>a[0].localeCompare(b[0]));
-    return `<ol class="hist">${rows.map(([d,t,pr])=>`<li><span class="num">${fdate(d,pr)}</span><span>${esc(t)}</span></li>`).join("")}</ol>`;
+    return `<ol class="hist">${rows.map(([d,t,pr])=>`<li><span class="num">${pr&&pr.label ? esc(pr.label.charAt(0).toUpperCase()+pr.label.slice(1)) : fdate(d,pr)}</span><span>${esc(t)}</span></li>`).join("")}</ol>`;
   }
   function siteSources(s){
     const seen = new Set(), all = [];
