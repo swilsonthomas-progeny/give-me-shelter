@@ -18,6 +18,10 @@ A public tracker of tiny houses, pallet shelters, emergency housing units and RV
 
 If you don't merge a pull request the same day, the next run adds to it instead of replacing it, so any edits you made in the pull request are kept. Each day's summary is stacked at the top of the description. If you edit data.json on main while a review is open, the job stops and asks you to merge or close the open pull request first.
 
+## Paywalled stories
+
+When the job finds a story it can't read in full (usually the Seattle Times) that seems to hold something the tracker needs, it lists it under **Stories to read for me** in the pull request, with the specific fact it's after. Read the story and reply in a comment on the pull request with what it says. The next run treats your comment as a source and cites the story. Only comments from the repository owner are read, from the open pull request or one merged in the last three days.
+
 ## One-time setup (about 20 minutes)
 
 1. **Create a public GitHub repository** (for example `give-me-shelter`) and upload every file in this folder, including the hidden `.github` folder and the empty `.nojekyll` file.

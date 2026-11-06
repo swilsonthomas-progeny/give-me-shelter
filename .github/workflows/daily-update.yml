@@ -52,8 +52,23 @@ jobs:
             git checkout -B "$BRANCH" origin/main
           fi
 
+      # Your comments on the open review (or one merged in the last few days) are notes on
+      # stories the job asked you to read. Only comments from the repo owner count.
+      - name: Collect editor notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ steps.base.outputs.pr }}
+        run: |
+          prs="$PR $(gh pr list --head "$BRANCH" --state merged --limit 1 --search "merged:>=$(date -u -d '3 days ago' +%F)" --json number --jq '.[].number')"
+          for n in $prs; do
+            gh api "repos/$GITHUB_REPOSITORY/issues/$n/comments" \
+              --jq ".[] | select(.user.login == \"$GITHUB_REPOSITORY_OWNER\") | \"From PR #$n, \" + .created_at[:10] + \":\n\" + .body + \"\n\""
+          done > "$RUNNER_TEMP/notes.md"
+          wc -c "$RUNNER_TEMP/notes.md"
+
       - name: Search for changes and draft an update
         env:
+          LEDGER_EDITOR_NOTES: ${{ runner.temp }}/notes.md
           # IDs from the Claude Console's workload identity wizard. They are not secrets;
           # a repository variable with the same name overrides the value here.
           ANTHROPIC_FEDERATION_RULE_ID: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID || 'fdrl_015NHkzYuELqGrqbBjQPvh4p' }}
@@ -71,7 +86,7 @@ jobs:
         run: |
           if [ -f CHANGES.md ]; then
             git add data.json
-            git commit -m "Daily ledger update $(date -u +%F)"
+            git commit --allow-empty -m "Daily ledger update $(date -u +%F)"
           fi
           if [ -n "$PR" ]; then
             # Push today's changes (and anything merged from main) onto the open review.
