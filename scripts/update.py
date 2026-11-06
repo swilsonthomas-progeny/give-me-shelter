@@ -79,7 +79,16 @@ Rules:
   "promise_updates" with a target, the date they were stated as "made", and status "in_progress".
   When a goal's date passes, set status "missed" or "delivered" by comparing the target with the
   units open on that date in the tracker.
+- Paywalled stories (Seattle Times especially): if a story you can't read in full seems to hold a fact
+  the tracker needs (a site, unit count, date, closure or goal) that no other source confirms, add it to
+  "read_requests" with what you need from it. The editor will read it and reply with what it says.
+  Don't request stories whose facts you've confirmed elsewhere. Three at most.
+- Editor notes (below) come from the editor, who read those stories. Treat a note as a source: cite the
+  story's own URL, with "(read by editor)" after its title.
 - If nothing is new, return empty lists.
+
+Editor notes on stories you asked to have read:
+{notes}
 
 Leads from news and city feeds published since {since} that mention shelter-related terms.
 Use them as starting points: confirm details by searching before you rely on one. Many are irrelevant.
@@ -110,6 +119,7 @@ Reply with exactly one fenced ```json block and nothing after it, shaped like:
   "city_count_adds": [ {{ "id": "cc-YYYY-MM-short", "date": "YYYY-MM-DD", "kind": "count",
       "units": 0, "by": "YYYY-MM-DD the projection names, or omit", "short": "chart label like '303 by end of summer', 30 characters max",
       "statement": "what the city said, in plain words", "sources": [...] }} ],
+  "read_requests": [ {{ "title": "...", "url": "https://...", "need": "the specific fact you need from it" }} ],
   "summary": "Two or three sentences for the reviewer on what changed and anything uncertain."
 }}
 For site_upserts on an existing id, send the full updated record."""
@@ -421,26 +431,40 @@ def main():
     since_d = dt.date.fromisoformat(data["updated"]) - dt.timedelta(days=2)
     since = since_d.isoformat()
     leads, failed = ([], []) if os.environ.get("LEDGER_SKIP_FEEDS") else read_feeds(since_d)
+    notes_path = os.environ.get("LEDGER_EDITOR_NOTES")
+    notes = open(notes_path, encoding="utf-8").read().strip() if notes_path and os.path.exists(notes_path) else ""
     prompt = INSTRUCTIONS.format(today=today.isoformat(), updated=data["updated"], since=since,
-                                 leads="\n".join(leads) or "(no feed items matched)", snapshot=snapshot(data))
+                                 leads="\n".join(leads) or "(no feed items matched)", snapshot=snapshot(data),
+                                 notes=notes or "(none)")
     reply = call_claude(prompt)
     patch = extract_json(reply)
     log, rejected = merge(data, patch)
+    asks = [r for r in patch.get("read_requests", []) if isinstance(r, dict) and str(r.get("url", "")).startswith("http")][:3]
 
     if failed:
         print("Feeds that didn't load:\n" + "\n".join(failed))
-    if not log:
+    if not log and asks:
+        # Nothing to change yet, but a story needs reading: still open a review to ask.
+        log_only_asks = True
+    else:
+        log_only_asks = False
+    if not log and not asks:
         print("No changes.")
         if os.path.exists(CHANGES):
             os.remove(CHANGES)
         return 0
 
-    data["updated"] = today.isoformat()
+    if not log_only_asks:
+        data["updated"] = today.isoformat()
     with open(DATA, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False); f.write("\n")
 
     md = [f"## Proposed ledger update, {today.isoformat()}", "", patch.get("summary", "").strip(), "", "### Changes"]
-    md += [f"- {line}" for line in log]
+    md += [f"- {line}" for line in log] or ["- None yet"]
+    if asks:
+        md += ["", "### Stories to read for me",
+               "I couldn't read these in full. Reply in a comment on this pull request with what each one says; the next run will use your notes."]
+        md += [f"- [ ] [{a.get('title') or a['url']}]({a['url']}): {a.get('need', '').strip()}" for a in asks]
     if rejected:
         md += ["", "### Dropped automatically (failed checks)"] + [f"- {r}" for r in rejected]
     if failed:
