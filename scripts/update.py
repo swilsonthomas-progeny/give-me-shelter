@@ -25,6 +25,7 @@ import re
 import sys
 import email.utils
 import html
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -204,8 +205,12 @@ AUDIENCE = "https://api.anthropic.com"
 def _post_json(url, payload, headers, timeout=60):
     req = urllib.request.Request(url, data=json.dumps(payload).encode(),
                                  headers={"content-type": "application/json", **headers})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.load(r)
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return json.load(r)
+    except urllib.error.HTTPError as e:
+        detail = e.read().decode("utf-8", "replace")[:2000]
+        raise SystemExit(f"{url} answered {e.code}: {detail}") from None
 
 
 def github_identity_token():
