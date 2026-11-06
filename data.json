@@ -199,7 +199,8 @@
         "announced": "2026-01-27",
         "opened": null,
         "closed": null,
-        "expected": "2026-11-30"
+        "expected": "2026-11-30",
+        "construction": "2026-09-10"
       },
       "notes": "72 RV spaces and 20 tiny houses, serving about 140 people. The city expects it to open at the end of November; LIHI had earlier said mid-November. Wilson says Seattle has gone more than a year and a half without an operating RV safe lot.",
       "sources": [
@@ -675,7 +676,7 @@
           "url": "https://openvan.camp/en/news/opening/groundbreaking-ceremony-tomorrow-glassyard"
         }
       ],
-      "short": "Glassyard groundbreaking"
+      "short": "Groundbreaking"
     },
     {
       "id": "e-2026-reset",

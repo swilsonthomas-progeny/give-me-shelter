@@ -114,6 +114,7 @@ Reply with exactly one fenced ```json block and nothing after it, shaped like:
       "status": "announced|construction|open|closed", "program": "initiative|accelerated|other",
       "program_note": "...", "dates": {{"announced": "YYYY-MM-DD|null", "opened": "YYYY-MM-DD|null",
       "closed": "YYYY-MM-DD|null", "expected": "YYYY-MM-DD|null",
+      "construction": "YYYY-MM-DD construction or installation began, or null",
       "expected_label": "only for a vague period, e.g. first half of 2027"}}, "notes": "...",
       "sources": [{{"title": "...", "url": "https://..."}}] }} ],
   "event_adds": [ {{ "id": "e-YYYY-short-slug", "date": "YYYY-MM-DD", "date_precision": "day|month",
@@ -322,7 +323,7 @@ def check_site(s):
     u = s.get("units") or {}
     if set(u) - UNIT_KEYS or not all(isinstance(v, int) and v >= 0 for v in u.values()): errs.append("bad units")
     d = s.get("dates") or {}
-    if not all(ok_date(d.get(k)) for k in ("announced", "opened", "closed", "expected")): errs.append("bad dates")
+    if not all(ok_date(d.get(k)) for k in ("announced", "construction", "opened", "closed", "expected")): errs.append("bad dates")
     if s.get("status") == "open" and not d.get("opened"): errs.append("open without opened date")
     if s.get("status") == "closed" and not d.get("closed"): errs.append("closed without closed date")
     if not ok_sources(s): errs.append("no sources")
