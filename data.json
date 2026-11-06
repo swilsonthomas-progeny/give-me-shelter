@@ -199,7 +199,7 @@
         "announced": "2026-01-27",
         "opened": null,
         "closed": null,
-        "expected": "2026-11-15"
+        "expected": "2026-11-30"
       },
       "notes": "Opening date changed. In September LIHI said mid-November. On Nov. 3 HSD Director Tanya Kim said it opens at the end of November. At an Oct. 28 neighborhood meeting an HSD staffer said \"right around Thanksgiving\". Only the month is known, so the expected date stays on the 15th. Space counts differ by source: most say 72 RV spaces and 20 tiny houses. HSD and KOMO give 92 total spaces. An Oct. 28 meeting report gives 70 RV spaces plus 20 tiny houses. LIHI says it will serve about 140 people. Wilson says the city has had no operating RV safe lot for over a year and a half.",
       "sources": [
@@ -639,8 +639,8 @@
       "id": "e-2026-vrap",
       "date": "2026-10-20",
       "type": "policy",
-      "title": "Council passes RV parking restrictions (VRAP), 8–1",
-      "detail": "Unpermitted RVs limited to two hours, no overnight parking from April 30, 2027; $5M toward safe lots, storage and outreach. Wilson says she has serious concerns; her signature is pending.",
+      "title": "Council passes RV parking restrictions (VRAP)",
+      "detail": "Unpermitted RVs limited to two hours, no overnight parking from April 30, 2027; $5M toward safe lots, storage and outreach. KOMO reports the package passed 8–1; KING 5, The Stranger and Capitol Hill Seattle report the RV permit bill (CB 121283) passed 6–3. Wilson said she had serious concerns.",
       "sources": [
         {
           "title": "KUOW",
@@ -649,6 +649,10 @@
         {
           "title": "Axios",
           "url": "https://www.axios.com/local/seattle/2026/10/22/seattle-homelessness-rv-parking-permit-program-ban"
+        },
+        {
+          "title": "Seattle council approves RV permit plan (KOMO)",
+          "url": "https://komonews.com/news/local/seattle-city-council-approves-vehicle-resident-assistance-program-homeless-rv-living-in-your-car-in-seattle-king-county-enforcement-recreational-vehicles"
         }
       ],
       "short": "Council RV limits"
@@ -692,7 +696,7 @@
       "type": "policy",
       "title": "Wilson vetoes RV permit bill, signs four others",
       "short": "Wilson vetoes CB 121283",
-      "detail": "Mayor Wilson vetoed CB 121283, the RV permit program in Councilmember Strauss's Vehicle Resident Assistance Program (VRAP). She signed the other four ordinances in the package. One of them, CB 121279, widens the authority of the Finance and Administrative Services director to sign leases and open safe lots, storage sites and other resources for vehicle residents. Her veto letter cites the cost and complexity of a one-time census, legal issues around proof of ownership and impoundment, and storage costs. It is her first veto. Council has up to 30 days to override, and six votes are needed. The bill passed 6–3 per KING 5, The Stranger and Capitol Hill Seattle. The tracker's earlier entry for the Oct. 20 VRAP vote says 8–1, so that figure should be checked against the vote on each bill.",
+      "detail": "Mayor Wilson vetoed CB 121283, the RV permit program in Councilmember Strauss's Vehicle Resident Assistance Program (VRAP). She signed the other four ordinances in the package. One of them, CB 121279, widens the authority of the Finance and Administrative Services director to sign leases and open safe lots, storage sites and other resources for vehicle residents. Her veto letter cites the cost and complexity of a one-time census, legal issues around proof of ownership and impoundment, and storage costs. It is her first veto. Council has up to 30 days to override, and six votes are needed. The bill passed 6–3 per KING 5, The Stranger and Capitol Hill Seattle.",
       "sources": [
         {
           "title": "Mayor Wilson to Sign Four out of Five RV Ordinances, Veto CB12183 (City of Seattle)",
