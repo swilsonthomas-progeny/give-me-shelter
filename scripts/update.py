@@ -73,6 +73,13 @@ Rules:
 - A project the city announces without a location or unit count goes in "unnamed_adds". When one of
   those gets a name and numbers, add it as a site and list the unnamed id in "unnamed_remove".
 - Neutral, plain language. No adjectives of praise or blame.
+- Every text field (notes, detail, status_note, program_note, statement, titles) is published on the
+  public site. Write it for readers: state what is known, plainly, as findings. Don't narrate your
+  research or reasoning ("the retrieved sources", "the tracker keeps", "I left", "only the month is
+  known so"), don't list which outlet said what unless sources genuinely conflict on a fact that
+  matters, and don't write notes to the reviewer there. Put uncertainty, conflicts and judgment calls
+  for the reviewer in "summary" instead, which is not published. Attribute claims of credit or
+  intent to whoever made them ("the mayor's office says").
 - Unit categories: "shelter" = beds in a congregate shelter building (rare in this tracker; most sites are microshelter); "pallet" = pallet-style or other
   manufactured micro-units; "tiny_house" = houses in a tiny house village; "emergency_housing" = rooms or apartments in a building leased or master-leased whole
   (hotels, apartment buildings); "rv" = vehicle safe lot spaces. A site can have more than one.

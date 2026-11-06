@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Give Me Shelter</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Shelter beds, tiny houses, emergency housing and RV safe lot spaces opened and closed in Seattle since January 1, 2026, against Mayor Katie Wilson's goals.">
+<meta name="description" content="Tiny houses, pallet shelters, emergency housing and RV safe lot spaces opened and closed in Seattle since January 1, 2026, measured against Mayor Katie Wilson's goals.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
@@ -170,8 +170,8 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
     <div class="method">
       <div><b>Categories</b><p>Microshelter: tiny houses and pallet units, combined on the chart and listed separately in each site's details. Emergency housing: rooms or apartments in a building leased whole. RV safe lot: parking spaces.</p></div>
       <div><b>What counts</b><p>Sites inside Seattle city limits. A unit counts from the day its site opens to residents and comes off the day it closes.</p></div>
-      <div><b>Goals</b><p>Goals include projections the city makes about how many units will open by a date. Each goal is marked at its target and due date. An arrow runs to it from the day it was set, starting at our count on that day. Missed and previous goals stay on the chart so the changes are visible.</p></div>
-      <div><b>City counts</b><p>When the city states how many units it has added, it appears at the top of the page and in the record, beside our own count for that date. We show both even when they don't match.</p></div>
+      <div><b>Goals</b><p>Goals include projections the city makes about how many units will open by a date. Each goal is marked at its target and due date. An arrow runs to it from the day it was set, starting at our count on that day. Missed and previous goals stay on the chart so the changes are visible. A deadline given as a season, such as the end of summer, is marked on its last day.</p></div>
+      <div><b>City counts</b><p>When the city states how many units it has added, the figure appears in the full record beside our own count for that date. We show both even when they don't match.</p></div>
       <div><b>Program notes</b><p>Each site says whether it is part of the mayor's new shelter initiative, an earlier project the city says it sped up, or neither, repeating what the city and operators say.</p></div>
       <div><b>Updates</b><p>A daily job reads news, city and provider feeds and drafts changes. A person reviews every change before it publishes.</p></div>
     </div>
@@ -403,7 +403,7 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
 
     // projects
     g += monthLines(PT + 26, sites.length*RH, PT + 26 + sites.length*RH + 15);
-    g += `<text x="${XS+4}" y="${PT+16}" font-size="10.5" fill="var(--muted)">Bar runs from announcement to opening. Dashed: still pending. Ticks: milestones.</text>`;
+    g += `<text x="${XS+4}" y="${PT+16}" font-size="10.5" fill="var(--muted)">Bar runs from announcement to opening. Dashed: still pending. Blurred end: approximate date. Ticks: milestones.</text>`;
     sites.forEach((s,i)=>{
       const y = PT + 26 + i*RH, cy = y + RH/2, col = GROUPS[mainGroup(s.units)].color;
       const pending = !s.dates.opened;
