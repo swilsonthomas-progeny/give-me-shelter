@@ -889,6 +889,33 @@
           "url": "https://www.thestranger.com/news/councilmember-rob-saka-backs-katie-wilsons-rv-ban-veto/"
         }
       ]
+    },
+    {
+      "id": "e-2026-balancing-safe-lot",
+      "date": "2026-11-03",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Council Balancing Package funds a second RV safe lot",
+      "short": "Council funds 2nd lot",
+      "detail": "The council budget chair's Balancing Package fully funds the Vehicle Resident Assistance Program, including a second new safe lot. The Center Square puts the package's spending above the mayor's proposal at about $7.12M for an RV safe lot. The mayor's proposed budget had $3.5M for the second lot. A Center Square report on the executive order says it sets no opening date for the second lot. HSD Director Tanya Kim said the city is accelerating plans to open the second lot in 2027. The package is an initial proposal. The council's final budget vote is expected in late November.",
+      "sources": [
+        {
+          "title": "Budget Chair Strauss releases balanced budget proposal focused on public safety and affordability - Seattle City Council Blog",
+          "url": "https://council.seattle.gov/2026/11/03/budget-chair-strauss-releases-balanced-budget-proposal-focused-on-public-safety-and-affordability/"
+        },
+        {
+          "title": "Seattle council eyes over $50M in one-time add-ons despite budget hole - The Center Square",
+          "url": "https://www.brushwoodmedianetwork.com/washington/news-washington/seattle-council-eyes-over-50m-in-one-time-add-ons-despite-budget-hole/"
+        },
+        {
+          "title": "Seattle mayor orders new work group after vetoing RV camping bill - The Center Square",
+          "url": "https://www.thecentersquare.com/washington/article_a0469544-5db2-4aa8-98d3-15c536167264.amp.html"
+        },
+        {
+          "title": "Mayor Wilson vetoes controversial RV permit bill, pivoting to executive strategy and safe lot expansion",
+          "url": "https://www.westsideseattle.com/robinson-papers/2026/11/03/mayor-wilson-vetoes-controversial-rv-permit-bill-pivoting-executive"
+        }
+      ]
     }
   ],
   "city_counts": [
