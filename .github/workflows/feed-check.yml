@@ -1,0 +1,17 @@
+name: Feed check (temporary)
+on: workflow_dispatch
+permissions: {contents: read}
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for ua in "SeattleShelterLedger/1.0 (feed reader)" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"; do
+          echo "=== UA: $ua"
+          for u in https://www.seattletimes.com/seattle-news/homeless/feed/ https://www.seattletimes.com/feed/ https://www.seattletimes.com/seattle-news/feed/ https://www.seattletimes.com/seattle-news/politics/feed/ https://www.realchangenews.org/rss.xml https://www.realchangenews.org/feed https://www.realchangenews.org/news/rss.xml https://www.realchangenews.org/index.rss; do
+            out=$(curl -sL -A "$ua" -o /tmp/b -w '%{http_code} %{content_type}' --max-time 20 "$u"); echo "$u -> $out :: $(head -c 120 /tmp/b | tr '\n' ' ')"
+          done; done
+          echo "=== Real Change homepage feed links"
+          curl -sL -A "Mozilla/5.0" https://www.realchangenews.org/ | grep -oiE '<link[^>]+(rss|atom)[^>]*>' | head
+          echo "=== Seattle Times homeless page feed links"
+          curl -sL -A "Mozilla/5.0" https://www.seattletimes.com/seattle-news/homeless/ | grep -oiE '<link[^>]+(rss|atom)[^>]*>' | head
