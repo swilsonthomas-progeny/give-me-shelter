@@ -202,7 +202,7 @@
         "expected": "2026-11-30",
         "construction": "2026-09-10"
       },
-      "notes": "72 RV spaces and 20 tiny houses, serving about 140 people. The city expects it to open at the end of November; LIHI had earlier said mid-November. Wilson says Seattle has gone more than a year and a half without an operating RV safe lot.",
+      "notes": "Serves about 140 people. The city expects it to open at the end of November; LIHI had earlier said mid-November. Wilson says Seattle has gone more than a year and a half without an operating RV safe lot.",
       "sources": [
         {
           "title": "Mayor Wilson vetoes controversial RV permit bill, pivoting to executive strategy and safe lot expansion (Westside Seattle)",
@@ -335,7 +335,8 @@
           "url": "https://www.realchangenews.org/news/2026/09/23/mayor-wilson-scales-back-shelter-goal-aiming-960-beds-under-new-plan"
         }
       ],
-      "short": "4,000 in 4 years"
+      "short": "4,000 in 4 years",
+      "headline": "4,000 units in four years"
     },
     {
       "id": "p-500-worldcup",
@@ -358,7 +359,8 @@
           "url": "https://www.kuow.org/governing/2026-06-04/seattle-mayor-wilson-homeless-shelter-beds-world-cup-deadline"
         }
       ],
-      "short": "500 by World Cup"
+      "short": "500 by World Cup",
+      "headline": "500 units by the World Cup"
     },
     {
       "id": "p-303-summer",
@@ -377,7 +379,8 @@
           "title": "The Stranger",
           "url": "https://www.thestranger.com/news/seattle-mayor-katie-wilson-unveils-new-75-unit-shelter/"
         }
-      ]
+      ],
+      "headline": "303 units by the end of summer"
     },
     {
       "id": "p-1000-2026",
@@ -400,7 +403,8 @@
           "url": "https://komonews.com/news/local/seattle-mayor-katie-wilson-new-plan-reduce-homelessness-affordable-housing-shelter-units-tiny-homes-beds-crime-budget-gap-city-council"
         }
       ],
-      "short": "1,000 in 2026"
+      "short": "1,000 in 2026",
+      "headline": "1,000 units in 2026"
     },
     {
       "id": "p-400-2026",
@@ -419,7 +423,8 @@
           "url": "https://komonews.com/news/local/story/seattle-mayor-katie-wilson-new-plan-reduce-homelessness-affordable-housing-shelter-units-tiny-homes-beds-crime-budget-gap-city-council"
         }
       ],
-      "short": "400+ by end of 2026"
+      "short": "400+ by end of 2026",
+      "headline": "More than 400 units by the end of 2026"
     },
     {
       "id": "p-960-2027",
@@ -442,7 +447,8 @@
           "url": "https://www.capitolhillseattle.com/2026/10/wilson-plan-shifts-seattles-encampment-strategy-to-prioritize-sidewalks-parks-and-shelter/"
         }
       ],
-      "short": "960 by end of 2027"
+      "short": "960 by end of 2027",
+      "headline": "960 beds by the end of 2027"
     },
     {
       "id": "p-larger-villages",
@@ -461,7 +467,8 @@
           "url": "https://www.axios.com/newsletters/axios-seattle-1bb7ba82-e5c3-4117-9af0-2641df93f131"
         }
       ],
-      "short": "Bigger villages"
+      "short": "Bigger villages",
+      "headline": "Allow bigger tiny house villages"
     },
     {
       "id": "p-expedite-permits",
@@ -476,7 +483,8 @@
           "url": "https://wilson.seattle.gov/2026/01/15/mayor-wilson-announces-executive-orders-to-accelerate-shelter-and-improve-transit/"
         }
       ],
-      "short": "Faster permits"
+      "short": "Faster permits",
+      "headline": "Speed up permits for shelter and housing"
     },
     {
       "id": "p-two-safe-lots",
@@ -499,7 +507,8 @@
           "title": "Seattle Mayor Wilson vetoes RV permit bill due to 'efficacy concerns' (KOMO)",
           "url": "https://komonews.com/news/local/seattle-mayor-wilson-vetoes-rv-permit-bill-due-to-efficacy-concerns-signs-4-others-homeless-camping-shelter-reosuces-budget-funding-council-safety-violence-drug-use-neighborhood"
         }
-      ]
+      ],
+      "headline": "Open two RV safe lots"
     },
     {
       "id": "p-rv-workgroup",
@@ -519,7 +528,8 @@
           "url": "https://kvi.com/2026/11/05/seattle-doesnt-know-how-many-rvs-line-its-streets-but-katie-wilson-insists-nurses-veterans-and-tourists-are-inside"
         }
       ],
-      "by": "2027-01-02"
+      "by": "2027-01-02",
+      "headline": "RV work group recommendations in 60 days"
     }
   ],
   "events": [

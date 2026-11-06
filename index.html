@@ -94,10 +94,31 @@ svg .mono{font-variant-numeric:tabular-nums}
 .chip{font-size:.74rem;padding:1px 7px;border-radius:3px;border:1px solid var(--rule);display:inline-flex;gap:5px;align-items:center}
 .prog{font-size:.82rem;font-style:italic;color:var(--muted)}
 
-/* record */
-.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.filters button{font:inherit;font-size:.8rem;background:transparent;color:var(--ink);border:1px solid var(--rule);border-radius:99px;padding:4px 12px;cursor:pointer}
-.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+/* tabs */
+.tabs{display:flex;gap:22px;border-bottom:1px solid var(--rule);margin-top:-4px}
+.tabs a{color:var(--muted);text-decoration:none;font-weight:700;font-size:1rem;padding:8px 0 9px;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.tabs a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.view{display:flex;flex-direction:column;gap:inherit}
+.view[hidden]{display:none}
+
+/* record as a blog */
+.lede{max-width:680px;color:var(--muted);margin:0}
+.blog{max-width:680px;display:flex;flex-direction:column}
+.post{padding:26px 0 28px;border-top:1px solid var(--rule)}
+.post:first-child{border-top:0;padding-top:4px}
+.post time{display:block;font-size:.85rem;color:var(--muted);margin-bottom:4px}
+.post h3{font-family:var(--f-body);font-size:1.4rem;line-height:1.25;font-weight:700;margin:0 0 10px}
+.post p{margin:0 0 12px;font-size:1rem;line-height:1.6;color:var(--ink)}
+.post .sub2{color:var(--muted);font-size:.95rem;margin-bottom:10px}
+.post .hist{margin:4px 0 14px;font-size:.95rem}
+.post .hist li .num{font-size:.85rem}
+.post .hist li{grid-template-columns:130px minmax(0,1fr)}
+.post .prog{font-size:.95rem;margin-bottom:12px}
+.post .srcs{font-size:.85rem;flex-direction:column;gap:3px}
+.post .srcs::before{content:"Sources";color:var(--muted)}
+
+/* record (legacy) */
 .record{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
 .record li{display:flex;flex-direction:column;gap:3px;padding:10px 0;border-top:1px solid var(--rule)}
 .record h3{font-family:var(--f-body);font-size:.95rem;font-weight:600}
@@ -127,6 +148,12 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
     <div class="meta num" id="updated"></div>
   </header>
 
+  <nav class="tabs" role="tablist" aria-label="Views">
+    <a href="#chart" role="tab" id="tab-chart" aria-controls="view-chart" aria-selected="true">The chart</a>
+    <a href="#record" role="tab" id="tab-record" aria-controls="view-record" aria-selected="false">The record</a>
+  </nav>
+
+  <div id="view-chart" role="tabpanel" aria-labelledby="tab-chart" class="view">
   <section class="strip" aria-label="Totals">
     <div class="tally num" aria-label="Units open, announced and total">
       <div class="t-open"><span id="total">—</span> open</div>
@@ -144,20 +171,13 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
     </div>
     <div class="nav" id="nav" hidden>
       <svg id="navsvg" role="slider" aria-label="Move through the timeline" tabindex="0"></svg>
-      <div class="navbtns"><button type="button" id="go-start">Campaign</button><button type="button" id="go-2026">Jan 2026</button><button type="button" id="go-today">Today</button><button type="button" id="go-end">2027 goals</button></div>
       <span class="navhint">Swipe the chart or drag the window in this strip to move through time.</span>
     </div>
   </section>
 
   <section aria-labelledby="u-h">
-    <div class="sec-head"><h2 id="u-h">Announced, not yet named</h2><p>Projects the city has announced without a location or unit count. They join the chart once details are public.</p></div>
+    <div class="sec-head"><h2 id="u-h">Announced, not yet named</h2></div>
     <div class="watch unnamed" id="unnamed"></div>
-  </section>
-
-  <section aria-labelledby="r-h">
-    <div class="sec-head"><h2 id="r-h">Full record</h2><p>Newest first. Each site appears once, with its own history.</p></div>
-    <div class="filters" id="filters" role="group" aria-label="Filter the record"></div>
-    <ol class="record" id="record"></ol>
   </section>
 
   <section>
@@ -169,13 +189,20 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
     <div class="sec-head"><h2>How this is counted</h2></div>
     <div class="method">
       <div><b>Categories</b><p>Microshelter: tiny houses and pallet units, combined on the chart and listed separately in each site's details. Emergency housing: rooms or apartments in a building leased whole. RV safe lot: parking spaces.</p></div>
-      <div><b>What counts</b><p>Sites inside Seattle city limits. A unit counts from the day its site opens to residents and comes off the day it closes. The dotted line ahead of today adds each named project on its expected opening date, using the same dates as the project bars; projects without a date and unnamed plans aren't included, and ~ marks an approximate date. On the project bars, a dashed outline means announced, stripes mean under construction, a solid bar means open, and a blurred end marks an approximate opening date.</p></div>
+      <div><b>What counts</b><p>Sites inside Seattle city limits. A unit counts from the day its site opens to residents and comes off the day it closes. The dotted line ahead of today adds each named project on its expected opening date, using the same dates as the project bars; projects without a date and unnamed plans aren't included. A blurred step means the opening date is approximate. On the project bars, a dashed outline means announced, stripes mean under construction, a solid bar means open, and a blurred end marks an approximate opening date.</p></div>
       <div><b>Goals</b><p>Goals include projections the city makes about how many units will open by a date. Each goal is marked at its target and due date. An arrow runs to it from the day it was set, starting at our count on that day. Missed and previous goals stay on the chart so the changes are visible. A deadline given as a season, such as the end of summer, is marked on its last day.</p></div>
       <div><b>City counts</b><p>When the city states how many units it has added, the figure appears in the full record beside our own count for that date. We show both even when they don't match.</p></div>
       <div><b>Program notes</b><p>Each site says whether it is part of the mayor's new shelter initiative, an earlier project the city says it sped up, or neither, repeating what the city and operators say.</p></div>
       <div><b>Updates</b><p>A daily job reads news, city and provider feeds and drafts changes. A person reviews every change before it publishes.</p></div>
     </div>
   </section>
+
+  </div>
+
+  <div id="view-record" role="tabpanel" aria-labelledby="tab-record" class="view" hidden>
+    <p class="lede">Every opening, closure, promise and policy move since the campaign, newest first. Each site appears once, under its latest change.</p>
+    <div class="blog" id="record"></div>
+  </div>
 
   <footer>Tracking progress, promises and policy on shelter. <span id="foot-updated"></span></footer>
 </div>
@@ -353,8 +380,9 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
         const x = X(o.date); pl += ` H${x}`; pv += sum(o.st.units); pl += ` V${Y(pv)}`;
         const approx = !!o.st.dates.expected_label;
         marks += `<g class="mk" tabindex="0" role="button" data-id="s:${esc(o.st.id)}" aria-label="Expected: ${esc(o.st.name)}, ${sum(o.st.units)} units, ${approx?esc(o.st.dates.expected_label):fdate(o.st.dates.expected)}. Total ${pv}.">
-          <circle class="ring" cx="${x}" cy="${Y(pv)}" r="4.5" fill="var(--sheet)" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="2 2"/>
-          <text x="${x+8}" y="${Y(pv)+17}" font-size="12.5" font-weight="700" fill="var(--muted)">${approx?"~":""}${pv}</text></g>`;
+          ${approx ? `<ellipse cx="${x}" cy="${Y(pv)}" rx="14" ry="6" fill="var(--muted)" fill-opacity=".55" filter="url(#fuzz)"/><circle class="ring" cx="${x}" cy="${Y(pv)}" r="6" fill="transparent" stroke="none"/>`
+            : `<circle class="ring" cx="${x}" cy="${Y(pv)}" r="4.5" fill="var(--sheet)" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="2 2"/>`}
+          <text x="${x+8}" y="${Y(pv)+17}" font-size="12.5" font-weight="700" fill="var(--muted)">${pv}</text></g>`;
       });
       pl += ` H${X(END)}`;
       g += `<path d="${pl}" fill="none" stroke="var(--muted)" stroke-width="1.75" stroke-dasharray="2 4" stroke-linecap="round" stroke-linejoin="round"/>` + marks;
@@ -503,7 +531,6 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
   }
 
   // ---------- full record ----------
-  let filter = "all";
   function siteHistory(s){
     const rows = [];
     if (s.dates.announced) rows.push([s.dates.announced, "Announced"]);
@@ -524,30 +551,26 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
 
   function record(){
     const out = [];
-    D.promises.forEach(q=>out.push({date:q.made, f:"goals", html:card(ITEMS["p:"+q.id])}));
-    D.events.filter(e=>e.type!=="site").forEach(e=>out.push({date:e.date, f: e.type==="goal"?"goals":"policy", html:card(ITEMS["e:"+e.id])}));
-    (D.city_counts||[]).forEach(c=>out.push({date:c.date, f:"city", html:card(ITEMS["c:"+c.id])}));
-    // one entry per site, filed under its latest change
-    D.sites.forEach(st=>out.push({date:siteLast(st), f:"sites", site:true, status:st.status, html:card(ITEMS["s:"+st.id])}));
-    const F = [["all","Everything"],["goals","Promises & goals"],["policy","Policy"],["sites","Sites"],["city","City counts"]];
-    const fEl = document.getElementById("filters");
-    fEl.innerHTML = F.map(([k,l])=>`<button type="button" id="rf-${k}" data-k="${k}" aria-pressed="${k===filter}">${l}</button>`).join("");
-    fEl.onclick = e=>{ const b=e.target.closest("button"); if(!b) return; filter=b.dataset.k; record(); };
-    let list = out.filter(e=>filter==="all"||e.f===filter);
-    const rank = {announced:0, construction:0, open:1, closed:2};
-    if (filter==="sites") list.sort((a,b)=>(rank[a.status]-rank[b.status]) || b.date.localeCompare(a.date));
-    else list.sort((a,b)=>b.date.localeCompare(a.date));
-    document.getElementById("record").innerHTML = list.map(e=>`<li${e.site?' class="site-card"':""}>${e.site ? e.html : e.html.replace('<div class="when">', `<div class="when"><span class="num">${fdate(e.date)}</span>`)}</li>`).join("");
+    D.promises.forEach(q=>out.push({date:q.made, prec:q.made_precision, html:card(ITEMS["p:"+q.id])}));
+    D.events.filter(e=>e.type!=="site").forEach(e=>out.push({date:e.date, prec:e.date_precision, html:card(ITEMS["e:"+e.id])}));
+    (D.city_counts||[]).forEach(c=>out.push({date:c.date, html:card(ITEMS["c:"+c.id])}));
+    // one post per site, filed under its latest change
+    D.sites.forEach(st=>out.push({date:siteLast(st), html:card(ITEMS["s:"+st.id])}));
+    out.sort((a,b)=>b.date.localeCompare(a.date));
+    document.getElementById("record").innerHTML = out.map(e=>`<article class="post"><time datetime="${esc(e.date)}">${fdate(e.date, e.prec==="month"?"month":undefined).replace(/^(\w{3}) /, (m,mo)=>({Jan:"January ",Feb:"February ",Mar:"March ",Apr:"April ",Jun:"June ",Jul:"July ",Aug:"August ",Sep:"September ",Oct:"October ",Nov:"November ",Dec:"December "})[mo]||m)}</time>${e.html}</article>`).join("");
   }
 
+  const UNAME = {tiny_house:["tiny house","tiny houses"], pallet:["pallet unit","pallet units"], emergency_housing:["emergency housing unit","emergency housing units"], rv:["RV space","RV spaces"], shelter:["shelter bed","shelter beds"]};
+  const unitText = u => { const parts = CATKEYS.filter(k=>(u||{})[k]>0).map(k=>`${fmt(u[k])} ${UNAME[k]?UNAME[k][u[k]===1?0:1]:k}`); return parts.length>1 ? parts.slice(0,-1).join(", ")+" and "+parts.slice(-1) : (parts[0]||""); };
+
   // ---------- detail content ----------
-  function card(it, siteMode){
+  function card(it){
     const o = it.obj;
-    if (it.type==="promise") return `<div class="when"><span class="kind">${o.target?"Goal":"Promise"}</span><span class="pill ${o.status}">${PSTATUS[o.status]}</span></div><h3>${esc(o.text)}</h3>${o.target?`<p>Target: ${fmt(o.target.units)} units by ${fdate(o.target.by)}. Set ${esc(o.made_label||fdate(o.made))}.</p>`:""}<p>${esc(o.status_note)}</p>${srcs(o.sources)}`;
-    if (it.type==="event") return `<div class="when"><span class="kind">${TTYPE[o.type]||esc(o.type)}</span></div><h3>${esc(o.title)}</h3><p>${esc(o.detail)}</p>${srcs(o.sources)}`;
-    if (it.type==="city") return `<div class="when"><span class="kind">City ${o.kind==="count"?"count":"projection"}</span></div><h3>${fmt(o.units)} units ${o.kind==="count"?"added, per the city":"projected"}${o.kind!=="count"&&o.by?` by ${fdate(o.by)}`:""}</h3><p>${esc(o.statement)}</p>${o.kind==="count"?`<p>Our count for that date: ${fmt(it.ours)}.</p>`:""}${srcs(o.sources)}`;
-    const s = o, pill = {open:"delivered", closed:"missed", construction:"in_progress", announced:"in_progress"}[s.status];
-    return `<div class="when"><span class="kind">Site</span><span class="pill ${pill}">${esc(STATUS[s.status])}</span><span>${esc(s.neighborhood)}</span></div><h3>${esc(s.name)}: ${fmt(sum(s.units))} units</h3>${chips(s.units)}<p>${esc(s.address)}, ${esc(s.operator)}</p>${siteHistory(s)}<p>${esc(s.notes)}</p><div class="prog">${esc(PROGRAM[s.program]||"")}${s.program_note?". "+esc(s.program_note):""}</div>${siteSources(s)}`;
+    if (it.type==="promise") return `<h3>${o.target||/^[\d,+]+\s/.test(o.short||"")?"Goal":"Promise"}: ${esc(o.headline||o.short||o.text)}</h3>${(o.headline||o.short)?`<p>${esc(o.text)}</p>`:""}${o.target?`<p>Target: ${fmt(o.target.units)} units by ${fdate(o.target.by)}. Set ${esc(o.made_label||fdate(o.made))}.</p>`:""}${o.status_note?`<p>${esc(o.status_note)}</p>`:""}${srcs(o.sources)}`;
+    if (it.type==="event") return `<h3>${esc(o.title)}</h3>${o.detail?`<p>${esc(o.detail)}</p>`:""}${srcs(o.sources)}`;
+    if (it.type==="city") return `<h3>${fmt(o.units)} units ${o.kind==="count"?"added, per the city":"projected"}${o.kind!=="count"&&o.by?` by ${fdate(o.by)}`:""}</h3><p>${esc(o.statement)}</p>${o.kind==="count"?`<p>Our count for that date: ${fmt(it.ours)}.</p>`:""}${srcs(o.sources)}`;
+    const s = o;
+    return `<h3>${esc(s.name)}</h3><p class="sub2">${esc(unitText(s.units))}${s.neighborhood?`, ${esc(s.neighborhood)}`:""}</p><p>${esc(s.address)}. Run by ${esc(s.operator)}.</p>${siteHistory(s)}${s.notes?`<p>${esc(s.notes)}</p>`:""}<div class="prog">${esc(PROGRAM[s.program]||"")}${s.program_note?". "+esc(s.program_note):""}</div>${siteSources(s)}`;
   }
 
   // ---------- interaction ----------
@@ -577,9 +600,17 @@ footer{font-size:.8rem;color:var(--muted);border-top:1px solid var(--rule);paddi
   navsvg.addEventListener("pointermove", e=>{ if (dragging) navTo(e.clientX); });
   navsvg.addEventListener("pointerup", ()=>{ dragging = false; });
   navsvg.addEventListener("pointercancel", ()=>{ dragging = false; });
-  const jump = (id, d, f) => document.getElementById(id).addEventListener("click", ()=>{ if (d==="end") document.getElementById("plot").scrollLeft = 1e9; else scrollToDate(d, f); });
-  jump("go-start","2025-03-01",0); jump("go-2026","2026-01-01",0.04); jump("go-end","end");
-  document.getElementById("go-today").addEventListener("click", ()=>scrollToDate(D.updated, 0.72));
+  // tabs: #chart (default) and #record
+  function showTab(){
+    const rec = location.hash === "#record";
+    document.getElementById("view-chart").hidden = rec;
+    document.getElementById("view-record").hidden = !rec;
+    document.getElementById("tab-chart").setAttribute("aria-selected", String(!rec));
+    document.getElementById("tab-record").setAttribute("aria-selected", String(rec));
+    if (rec) close(); else if (D && document.getElementById("chart").clientWidth !== lastW) layout(false);
+  }
+  window.addEventListener("hashchange", showTab);
+  showTab();
   let rt; window.addEventListener("resize", ()=>{ clearTimeout(rt); rt = setTimeout(()=>{ if (D && document.getElementById("chart").clientWidth !== lastW) layout(false); }, 150); });
 
   const inline = document.getElementById("ledger-data");

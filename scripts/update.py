@@ -123,6 +123,7 @@ Reply with exactly one fenced ```json block and nothing after it, shaped like:
       "detail": "...", "sources": [...] }} ],
   "promise_updates": [ {{ "id": "existing or new id", "made": "YYYY-MM-DD", "made_label": "...",
       "text": "...", "short": "chart label, 22 characters max",
+      "headline": "plain headline for the public record, e.g. 'Open two RV safe lots' or '960 beds by the end of 2027'",
       "target": {{"units": 0, "by": "YYYY-MM-DD"}} or omit,
       "status": "missed|revised|in_progress|delivered", "status_note": "...", "sources": [...] }} ],
   "watch_adds": [ {{ "id": "kebab-id", "title": "...", "detail": "...", "sources": [...] }} ],
