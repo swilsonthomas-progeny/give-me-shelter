@@ -232,21 +232,59 @@
           "url": "https://openvan.camp/en/news/opening/construction-advances-glassyard-commons-rv-tiny"
         }
       ]
+    },
+    {
+      "id": "spruce-street-village",
+      "name": "Spruce Street Tiny House Village",
+      "neighborhood": "Central District",
+      "address": "King County-owned land at the Judge Patricia H. Clark Children and Family Justice Center campus, near E Spruce Street. DJC gives 14th Ave and E Spruce St. The Urbanist gives 12th Ave and E Spruce St.",
+      "operator": "Low Income Housing Institute (LIHI)",
+      "units": {
+        "shelter": 0,
+        "pallet": 0,
+        "tiny_house": 80,
+        "emergency_housing": 0,
+        "rv": 0
+      },
+      "status": "announced",
+      "program": "other",
+      "program_note": "The sources describe this as a King County-funded project on county land. They do not tie it to the City's shelter acceleration or Neighbor by Neighbor effort.",
+      "dates": {
+        "announced": null,
+        "opened": null,
+        "closed": null,
+        "expected": null
+      },
+      "notes": "The Urbanist reports the County Executive's budget update proposes $5M for an 80-unit village, with 30 homes set aside for families with children. DJC reports LIHI plans to open it in the first half of 2027. The exact announcement date is not given in the retrieved text, and neither is a specific expected month. The two sources give different cross streets.",
+      "sources": [
+        {
+          "title": "LIHI to open 80 tiny homes on county-owned Central District site (Seattle DJC)",
+          "url": "https://www.djc.com/news/bu/12178304.html"
+        },
+        {
+          "title": "Zahilay Announces More Than $19.5 Million in New Housing Investments (The Urbanist)",
+          "url": "https://www.theurbanist.org/zahilay-announces-more-than-19-5-million-in-new-housing-investments/"
+        }
+      ]
     }
   ],
   "watch": [
     {
       "id": "friendship-heights-village",
-      "title": "Friendship Heights Village (Aurora Ave N) — closure reported, not confirmed",
-      "detail": "Reporting says LIHI is moving houses from this 42-house village to Belmont while the site becomes senior housing. No closure date confirmed yet, so it is not subtracted from the totals.",
+      "title": "Friendship Heights Village (12245 Aurora Ave N) — replacement reported, closure date not confirmed",
+      "detail": "Capitol Hill Seattle Blog reports Belmont Village (opened July 2026) was built to replace Friendship Heights Village. It also reports LIHI is building 90 senior housing units on the Aurora Ave N site. LIHI's own village page still lists Friendship Heights Village as open with 42 tiny houses. LIHI's construction announcement says the property 'most recently held' the village. None of the retrieved sources gives a closing date or a final unit count.",
       "sources": [
         {
-          "title": "Prism News",
-          "url": "https://www.prismnews.com/hobbies/tiny-houses/belmont-tiny-house-village-breaks-ground-adds-32-homes-on"
+          "title": "'Record time' — Belmont Village opens with 31 new shelter homes on Capitol Hill (Capitol Hill Seattle Blog)",
+          "url": "https://www.capitolhillseattle.com/2026/07/record-time-belmont-village-opens-with-31-new-shelter-homes-on-capitol-hill/"
         },
         {
-          "title": "LIHI: Friendship Heights Village",
-          "url": "https://lihihousing.org/villages/friendshipheights"
+          "title": "LIHI Starts Construction on 90 Units of Senior Housing (LIHI)",
+          "url": "https://www.lihihousing.org/post/lihi-starts-construction-on-90-units-of-senior-housing"
+        },
+        {
+          "title": "Friendship Heights Village (LIHI)",
+          "url": "https://www.lihihousing.org/villages/friendshipheights"
         }
       ]
     },
@@ -258,6 +296,21 @@
         {
           "title": "PubliCola, June 29, 2026",
           "url": "https://publicola.com/2026/06/29/kcrha-spins-the-news-that-homelessness-is-growing/"
+        }
+      ]
+    },
+    {
+      "id": "westside-neighbors-shelter",
+      "title": "Westside Neighbors Shelter (West Seattle, 3618 SW Alaska St) — status for the 2026-27 cold-weather season unclear",
+      "detail": "The shelter's website says it is closed for the time being. It also says it normally opens as a cold-weather shelter from November through March. A board statement dated Aug. 26, 2026 says the shelter is 'in transition.' In August the operator said it is a seasonal shelter and is not permanently closed. No bed count or confirmed reopening date was found. It is a privately run, volunteer-operated shelter, not a City-contracted site.",
+      "sources": [
+        {
+          "title": "Westside Neighbors Shelter",
+          "url": "https://westsideneighborsshelter.org/"
+        },
+        {
+          "title": "The future of Westside Neighbors Shelter: Keith Hughes addresses rumors (West Seattle Herald)",
+          "url": "https://highlinetimes.com/west-seattle-herald/2026/08/15/future-westside-neighbors-shelter-keith-hughes-addresses-rumors"
         }
       ]
     }
@@ -807,6 +860,33 @@
         {
           "title": "West Seattle neighborhoods win targeted funding in Seattle budget package (Westside Seattle)",
           "url": "https://www.westsideseattle.com/robinson-papers/2026/11/05/west-seattle-neighborhoods-win-targeted-funding-seattle-budget-package"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-rv-override-window",
+      "date": "2026-11-03",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Strauss says he will seek a vote to override the RV permit veto",
+      "short": "Override vote sought",
+      "detail": "Councilmember Strauss said he plans to ask for a vote to override the Mayor's veto of the RV permit bill. KOMO reports an override needs six councilmembers voting yes within 30 days of the veto. The Charter window for considering an override runs from 5 to 30 days after the veto. The Center Square reports the bill passed 6-3 in October. The Stranger reports that Councilmember Saka's reversal, together with the three progressive members, would be enough to sustain the veto. As of Nov. 5-6 no override vote had been reported.",
+      "sources": [
+        {
+          "title": "Seattle mayor and city councilmembers clash over RV permit program, new executive order (KOMO)",
+          "url": "https://komonews.com/newsletter-daily/mayor-katie-wilson-rv-permit-program-city-legislation-shelter-waitlists-glassyard-commons-west-seattle-dan-strauss-city-councilmember-alexis-mercedes-rinck-press-conference-regulation-bills"
+        },
+        {
+          "title": "Seattle Mayor Wilson vetoes RV permit bill due to 'efficacy concerns,' signs 4 others (KOMO)",
+          "url": "https://komonews.com/news/local/seattle-mayor-wilson-vetoes-rv-permit-bill-due-to-efficacy-concerns-signs-4-others-homeless-camping-shelter-reosuces-budget-funding-council-safety-violence-drug-use-neighborhood"
+        },
+        {
+          "title": "Seattle mayor orders new work group after vetoing RV camping bill (The Center Square)",
+          "url": "https://www.thecentersquare.com/washington/article_a0469544-5db2-4aa8-98d3-15c536167264.html"
+        },
+        {
+          "title": "Councilmember Rob Saka Backs Katie Wilson's RV Ban Veto (The Stranger)",
+          "url": "https://www.thestranger.com/news/councilmember-rob-saka-backs-katie-wilsons-rv-ban-veto/"
         }
       ]
     }
