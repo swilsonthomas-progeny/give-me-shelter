@@ -232,9 +232,18 @@ def auth_headers():
     if missing or not os.environ.get("ACTIONS_ID_TOKEN_REQUEST_URL"):
         raise SystemExit("No credentials: set repository variables " + ", ".join(needed)
                          + " and give the workflow `id-token: write` permission (see README).")
+    jwt = github_identity_token()
+    try:  # log the identity claims (not the token) so a rule mismatch is easy to spot
+        import base64
+        seg = jwt.split(".")[1]
+        claims = json.loads(base64.urlsafe_b64decode(seg + "=" * (-len(seg) % 4)))
+        print("GitHub identity:", json.dumps({k: claims.get(k) for k in
+              ("iss", "aud", "sub", "repository", "repository_owner", "repository_owner_id", "ref", "event_name")}))
+    except Exception:
+        pass
     payload = {
         "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
-        "assertion": github_identity_token(),
+        "assertion": jwt,
         "federation_rule_id": os.environ["ANTHROPIC_FEDERATION_RULE_ID"],
         "organization_id": os.environ["ANTHROPIC_ORGANIZATION_ID"],
         "service_account_id": os.environ["ANTHROPIC_SERVICE_ACCOUNT_ID"],
