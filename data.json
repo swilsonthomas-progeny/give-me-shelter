@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06",
+  "updated": "2026-11-07",
   "baseline_date": "2026-01-01",
   "sites": [
     {
@@ -926,6 +926,25 @@
         {
           "title": "Mayor Wilson vetoes controversial RV permit bill, pivoting to executive strategy and safe lot expansion",
           "url": "https://www.westsideseattle.com/robinson-papers/2026/11/03/mayor-wilson-vetoes-controversial-rv-permit-bill-pivoting-executive"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-kcrha-ceo-resigns",
+      "date": "2026-11-06",
+      "date_precision": "day",
+      "type": "context",
+      "title": "KCRHA CEO Kelly Kinnison resigns",
+      "short": "KCRHA CEO resigns",
+      "detail": "Kelly Kinnison submitted her resignation as CEO of the King County Regional Homelessness Authority at the board's Nov. 6 meeting. It takes effect Nov. 16, 2026. KCRHA says her departure reflects the agency's changed mission and scope as locally funded service contracts move back to King County and the City of Seattle. Another report says that transfer happens in January 2027. Mayor Wilson and King County Executive Zahilay co-chair the KCRHA board. They say they will recommend interim leadership soon.",
+      "sources": [
+        {
+          "title": "KCRHA CEO Resigns - KCRHA",
+          "url": "https://kcrha.org/news-kcrha-ceo-resigns/"
+        },
+        {
+          "title": "King County Regional Homelessness Authority CEO resigns amid agency reset - KING5.com",
+          "url": "https://www.yahoo.com/news/us/articles/king-county-regional-homelessness-authority-191959111.html"
         }
       ]
     }
