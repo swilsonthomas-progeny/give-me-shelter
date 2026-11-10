@@ -3,7 +3,7 @@
 
 Runs on the Raspberry Pi that is wired to the speaker. It
   - reads your Spotify liked songs and turns them into a shelf of albums,
-  - plays an album one side at a time on a Spotify Connect device
+  - plays an album start to finish (or one side at a time) on a Spotify Connect device
     (normally librespot/raspotify on this same Pi),
   - serves the shelf, resized cover art and the deck state to the knob puck
     (and to the browser simulator at /sim) over plain HTTP on your LAN.
@@ -49,7 +49,8 @@ DEFAULTS = {
     "include_singles": False,   # singles with fewer than 4 tracks stay off the shelf
     "min_liked_songs": 1,       # albums need at least this many liked songs
     "needle_sound": True,       # crackle through the Pi's speaker before each side
-    "side_minutes": 23,         # longest a side should run before the album gets more sides
+    "flip_sides": False,        # True: stop at the end of each side and ask to flip the record
+    "side_minutes": 23,         # with flip_sides, longest a side runs before the album gets more sides
     "refresh_hours": 6,
 }
 
@@ -509,7 +510,7 @@ class Shelf:
 
 
 class Deck:
-    """The record currently on the platter. One side plays, then it waits to be flipped."""
+    """The record currently on the platter: the whole album, or one side at a time."""
 
     def __init__(self, sp, shelf: Shelf, cfg: dict, data: Path):
         self.sp, self.shelf, self.cfg = sp, shelf, cfg
@@ -592,7 +593,12 @@ class Deck:
             try:
                 if album_id not in self.track_cache:
                     self.track_cache[album_id] = self.sp.album_tracks(album_id)
-                sides = split_sides(self.track_cache[album_id], self.cfg["side_minutes"])
+                tracks = self.track_cache[album_id]
+                if self.cfg["flip_sides"]:
+                    sides = split_sides(tracks, self.cfg["side_minutes"])
+                else:                      # the whole album straight through
+                    sides = [sorted(tracks, key=lambda t: (t.get("disc") or 1, t.get("no") or 0))]
+                    sides = [s for s in sides if s]
                 if not sides:
                     return self._fail(Exception("Album has no tracks"))
                 self.album, self.sides = album, sides

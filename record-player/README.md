@@ -5,9 +5,9 @@ screen sits on the shelf; a small Raspberry Pi hidden by the speaker does the pl
 
 - **The shelf** is every album that contains one of your liked songs, sorted by artist then year.
 - **Turn** the knob to flick through covers. **Press** to put the record on.
-- The cover becomes the record's label and spins at 33⅓ rpm. The tonearm tracks inward as the side plays.
+- The cover fills the round screen with a tonearm over it that tracks inward as the album plays.
 - **Turn** while it plays for volume. **Press** to lift the needle, press again to drop it.
-- There is no skipping. When side A ends the music stops and the screen asks you to **flip the record**.
+- There is no skipping. The album plays start to finish, then stops.
 - **Long press** to go back to the shelf. The record keeps playing until you put on another.
 
 ## What to buy
@@ -16,7 +16,7 @@ Prices are approximate and were not checked against a shop on the day this was w
 
 | Part | Why | About |
 |---|---|---|
-| **M5Stack Dial v1.1** | The puck: 1.28" round 240x240 screen inside a rotating ring that also presses. | $35–50 |
+| **Elecrow CrowPanel 2.1" HMI ESP32 Rotary Display** | The puck: 2.1" round 480x480 screen inside a rotating ring that also presses. | $36–44 |
 | **Raspberry Pi Zero 2 WH** (the "H" means the pins are already soldered) | Runs Spotify Connect and the turntable server. | $18–20 |
 | **HiFiBerry DAC+ Zero** (or any I2S DAC HAT for the Pi Zero with a line out) | The Pi Zero has no audio socket. This pushes onto the pins, no soldering. | $20–25 |
 | microSD card, 16 GB or more | Pi storage. | $8 |
@@ -24,7 +24,7 @@ Prices are approximate and were not checked against a shop on the day this was w
 | USB-C cable and any USB charger | Power for the puck (and how you load its software). | $8 |
 | Cable from the DAC to your speakers (RCA or 3.5 mm, depending on the DAC and speakers) | | $6 |
 
-That is roughly $110–130. You also need powered speakers or an amplifier with a line input, and Spotify Premium.
+That is roughly $110–125. You also need powered speakers or an amplifier with a line input, and Spotify Premium.
 
 **If a Bluetooth speaker is the main plan,** buy a Raspberry Pi 4 or 5 instead of the Zero and skip the DAC.
 The Zero's Wi-Fi and Bluetooth share one 2.4 GHz radio and audio tends to stutter. Bluetooth pairing is not
@@ -33,8 +33,8 @@ set up by the installer here; wired output is.
 ## How it fits together
 
 ```
- puck (M5Stack Dial)  --Wi-Fi-->  Pi: turntable.py  --Spotify Web API-->  Spotify
-   draws the interface              shelf, sides, cover art                  |
+ puck (CrowPanel 2.1")  --Wi-Fi-->  Pi: turntable.py  --Spotify Web API-->  Spotify
+   draws the interface              shelf, cover art, playback              |
    sends knob turns/presses         Pi: raspotify (Spotify Connect) <--------+
                                       --> DAC --> speakers
 ```
@@ -52,7 +52,7 @@ python3 turntable.py --demo        # made-up library, pretend speaker
 ```
 
 Open <http://127.0.0.1:8888/sim>. Scroll to turn, click to press, hold to long press.
-Add `--demo-speed 30` to see a side end and the flip prompt without waiting 20 minutes.
+Add `--demo-speed 30` to see an album finish without waiting 40 minutes.
 
 To use your real library on a laptop, do steps 1 and 3 below on the laptop and set `device_name`
 in `config.json` to a speaker Spotify can already see (for example your computer's name with the Spotify app open).
@@ -91,8 +91,8 @@ The shelf fills in after a minute or so, and `http://recordplayer.local:8888/sim
 
 1. Install [PlatformIO](https://platformio.org/install) (the VS Code extension is easiest).
 2. Copy `firmware/include/config.example.h` to `config.h` and fill in your Wi-Fi and the Pi's address.
-3. Plug the Dial into your computer with USB-C. If it is not detected, hold the button on the back
-   (G0) while plugging it in. Then:
+3. Plug the puck into your computer with USB-C. If it is not detected, hold its BOOT button while
+   plugging it in. Then:
    ```
    cd firmware
    pio run -t upload
@@ -105,16 +105,15 @@ The shelf fills in after a minute or so, and `http://recordplayer.local:8888/sim
 | `device_name` | `Record Player` | The Spotify Connect speaker to play on. |
 | `min_liked_songs` | `1` | Raise to 2 or 3 to keep stray one-song albums off the shelf. |
 | `include_singles` | `false` | Singles with fewer than four tracks are left off unless this is true. |
-| `side_minutes` | `23` | Longest a side may run. Long albums get sides C, D and so on. |
-| `needle_sound` | `true` | A short crackle through the speaker before each side. |
-
-Sides are cut per disc at the track boundary nearest the halfway point. Releases under four tracks or
-twelve minutes are a single side.
+| `flip_sides` | `false` | Set to true to stop at the end of each side and ask you to flip the record. |
+| `side_minutes` | `23` | With `flip_sides`, the longest a side may run. Long albums get sides C, D and so on. |
+| `needle_sound` | `true` | A short crackle through the speaker each time the needle drops. |
 
 ## Known limits
 
-- **The firmware has not been built or run on a real Dial.** It was type-checked against stand-in headers
-  only, because the build tools could not be downloaded where it was written. Expect to fix small things on
+- **The firmware has not been built or run on a real puck.** It was type-checked against stand-in headers
+  only, because the build tools could not be downloaded where it was written. The pins and screen setup are
+  copied from Elecrow's own example (`Board21.h` in their GitHub repository). Expect to fix small things on
   first flash. If one click of the ring moves the wrong number of albums, change `ENC_COUNTS_PER_STEP` in `config.h`.
 - **Not tested against live Spotify.** The server was tested end to end with the built-in demo library. It uses
   `GET /me/tracks`, `GET /albums/{id}/tracks` and the `/me/player` endpoints. Spotify cut back its developer API

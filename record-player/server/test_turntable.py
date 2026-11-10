@@ -89,7 +89,18 @@ class DeckTest(unittest.TestCase):
             time.sleep(0.01)
         self.fail(f"never reached {mode}, stuck in {self.deck.mode}")
 
+    def test_album_plays_straight_through_by_default(self):
+        album = next(a for a in self.shelf.albums if a["total"] >= 8)
+        self.deck.play(album["id"])
+        st = self.deck.state()
+        self.assertEqual((st["mode"], st["sides"]), ("playing", 1))
+        self.assertEqual(len(self.sp.queue), album["total"])
+        self.run_until("end")
+        self.deck.press()
+        self.assertEqual(self.deck.mode, "playing")
+
     def test_sides_flip_and_end(self):
+        self.cfg["flip_sides"] = True
         album = next(a for a in self.shelf.albums if len(tt.split_sides(self.sp.album_tracks(a["id"]))) == 2)
         self.deck.play(album["id"])
         self.assertEqual(self.deck.state()["mode"], "playing")

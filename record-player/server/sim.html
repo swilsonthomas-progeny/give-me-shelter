@@ -8,38 +8,41 @@
   :root { color-scheme: dark; }
   body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
          gap: 28px; background: #2b2420; color: #d8cfc0; font: 15px/1.5 system-ui, sans-serif; padding: 16px; box-sizing: border-box; }
-  .puck { width: min(86vw, 460px); aspect-ratio: 1; border-radius: 50%; padding: 9%; box-sizing: border-box; touch-action: none;
+  .puck { width: min(88vw, 520px); aspect-ratio: 1; border-radius: 50%; padding: 7%; box-sizing: border-box; touch-action: none;
           background: repeating-conic-gradient(#8a8782 0 1.2deg, #a7a49e 1.2deg 2.4deg); box-shadow: 0 18px 40px #0009, inset 0 0 0 2px #fff3; }
   canvas { width: 100%; height: 100%; border-radius: 50%; display: block; background: #000; box-shadow: 0 0 0 5px #111; cursor: pointer; }
-  .help { max-width: 460px; text-align: center; color: #a89e8e; }
+  .help { max-width: 520px; text-align: center; color: #a89e8e; }
   kbd { background: #463c35; border-radius: 4px; padding: 1px 6px; color: #f2ead8; font: inherit; }
 </style>
 </head>
 <body>
-<div class="puck" id="puck"><canvas id="c" width="480" height="480"></canvas></div>
+<div class="puck" id="puck"><canvas id="c" width="960" height="960"></canvas></div>
 <div class="help">
   Turn: scroll wheel, drag around the ring, or <kbd>←</kbd> <kbd>→</kbd>. &nbsp; Press: click or <kbd>Space</kbd>. &nbsp; Long press: hold, or <kbd>L</kbd>.<br>
   On the shelf, turn to browse and press to play. While a record plays, turn for volume, press to lift or drop the needle, long press to go back to the shelf.
 </div>
 <script>
 // This page mirrors firmware/src/main.cpp: same layout numbers, same rules.
-// Everything is drawn in the puck's 240x240 coordinates.
+// Everything is drawn in the puck's 480x480 coordinates.
 const cv = document.getElementById('c'), g = cv.getContext('2d');
 g.scale(2, 2);
-const CREAM = '#f2ead8', LABEL_R = 84, C = 120;
-const ARM = { px: 200, py: 40, len: 100, rest: 72, outer: 63, inner: 49.5 };  // degrees between arm and the line to the spindle
+const CREAM = '#f2ead8', SOFT = '#d8cfc0', DIM = '#a89e8e', C = 240;
+const ARM = { px: 400, py: 80, len: 200, rest: 72, outer: 63, inner: 32 };  // degrees between arm and the line to the spindle
 
 let shelf = [], shelfVersion = '', index = 0, view = 'shelf';
 let st = { mode: 'idle', vol: 40 };
-let cover = null, coverFor = '', label = null, labelFor = '';
-let lastTurn = 0, lastInput = performance.now();
-let angle = 0, speed = 0, arm = ARM.rest, lastFrame = performance.now();
-let volShown = 0, sideShown = 0, shownSide = '', volPending = null, volTimer = 0, localVol = 40, toast = '', toastUntil = 0;
+let covers = {};                       // album id -> Image (the puck keeps just one)
+let lastTurn = 0, lastInput = performance.now(), lastFrame = performance.now();
+let arm = ARM.rest, volShown = 0, startShown = 0, volPending = null, volTimer = 0, localVol = 40, toast = '', toastUntil = 0;
 
 async function api(path, method = 'POST') {
   try { const r = await fetch(path, { method }); if (r.ok) applyState(await r.json()); } catch (e) { toastMsg('Turntable not reachable'); }
 }
 function toastMsg(t) { toast = t; toastUntil = performance.now() + 4000; }
+function coverOf(id) {
+  if (!covers[id]) { const im = new Image(); im.src = `/art/${id}?s=480`; covers = { [id]: im }; }
+  return covers[id].complete && covers[id].naturalWidth ? covers[id] : null;
+}
 
 function applyState(s) {
   const was = st;
@@ -47,12 +50,8 @@ function applyState(s) {
   if (performance.now() - volShown > 2000) localVol = s.vol;
   if (s.err) toastMsg(s.err);
   if (s.v !== shelfVersion) loadShelf();
-  if (s.mode === 'playing' && (was.mode !== 'playing' || s.side !== shownSide || s.album !== was.album)) {
-    if (s.side !== shownSide || s.album !== was.album || was.mode === 'flip' || was.mode === 'end') sideShown = performance.now();
-    shownSide = s.side;
-  }
+  if (s.mode === 'playing' && (s.album !== was.album || s.side !== was.side || ['flip', 'end', 'idle', 'loading'].includes(was.mode))) startShown = performance.now();
   if (s.mode === 'idle' && view === 'deck') view = 'shelf';
-  if (s.album && s.album !== labelFor) { labelFor = s.album; label = null; const im = new Image(); im.onload = () => { if (labelFor === s.album) label = im; }; im.src = `/art/${s.album}?s=168`; }
 }
 async function loadShelf() {
   const text = await (await fetch('/api/shelf')).text();
@@ -88,7 +87,7 @@ function press() {
     const a = shelf[index];
     if (!a) return;
     view = 'deck';
-    if (!(st.album === a.id && st.mode !== 'idle')) { st = { ...st, mode: 'loading', album: a.id }; api('/api/play?album=' + a.id); }
+    if (!(st.album === a.id && st.mode !== 'idle')) { st = { ...st, mode: 'loading', album: a.id, artist: a.artist, title: a.title }; api('/api/play?album=' + a.id); }
   } else if (st.mode !== 'loading') {
     api('/api/press');
   }
@@ -108,12 +107,12 @@ addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1);
   else if (e.key === ' ' || e.key === 'Enter') { press(); e.preventDefault(); } else if (e.key === 'l' || e.key === 'L') longPress();
 });
-let downAt = 0, held = false, holdTimer = 0, dragAngle = null, dragged = false;
+let held = false, holdTimer = 0, dragAngle = null;
 const puck = document.getElementById('puck');
 function pointerAngle(e) { const r = puck.getBoundingClientRect(); return Math.atan2(e.clientY - r.top - r.height / 2, e.clientX - r.left - r.width / 2) * 180 / Math.PI; }
 puck.addEventListener('pointerdown', e => {
   puck.setPointerCapture(e.pointerId);
-  dragged = false; held = false; downAt = performance.now();
+  held = false;
   if (e.target === cv) { dragAngle = null; holdTimer = setTimeout(() => { held = true; longPress(); }, 600); }
   else dragAngle = pointerAngle(e);
 });
@@ -121,7 +120,7 @@ puck.addEventListener('pointermove', e => {
   if (dragAngle === null || !e.buttons) return;
   let d = pointerAngle(e) - dragAngle;
   if (d > 180) d -= 360; if (d < -180) d += 360;
-  if (Math.abs(d) >= 12) { turn(Math.sign(d)); dragAngle = pointerAngle(e); dragged = true; }
+  if (Math.abs(d) >= 12) { turn(Math.sign(d)); dragAngle = pointerAngle(e); }
 });
 puck.addEventListener('pointerup', e => { clearTimeout(holdTimer); if (dragAngle === null && !held && e.target === cv) press(); dragAngle = null; });
 
@@ -131,79 +130,62 @@ function fit(text, width) {
   while (text.length > 1 && g.measureText(text + '...').width > width) text = text.slice(0, -1);
   return text.trimEnd() + '...';
 }
-function chord(y) { return 2 * Math.sqrt(Math.max(0, 118 * 118 - (y - C) * (y - C))) - 16; }
-function text(str, y, font, color = CREAM) { g.font = font; g.fillStyle = color; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(fit(str, chord(y)), C, y); }
+function chord(y) { return 2 * Math.sqrt(Math.max(0, 236 * 236 - (y - C) * (y - C))) - 32; }
+function text(str, y, font, color = CREAM) { g.font = font; g.fillStyle = color; g.textAlign = 'center'; g.textBaseline = 'alphabetic'; g.fillText(fit(str || '', chord(y)), C, y); }
 function arc(r0, r1, a0, a1, color) { g.beginPath(); g.strokeStyle = color; g.lineWidth = r1 - r0; g.arc(C, C, (r0 + r1) / 2, a0 * Math.PI / 180, a1 * Math.PI / 180); g.stroke(); }
+function dot(x, y, r, color) { g.beginPath(); g.fillStyle = color; g.arc(x, y, r, 0, 7); g.fill(); }
+function banner(a, b) { g.fillStyle = '#000b'; g.fillRect(0, 284, 480, 108); text(a, 334, '600 30px system-ui'); text(b, 372, '22px system-ui', SOFT); }
 
 function drawShelf(now) {
   const a = shelf[index];
-  g.fillStyle = '#16120f'; g.fillRect(0, 0, 240, 240);
-  if (!a) { text(st.auth === false ? 'Not connected' : 'Reading your shelf...', 112, '600 15px system-ui'); text(st.auth === false ? 'open /setup' : '', 134, '12px system-ui', '#a89e8e'); return; }
-  const settled = now - lastTurn > 180;
-  if (settled && coverFor !== a.id) { coverFor = a.id; cover = null; const im = new Image(); im.onload = () => { if (coverFor === a.id) cover = im; }; im.src = `/art/${a.id}?s=240`; }
-  if (settled && cover && coverFor === a.id) {
-    g.drawImage(cover, 0, 0, 240, 240);
-    const grad = g.createLinearGradient(0, 138, 0, 240);
+  g.fillStyle = '#16120f'; g.fillRect(0, 0, 480, 480);
+  if (!a) { text(st.auth === false ? 'Not connected to Spotify' : 'Reading your shelf...', 248, '22px system-ui'); return; }
+  const im = now - lastTurn > 180 ? coverOf(a.id) : null;
+  if (im) {
+    g.drawImage(im, 0, 0, 480, 480);
+    const grad = g.createLinearGradient(0, 276, 0, 480);
     grad.addColorStop(0, '#0000'); grad.addColorStop(0.45, '#000c'); grad.addColorStop(1, '#000e');
-    g.fillStyle = grad; g.fillRect(0, 138, 240, 102);
+    g.fillStyle = grad; g.fillRect(0, 276, 480, 204);
   } else {
     const key = a.artist.replace(/^(the|a|an)\s+/i, '');
-    const letter = /[a-z]/i.test(key[0] || '') ? key[0].toUpperCase() : '#';
-    text(letter, 96, '700 96px Georgia, serif', '#4a3f37');
+    text(/[a-z]/i.test(key[0] || '') ? key[0].toUpperCase() : '#', 250, '700 190px Georgia, serif', '#4a3f37');
   }
-  text(a.artist, 180, '600 16px system-ui');
-  text(a.title, 199, '13px system-ui', '#d8cfc0');
-  text(a.year || '', 216, '11px system-ui', '#a89e8e');
-  // where you are along the shelf
-  arc(116, 119, -90, 270, '#ffffff22');
-  const at = -90 + 360 * index / shelf.length;
-  arc(114, 120, at - 2.5, at + 2.5, CREAM);
-  if (st.album && st.mode === 'playing') {   // a record is still playing
-    const t = now / 1000 * 200 * Math.PI / 180;
-    g.beginPath(); g.fillStyle = '#000a'; g.arc(C, 24, 11, 0, 7); g.fill();
-    g.beginPath(); g.fillStyle = CREAM; g.arc(C, 24, 7, 0, 7); g.fill();
-    g.beginPath(); g.fillStyle = '#000'; g.arc(C + 4 * Math.cos(t), 24 + 4 * Math.sin(t), 1.6, 0, 7); g.fill();
-  }
+  text(a.artist, 370, '600 30px system-ui');
+  text(a.title, 404, '22px system-ui', SOFT);
+  text(a.year, 434, '17px system-ui', DIM);
+  const at = (-90 + 360 * index / shelf.length) * Math.PI / 180;     // where you are along the shelf
+  dot(C + 232 * Math.cos(at), C + 232 * Math.sin(at), 6, CREAM);
+  if (st.album && st.mode === 'playing') { dot(C, 46, 20, '#000a'); dot(C, 46, 13, CREAM); dot(C, 46, 4, '#000'); }   // a record is still playing
 }
 
 function drawDeck(now, dt) {
   const playing = st.mode === 'playing';
-  speed += ((playing ? 200 : 0) - speed) * Math.min(1, dt * 2.5);
-  angle = (angle + speed * dt) % 360;
   const progress = st.dur ? Math.min(1, st.pos / st.dur) : 0;
   const target = playing ? ARM.outer + (ARM.inner - ARM.outer) * progress : ARM.rest;
   arm += (target - arm) * Math.min(1, dt * 4);
 
-  g.fillStyle = '#0c0c0c'; g.fillRect(0, 0, 240, 240);
-  for (let r = 88; r <= 118; r += 3) arc(r, r + 1, 0, 360, r % 2 ? '#1c1c1c' : '#242424');
-  arc(86, 119, -38, -22, '#ffffff0d'); arc(86, 119, 142, 158, '#ffffff0d');     // sheen
-  g.save();
-  g.beginPath(); g.arc(C, C, LABEL_R, 0, 7); g.clip();
-  g.translate(C, C); g.rotate(angle * Math.PI / 180);
-  if (label) g.drawImage(label, -LABEL_R, -LABEL_R, 2 * LABEL_R, 2 * LABEL_R); else { g.fillStyle = '#3a302a'; g.fillRect(-LABEL_R, -LABEL_R, 168, 168); }
-  g.restore();
-  g.beginPath(); g.fillStyle = '#0c0c0c'; g.arc(C, C, 9, 0, 7); g.fill();
-  g.beginPath(); g.fillStyle = '#c9c5bd'; g.arc(C, C, 3, 0, 7); g.fill();
+  const im = st.album && coverOf(st.album);
+  if (im) g.drawImage(im, 0, 0, 480, 480); else { g.fillStyle = '#16120f'; g.fillRect(0, 0, 480, 480); }
+  if (!playing) { g.fillStyle = '#0007'; g.fillRect(0, 0, 480, 480); }          // needle up: the cover dims
+  arc(226, 240, 0, 360, '#0c0c0c'); arc(230, 231, 0, 360, '#2a2a2a'); arc(235, 236, 0, 360, '#2a2a2a');   // edge of the record
+  dot(C, C, 18, '#0c0c0c'); dot(C, C, 6, '#c9c5bd');                            // spindle
 
-  // tonearm
-  const dir = (135 - arm) * Math.PI / 180;
+  const dir = (135 - arm) * Math.PI / 180;                                      // tonearm
   const sx = ARM.px + ARM.len * Math.cos(dir), sy = ARM.py + ARM.len * Math.sin(dir);
   g.lineCap = 'round';
-  g.beginPath(); g.strokeStyle = '#0008'; g.lineWidth = 7; g.moveTo(ARM.px + 2, ARM.py + 3); g.lineTo(sx + 2, sy + 3); g.stroke();
-  g.beginPath(); g.strokeStyle = '#c9c5bd'; g.lineWidth = 5; g.moveTo(ARM.px, ARM.py); g.lineTo(sx, sy); g.stroke();
-  g.beginPath(); g.strokeStyle = '#efeae0'; g.lineWidth = 9; g.moveTo(sx - 9 * Math.cos(dir), sy - 9 * Math.sin(dir)); g.lineTo(sx, sy); g.stroke();
+  g.beginPath(); g.strokeStyle = '#0008'; g.lineWidth = 14; g.moveTo(ARM.px + 4, ARM.py + 6); g.lineTo(sx + 4, sy + 6); g.stroke();
+  g.beginPath(); g.strokeStyle = '#c9c5bd'; g.lineWidth = 10; g.moveTo(ARM.px, ARM.py); g.lineTo(sx, sy); g.stroke();
+  g.beginPath(); g.strokeStyle = '#efeae0'; g.lineWidth = 18; g.moveTo(sx - 18 * Math.cos(dir), sy - 18 * Math.sin(dir)); g.lineTo(sx, sy); g.stroke();
   g.lineCap = 'butt';
-  g.beginPath(); g.fillStyle = '#8f8b84'; g.arc(ARM.px, ARM.py, 13, 0, 7); g.fill();
-  g.beginPath(); g.fillStyle = '#2a2a2a'; g.arc(ARM.px, ARM.py, 5, 0, 7); g.fill();
+  dot(ARM.px, ARM.py, 26, '#8f8b84'); dot(ARM.px, ARM.py, 10, '#2a2a2a');
 
-  const banner = (a, b) => { g.fillStyle = '#000b'; g.fillRect(0, 142, 240, 54); text(a, 160, '600 16px system-ui'); text(b, 181, '12px system-ui', '#d8cfc0'); };
   if (st.mode === 'flip') banner('Flip to side ' + String.fromCharCode(st.side.charCodeAt(0) + 1), 'press to turn it over');
-  else if (st.mode === 'end') banner('Side ' + st.side + ' finished', 'press to play it again');
-  else if (st.mode === 'loading') banner('Putting it on...', '');
-  else if (playing && now - sideShown < 3500) banner('Side ' + st.side, st.title || '');
+  else if (st.mode === 'end') banner('Finished', 'press to play it again');
+  else if (st.mode === 'loading') banner('Putting it on...', st.title || '');
+  else if (playing && now - startShown < 3500) banner(st.sides > 1 ? 'Side ' + st.side : st.title, st.sides > 1 ? st.title : st.artist);
   if (now - volShown < 1500) {
-    arc(111, 118, 135, 405, '#000c');
-    if (localVol > 0) arc(112, 117, 135, 135 + 270 * localVol / 100, CREAM);
+    arc(220, 236, 135, 405, '#000c');
+    if (localVol > 0) { g.lineCap = 'round'; arc(223, 233, 135, 135 + 270 * localVol / 100, CREAM); g.lineCap = 'butt'; }
   }
 }
 
@@ -211,7 +193,7 @@ function frame(now) {
   const dt = Math.min(0.1, (now - lastFrame) / 1000); lastFrame = now;
   if (view === 'shelf' && st.mode === 'playing' && now - lastInput > 20000) view = 'deck';   // drift back to the record
   if (view === 'shelf') drawShelf(now); else drawDeck(now, dt);
-  if (now < toastUntil) { g.fillStyle = '#000d'; g.fillRect(0, 96, 240, 48); text(toast, 120, '12px system-ui'); }
+  if (now < toastUntil) { g.fillStyle = '#000d'; g.fillRect(0, 196, 480, 88); text(toast, 248, '20px system-ui'); }
   requestAnimationFrame(frame);
 }
 poll();
