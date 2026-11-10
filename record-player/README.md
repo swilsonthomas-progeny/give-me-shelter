@@ -12,23 +12,42 @@ screen sits on the shelf; a small Raspberry Pi hidden by the speaker does the pl
 
 ## What to buy
 
-Prices are approximate and were not checked against a shop on the day this was written.
+Two orders cover the electronics. Prices are approximate; check stock on the day.
+
+**From Adafruit (adafruit.com)**
+
+| Part | Product no. | Why | About |
+|---|---|---|---|
+| Raspberry Pi Zero 2 WH (pins already soldered) | search "Zero 2 W with header" | Runs Spotify Connect and the turntable server. | $18–20 |
+| I2S 3W Stereo Speaker Bonnet | 3346 | Amplifier that pushes onto the Pi's pins. Buy the current version with terminal blocks already soldered. | $13 |
+| Medium Surface Transducer with Wires, 4 ohm 3 W (buy two) | 1785 | The exciters: they stick to a panel of the box and turn it into the speaker. | $15 each |
+| 5V 2.5A micro-USB power supply | 1995 | Powers the Pi and the amplifier. | $8 |
+| microSD card, 16 GB or more | any | Pi storage. | $8–10 |
+
+**From Elecrow (elecrow.com)**
 
 | Part | Why | About |
 |---|---|---|
-| **Elecrow CrowPanel 2.1" HMI ESP32 Rotary Display** | The puck: 2.1" round 480x480 screen inside a rotating ring that also presses. | $36–44 |
-| **Raspberry Pi Zero 2 WH** (the "H" means the pins are already soldered) | Runs Spotify Connect and the turntable server. | $18–20 |
-| **HiFiBerry DAC+ Zero** (or any I2S DAC HAT for the Pi Zero with a line out) | The Pi Zero has no audio socket. This pushes onto the pins, no soldering. | $20–25 |
-| microSD card, 16 GB or more | Pi storage. | $8 |
-| 5V 2.5A micro-USB power supply | Pi power. | $10 |
-| USB-C cable and any USB charger | Power for the puck (and how you load its software). | $8 |
-| Cable from the DAC to your speakers (RCA or 3.5 mm, depending on the DAC and speakers) | | $6 |
+| CrowPanel 2.1" HMI ESP32 Rotary Display (480x480) | The puck: round screen inside a rotating ring that also presses. | $36–44 |
 
-That is roughly $110–125. You also need powered speakers or an amplifier with a line input, and Spotify Premium.
+**From anywhere**
 
-**If a Bluetooth speaker is the main plan,** buy a Raspberry Pi 4 or 5 instead of the Zero and skip the DAC.
-The Zero's Wi-Fi and Bluetooth share one 2.4 GHz radio and audio tends to stutter. Bluetooth pairing is not
-set up by the installer here; wired output is.
+- A thin wooden box, roughly 25 x 20 x 8 cm, with panels 3–6 mm thick (a craft-shop plywood box or a cigar box).
+- A USB-C cable and USB charger for the puck, and four small rubber feet.
+
+That is roughly $115–125 plus the box. You also need Spotify Premium.
+
+### Building the box
+
+- Stick the two exciters to the inside of the largest thin panel, away from its centre and from each other.
+  Clean the wood first; the adhesive ring only sticks well once.
+- Screw the exciter wires into the amplifier's two terminal blocks (one exciter per block). No soldering.
+- Do not fix the Pi to the panel that carries the exciters. Mount it on the base with a little foam under it.
+- Put rubber feet under the puck if it sits on a vibrating panel, or it will buzz. Feet under the box help too.
+- Leave a notch for the two power cables.
+
+Expect clear mids, little bass and room-filling rather than loud volume. A thin, stiff, light panel sounds
+best; a thick one sounds dull.
 
 ## How it fits together
 
@@ -36,7 +55,7 @@ set up by the installer here; wired output is.
  puck (CrowPanel 2.1")  --Wi-Fi-->  Pi: turntable.py  --Spotify Web API-->  Spotify
    draws the interface              shelf, cover art, playback              |
    sends knob turns/presses         Pi: raspotify (Spotify Connect) <--------+
-                                      --> DAC --> speakers
+                                      --> amplifier --> exciters on the box
 ```
 
 - `server/turntable.py` – the brain. Standard-library Python plus Pillow.
@@ -69,8 +88,9 @@ in `config.json` to a speaker Spotify can already see (for example your computer
 
 1. Flash **Raspberry Pi OS Lite (64-bit)** with Raspberry Pi Imager. In its settings set the hostname to
    `recordplayer`, add your Wi-Fi, and turn on SSH.
-2. Push the DAC onto the pins. For a HiFiBerry DAC+ Zero add `dtoverlay=hifiberry-dac` to
-   `/boot/firmware/config.txt` and comment out `dtparam=audio=on`, then reboot. Other DACs name their own overlay.
+2. Push the Speaker Bonnet onto the pins. Add `dtoverlay=hifiberry-dac` to `/boot/firmware/config.txt` and
+   comment out `dtparam=audio=on`, then reboot. (That generic overlay is the one Adafruit has long used for this
+   board. If there is no sound, follow the setup script in Adafruit's Speaker Bonnet guide instead.)
 3. Copy this `record-player` folder to the Pi, then:
    ```
    cd record-player
