@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Record player simulator</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+         gap: 28px; background: #2b2420; color: #d8cfc0; font: 15px/1.5 system-ui, sans-serif; padding: 16px; box-sizing: border-box; }
+  .puck { width: min(86vw, 460px); aspect-ratio: 1; border-radius: 50%; padding: 9%; box-sizing: border-box; touch-action: none;
+          background: repeating-conic-gradient(#8a8782 0 1.2deg, #a7a49e 1.2deg 2.4deg); box-shadow: 0 18px 40px #0009, inset 0 0 0 2px #fff3; }
+  canvas { width: 100%; height: 100%; border-radius: 50%; display: block; background: #000; box-shadow: 0 0 0 5px #111; cursor: pointer; }
+  .help { max-width: 460px; text-align: center; color: #a89e8e; }
+  kbd { background: #463c35; border-radius: 4px; padding: 1px 6px; color: #f2ead8; font: inherit; }
+</style>
+</head>
+<body>
+<div class="puck" id="puck"><canvas id="c" width="480" height="480"></canvas></div>
+<div class="help">
+  Turn: scroll wheel, drag around the ring, or <kbd>←</kbd> <kbd>→</kbd>. &nbsp; Press: click or <kbd>Space</kbd>. &nbsp; Long press: hold, or <kbd>L</kbd>.<br>
+  On the shelf, turn to browse and press to play. While a record plays, turn for volume, press to lift or drop the needle, long press to go back to the shelf.
+</div>
+<script>
+// This page mirrors firmware/src/main.cpp: same layout numbers, same rules.
+// Everything is drawn in the puck's 240x240 coordinates.
+const cv = document.getElementById('c'), g = cv.getContext('2d');
+g.scale(2, 2);
+const CREAM = '#f2ead8', LABEL_R = 84, C = 120;
+const ARM = { px: 200, py: 40, len: 100, rest: 72, outer: 63, inner: 49.5 };  // degrees between arm and the line to the spindle
+
+let shelf = [], shelfVersion = '', index = 0, view = 'shelf';
+let st = { mode: 'idle', vol: 40 };
+let cover = null, coverFor = '', label = null, labelFor = '';
+let lastTurn = 0, lastInput = performance.now();
+let angle = 0, speed = 0, arm = ARM.rest, lastFrame = performance.now();
+let volShown = 0, sideShown = 0, shownSide = '', volPending = null, volTimer = 0, localVol = 40, toast = '', toastUntil = 0;
+
+async function api(path, method = 'POST') {
+  try { const r = await fetch(path, { method }); if (r.ok) applyState(await r.json()); } catch (e) { toastMsg('Turntable not reachable'); }
+}
+function toastMsg(t) { toast = t; toastUntil = performance.now() + 4000; }
+
+function applyState(s) {
+  const was = st;
+  st = s;
+  if (performance.now() - volShown > 2000) localVol = s.vol;
+  if (s.err) toastMsg(s.err);
+  if (s.v !== shelfVersion) loadShelf();
+  if (s.mode === 'playing' && (was.mode !== 'playing' || s.side !== shownSide || s.album !== was.album)) {
+    if (s.side !== shownSide || s.album !== was.album || was.mode === 'flip' || was.mode === 'end') sideShown = performance.now();
+    shownSide = s.side;
+  }
+  if (s.mode === 'idle' && view === 'deck') view = 'shelf';
+  if (s.album && s.album !== labelFor) { labelFor = s.album; label = null; const im = new Image(); im.onload = () => { if (labelFor === s.album) label = im; }; im.src = `/art/${s.album}?s=168`; }
+}
+async function loadShelf() {
+  const text = await (await fetch('/api/shelf')).text();
+  const lines = text.trim().split('\n');
+  const keep = shelf[index] && shelf[index].id;
+  shelfVersion = lines[0].split('\t')[0];
+  shelf = lines.slice(1).map(l => { const [id, artist, title, year] = l.split('\t'); return { id, artist, title, year }; });
+  index = Math.max(0, shelf.findIndex(a => a.id === keep));
+  lastTurn = 0;
+}
+async function poll() {
+  try { applyState(await (await fetch('/api/state')).json()); } catch (e) { toastMsg('Turntable not reachable'); }
+  setTimeout(poll, view === 'deck' ? 1000 : 2500);
+}
+
+// ---- input ------------------------------------------------------------------
+function turn(steps) {
+  lastInput = performance.now();
+  if (view === 'shelf') {
+    if (!shelf.length) return;
+    index = ((index + steps) % shelf.length + shelf.length) % shelf.length;
+    lastTurn = performance.now();
+  } else {
+    localVol = Math.max(0, Math.min(100, localVol + steps * 3));
+    volShown = performance.now();
+    volPending = localVol;
+    if (!volTimer) volTimer = setTimeout(() => { volTimer = 0; api('/api/volume?v=' + volPending); }, 150);
+  }
+}
+function press() {
+  lastInput = performance.now();
+  if (view === 'shelf') {
+    const a = shelf[index];
+    if (!a) return;
+    view = 'deck';
+    if (!(st.album === a.id && st.mode !== 'idle')) { st = { ...st, mode: 'loading', album: a.id }; api('/api/play?album=' + a.id); }
+  } else if (st.mode !== 'loading') {
+    api('/api/press');
+  }
+}
+function longPress() {
+  lastInput = performance.now();
+  if (view === 'deck') {
+    view = 'shelf';
+    const i = shelf.findIndex(a => a.id === st.album);
+    if (i >= 0) index = i;
+    lastTurn = 0;
+  } else if (st.album && st.mode !== 'idle') view = 'deck';
+}
+let wheelAcc = 0;
+addEventListener('wheel', e => { wheelAcc += e.deltaY; while (Math.abs(wheelAcc) >= 40) { turn(Math.sign(wheelAcc)); wheelAcc -= 40 * Math.sign(wheelAcc); } e.preventDefault(); }, { passive: false });
+addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') turn(1); else if (e.key === 'ArrowLeft') turn(-1);
+  else if (e.key === ' ' || e.key === 'Enter') { press(); e.preventDefault(); } else if (e.key === 'l' || e.key === 'L') longPress();
+});
+let downAt = 0, held = false, holdTimer = 0, dragAngle = null, dragged = false;
+const puck = document.getElementById('puck');
+function pointerAngle(e) { const r = puck.getBoundingClientRect(); return Math.atan2(e.clientY - r.top - r.height / 2, e.clientX - r.left - r.width / 2) * 180 / Math.PI; }
+puck.addEventListener('pointerdown', e => {
+  puck.setPointerCapture(e.pointerId);
+  dragged = false; held = false; downAt = performance.now();
+  if (e.target === cv) { dragAngle = null; holdTimer = setTimeout(() => { held = true; longPress(); }, 600); }
+  else dragAngle = pointerAngle(e);
+});
+puck.addEventListener('pointermove', e => {
+  if (dragAngle === null || !e.buttons) return;
+  let d = pointerAngle(e) - dragAngle;
+  if (d > 180) d -= 360; if (d < -180) d += 360;
+  if (Math.abs(d) >= 12) { turn(Math.sign(d)); dragAngle = pointerAngle(e); dragged = true; }
+});
+puck.addEventListener('pointerup', e => { clearTimeout(holdTimer); if (dragAngle === null && !held && e.target === cv) press(); dragAngle = null; });
+
+// ---- drawing ----------------------------------------------------------------
+function fit(text, width) {
+  if (g.measureText(text).width <= width) return text;
+  while (text.length > 1 && g.measureText(text + '...').width > width) text = text.slice(0, -1);
+  return text.trimEnd() + '...';
+}
+function chord(y) { return 2 * Math.sqrt(Math.max(0, 118 * 118 - (y - C) * (y - C))) - 16; }
+function text(str, y, font, color = CREAM) { g.font = font; g.fillStyle = color; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(fit(str, chord(y)), C, y); }
+function arc(r0, r1, a0, a1, color) { g.beginPath(); g.strokeStyle = color; g.lineWidth = r1 - r0; g.arc(C, C, (r0 + r1) / 2, a0 * Math.PI / 180, a1 * Math.PI / 180); g.stroke(); }
+
+function drawShelf(now) {
+  const a = shelf[index];
+  g.fillStyle = '#16120f'; g.fillRect(0, 0, 240, 240);
+  if (!a) { text(st.auth === false ? 'Not connected' : 'Reading your shelf...', 112, '600 15px system-ui'); text(st.auth === false ? 'open /setup' : '', 134, '12px system-ui', '#a89e8e'); return; }
+  const settled = now - lastTurn > 180;
+  if (settled && coverFor !== a.id) { coverFor = a.id; cover = null; const im = new Image(); im.onload = () => { if (coverFor === a.id) cover = im; }; im.src = `/art/${a.id}?s=240`; }
+  if (settled && cover && coverFor === a.id) {
+    g.drawImage(cover, 0, 0, 240, 240);
+    const grad = g.createLinearGradient(0, 138, 0, 240);
+    grad.addColorStop(0, '#0000'); grad.addColorStop(0.45, '#000c'); grad.addColorStop(1, '#000e');
+    g.fillStyle = grad; g.fillRect(0, 138, 240, 102);
+  } else {
+    const key = a.artist.replace(/^(the|a|an)\s+/i, '');
+    const letter = /[a-z]/i.test(key[0] || '') ? key[0].toUpperCase() : '#';
+    text(letter, 96, '700 96px Georgia, serif', '#4a3f37');
+  }
+  text(a.artist, 180, '600 16px system-ui');
+  text(a.title, 199, '13px system-ui', '#d8cfc0');
+  text(a.year || '', 216, '11px system-ui', '#a89e8e');
+  // where you are along the shelf
+  arc(116, 119, -90, 270, '#ffffff22');
+  const at = -90 + 360 * index / shelf.length;
+  arc(114, 120, at - 2.5, at + 2.5, CREAM);
+  if (st.album && st.mode === 'playing') {   // a record is still playing
+    const t = now / 1000 * 200 * Math.PI / 180;
+    g.beginPath(); g.fillStyle = '#000a'; g.arc(C, 24, 11, 0, 7); g.fill();
+    g.beginPath(); g.fillStyle = CREAM; g.arc(C, 24, 7, 0, 7); g.fill();
+    g.beginPath(); g.fillStyle = '#000'; g.arc(C + 4 * Math.cos(t), 24 + 4 * Math.sin(t), 1.6, 0, 7); g.fill();
+  }
+}
+
+function drawDeck(now, dt) {
+  const playing = st.mode === 'playing';
+  speed += ((playing ? 200 : 0) - speed) * Math.min(1, dt * 2.5);
+  angle = (angle + speed * dt) % 360;
+  const progress = st.dur ? Math.min(1, st.pos / st.dur) : 0;
+  const target = playing ? ARM.outer + (ARM.inner - ARM.outer) * progress : ARM.rest;
+  arm += (target - arm) * Math.min(1, dt * 4);
+
+  g.fillStyle = '#0c0c0c'; g.fillRect(0, 0, 240, 240);
+  for (let r = 88; r <= 118; r += 3) arc(r, r + 1, 0, 360, r % 2 ? '#1c1c1c' : '#242424');
+  arc(86, 119, -38, -22, '#ffffff0d'); arc(86, 119, 142, 158, '#ffffff0d');     // sheen
+  g.save();
+  g.beginPath(); g.arc(C, C, LABEL_R, 0, 7); g.clip();
+  g.translate(C, C); g.rotate(angle * Math.PI / 180);
+  if (label) g.drawImage(label, -LABEL_R, -LABEL_R, 2 * LABEL_R, 2 * LABEL_R); else { g.fillStyle = '#3a302a'; g.fillRect(-LABEL_R, -LABEL_R, 168, 168); }
+  g.restore();
+  g.beginPath(); g.fillStyle = '#0c0c0c'; g.arc(C, C, 9, 0, 7); g.fill();
+  g.beginPath(); g.fillStyle = '#c9c5bd'; g.arc(C, C, 3, 0, 7); g.fill();
+
+  // tonearm
+  const dir = (135 - arm) * Math.PI / 180;
+  const sx = ARM.px + ARM.len * Math.cos(dir), sy = ARM.py + ARM.len * Math.sin(dir);
+  g.lineCap = 'round';
+  g.beginPath(); g.strokeStyle = '#0008'; g.lineWidth = 7; g.moveTo(ARM.px + 2, ARM.py + 3); g.lineTo(sx + 2, sy + 3); g.stroke();
+  g.beginPath(); g.strokeStyle = '#c9c5bd'; g.lineWidth = 5; g.moveTo(ARM.px, ARM.py); g.lineTo(sx, sy); g.stroke();
+  g.beginPath(); g.strokeStyle = '#efeae0'; g.lineWidth = 9; g.moveTo(sx - 9 * Math.cos(dir), sy - 9 * Math.sin(dir)); g.lineTo(sx, sy); g.stroke();
+  g.lineCap = 'butt';
+  g.beginPath(); g.fillStyle = '#8f8b84'; g.arc(ARM.px, ARM.py, 13, 0, 7); g.fill();
+  g.beginPath(); g.fillStyle = '#2a2a2a'; g.arc(ARM.px, ARM.py, 5, 0, 7); g.fill();
+
+  const banner = (a, b) => { g.fillStyle = '#000b'; g.fillRect(0, 142, 240, 54); text(a, 160, '600 16px system-ui'); text(b, 181, '12px system-ui', '#d8cfc0'); };
+  if (st.mode === 'flip') banner('Flip to side ' + String.fromCharCode(st.side.charCodeAt(0) + 1), 'press to turn it over');
+  else if (st.mode === 'end') banner('Side ' + st.side + ' finished', 'press to play it again');
+  else if (st.mode === 'loading') banner('Putting it on...', '');
+  else if (playing && now - sideShown < 3500) banner('Side ' + st.side, st.title || '');
+  if (now - volShown < 1500) {
+    arc(111, 118, 135, 405, '#000c');
+    if (localVol > 0) arc(112, 117, 135, 135 + 270 * localVol / 100, CREAM);
+  }
+}
+
+function frame(now) {
+  const dt = Math.min(0.1, (now - lastFrame) / 1000); lastFrame = now;
+  if (view === 'shelf' && st.mode === 'playing' && now - lastInput > 20000) view = 'deck';   // drift back to the record
+  if (view === 'shelf') drawShelf(now); else drawDeck(now, dt);
+  if (now < toastUntil) { g.fillStyle = '#000d'; g.fillRect(0, 96, 240, 48); text(toast, 120, '12px system-ui'); }
+  requestAnimationFrame(frame);
+}
+poll();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+[Unit]
+Description=Record player turntable server
+After=network-online.target raspotify.service
+Wants=network-online.target
+
+[Service]
+User=__USER__
+SupplementaryGroups=audio
+WorkingDirectory=__DIR__/server
+ExecStart=/usr/bin/python3 __DIR__/server/turntable.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

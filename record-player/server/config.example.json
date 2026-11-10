@@ -1,0 +1,10 @@
+{
+  "client_id": "paste the Client ID from developer.spotify.com/dashboard",
+  "redirect_uri": "http://127.0.0.1:8888/callback",
+  "port": 8888,
+  "device_name": "Record Player",
+  "include_singles": false,
+  "min_liked_songs": 1,
+  "needle_sound": true,
+  "side_minutes": 23
+}

@@ -1,0 +1,6 @@
+server/config.json
+server/data/
+server/data-demo/
+firmware/include/config.h
+firmware/.pio/
+__pycache__/
