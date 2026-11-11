@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07",
+  "updated": "2026-11-11",
   "baseline_date": "2026-01-01",
   "sites": [
     {
@@ -945,6 +945,25 @@
         {
           "title": "King County Regional Homelessness Authority CEO resigns amid agency reset - KING5.com",
           "url": "https://www.yahoo.com/news/us/articles/king-county-regional-homelessness-authority-191959111.html"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-rv-override-vote-set",
+      "date": "2026-11-11",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Council schedules vote on overriding the RV permit veto for Thursday, Nov. 12",
+      "short": "Override vote Nov 12",
+      "detail": "The Seattle City Council has scheduled a vote on Thursday, Nov. 12 on whether to override Mayor Wilson's veto of Council Bill 121283, the RV permit program. An override needs a two-thirds majority. Wilson signed the other four bills in the RV package, including one that expands the city's authority to open safe parking lots and storage sites. Councilmember Dan Strauss, the bill's sponsor, has said he will seek the override. Council members have until Dec. 2 to vote on an override.",
+      "sources": [
+        {
+          "title": "Seattle council to vote on overriding Wilson's RV permit veto Thursday - MyNorthwest.com",
+          "url": "https://mynorthwest.com/mynorthwest-politics/rv-permit-program-2/4297915"
+        },
+        {
+          "title": "Councilmember Rob Saka Backs Katie Wilson's RV Ban Veto - The Stranger",
+          "url": "https://www.thestranger.com/news/councilmember-rob-saka-backs-katie-wilsons-rv-ban-veto/"
         }
       ]
     }
