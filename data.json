@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11",
+  "updated": "2026-11-13",
   "baseline_date": "2026-01-01",
   "sites": [
     {
@@ -964,6 +964,33 @@
         {
           "title": "Councilmember Rob Saka Backs Katie Wilson's RV Ban Veto - The Stranger",
           "url": "https://www.thestranger.com/news/councilmember-rob-saka-backs-katie-wilsons-rv-ban-veto/"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-rv-veto-sustained",
+      "date": "2026-11-12",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Council fails to override mayor's RV permit veto",
+      "short": "RV veto upheld",
+      "detail": "The City Council voted 5-4 on Nov. 12 to override Mayor Wilson's veto of CB 121283, the RV permit bill. Six votes were needed, so the veto stands. Councilmember Rob Saka had voted for the bill in October and did not vote to override. The other four bills in the Vehicle Resident Assistance Program package were signed on Nov. 2 and remain in effect. They include CB 121279, which lets the Finance and Administrative Services director sign leases for safe lots, safe storage and other resources for vehicle residents. The mayor's Nov. 3 executive order stays in place. It directs outreach funding, the opening of two RV safe lots for 182 vehicle residents, and a working group with recommendations due in 60 days. The mayor's office says it will send any needed legislation to the council by March 31, 2027. Councilmember Strauss, the bill's sponsor, said the city is 'on track' to add two safe lots.",
+      "sources": [
+        {
+          "title": "Seattle City Council's vote sustains Mayor Wilson's veto of RV permit bill - KOMO",
+          "url": "https://komonews.com/news/local/seattle-city-council-rv-permit-program-homelessness-crisis-mayor-katie-wilson-veto-overide-72-hour-limit-ownership-proof-noise-trash"
+        },
+        {
+          "title": "Wilson's veto stands as Seattle City Council tussles over flipped vote - Capitol Hill Seattle Blog",
+          "url": "https://www.capitolhillseattle.com/2026/11/wilsons-veto-stands-as-seattle-city-council-tussles-over-flipped-vote/"
+        },
+        {
+          "title": "Seattle City Councilmember Dan Strauss statement after council upholds mayor veto of RV legislation",
+          "url": "https://council.seattle.gov/2026/11/12/seattle-city-councilmember-dan-strauss-statement-after-council-upholds-mayor-veto-of-rv-legislation/"
+        },
+        {
+          "title": "Seattle council falls 1 vote short of overriding mayor's veto of RV permit program - KOMO",
+          "url": "https://komonews.com/news/local/seattle-council-falls-short-of-votes-to-override-mayors-veto-of-rv-permit-program-katie-wilson-homelessness-crime-drug-use-addiction-mental-health-encampment-shelter-reources-nonprofit-funding"
         }
       ]
     }
