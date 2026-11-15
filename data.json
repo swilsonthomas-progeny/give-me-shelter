@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-13",
+  "updated": "2026-11-15",
   "baseline_date": "2026-01-01",
   "sites": [
     {
@@ -513,23 +513,27 @@
     {
       "id": "p-rv-workgroup",
       "made": "2026-11-03",
-      "made_label": "Nov. 3, 2026",
+      "made_label": "Nov. 3, 2026 (Executive Order 2026-09)",
       "text": "A work group of city departments and community partners will recommend changes to the city's RV programs, policies and laws within 60 days. Any legislation goes to the council by March 31, 2027.",
       "short": "RV work group, 60 days",
       "status": "in_progress",
-      "status_note": "Recommendations due in early January 2027.",
+      "status_note": "The council voted 5-4 on Nov. 12 not to override the mayor's veto of the RV permit bill (CB 121283), so the work group is now the main next step on RV policy. The executive order sets a 60-day window for recommendations. Councilmember Strauss has said he expects a report by Jan. 15. He also wants the group's recommendations released before about $800,000 a year in related funds is unlocked, which would take another council vote.",
       "sources": [
         {
-          "title": "Seattle Mayor Katie Wilson orders new approach to RV homelessness after vetoing permit program - MyNorthwest.com",
-          "url": "https://mynorthwest.com/mynorthwest-politics/seattle-wilson-rv-executive/4294279"
+          "title": "Wilson Makes First Veto As Mayor Count, Tweaking RV Parking Reform (The Urbanist)",
+          "url": "https://www.theurbanist.org/wilson-makes-first-veto-as-mayor-count/"
         },
         {
-          "title": "Seattle doesn't know how many RVs line its streets - KVI",
-          "url": "https://kvi.com/2026/11/05/seattle-doesnt-know-how-many-rvs-line-its-streets-but-katie-wilson-insists-nurses-veterans-and-tourists-are-inside"
+          "title": "Katie Wilson's RV Ban Veto Survives! (The Stranger)",
+          "url": "https://www.thestranger.com/news/katie-wilsons-rv-ban-veto-survives/"
+        },
+        {
+          "title": "Seattle council falls 1 vote short of overriding mayor's veto of RV permit program (KOMO)",
+          "url": "https://komonews.com/newsletter-daily/seattle-council-falls-short-of-votes-to-override-mayors-veto-of-rv-permit-program-katie-wilson-homelessness-crime-drug-use-addiction-mental-health-encampment-shelter-reources-nonprofit-funding"
         }
       ],
       "by": "2027-01-02",
-      "headline": "RV work group recommendations in 60 days"
+      "headline": "RV work group to report within 60 days"
     }
   ],
   "events": [
