@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-15",
+  "updated": "2026-11-16",
   "baseline_date": "2026-01-01",
   "sites": [
     {
@@ -995,6 +995,33 @@
         {
           "title": "Seattle council falls 1 vote short of overriding mayor's veto of RV permit program - KOMO",
           "url": "https://komonews.com/news/local/seattle-council-falls-short-of-votes-to-override-mayors-veto-of-rv-permit-program-katie-wilson-homelessness-crime-drug-use-addiction-mental-health-encampment-shelter-reources-nonprofit-funding"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-budget-pension-suit",
+      "date": "2026-11-13",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Firefighters' pension lawsuit disrupts council budget schedule; final vote set for Nov. 20",
+      "short": "Budget vote delayed",
+      "detail": "The Seattle Firefighters' Pension Board sued the city over budget changes that would close a pension reserve account and use part of it for general spending. The council budget chair's plan to finish the budget on Friday, Nov. 13 did not go ahead, and he said he hoped to finish on Monday, Nov. 16. A final adoption vote is set for Nov. 20. The council's Balancing Package includes funding for a second RV safe lot. A council budget provision also keeps roughly $800,000 a year in vehicle-resident program funding from being spent on other purposes until the RV work group releases its recommendations. Releasing that money would take another council vote.",
+      "sources": [
+        {
+          "title": "Firefighters' Union Throws $22 Million Wrench Into Council Plan to Fund New Spending by Lowering Pension Contributions (PubliCola)",
+          "url": "https://ericacbarnett.substack.com/p/firefighters-union-throws-22-million"
+        },
+        {
+          "title": "Seattle council preps for final vote on plan to close $175M deficit (The Center Square)",
+          "url": "https://justthenews.com/nation/states/center-square/seattle-council-preps-final-vote-plan-close-175m-deficit"
+        },
+        {
+          "title": "Katie Wilson's RV Ban Veto Survives! (The Stranger)",
+          "url": "https://www.thestranger.com/news/katie-wilsons-rv-ban-veto-survives/"
+        },
+        {
+          "title": "Budget Chair Strauss releases balanced budget proposal focused on public safety and affordability (Seattle City Council)",
+          "url": "https://council.seattle.gov/2026/11/03/budget-chair-strauss-releases-balanced-budget-proposal-focused-on-public-safety-and-affordability/"
         }
       ]
     }
