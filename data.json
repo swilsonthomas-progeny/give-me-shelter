@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16",
+  "updated": "2026-11-19",
   "baseline_date": "2026-01-01",
   "sites": [
     {
@@ -1022,6 +1022,26 @@
         {
           "title": "Budget Chair Strauss releases balanced budget proposal focused on public safety and affordability (Seattle City Council)",
           "url": "https://council.seattle.gov/2026/11/03/budget-chair-strauss-releases-balanced-budget-proposal-focused-on-public-safety-and-affordability/"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-spruce-county-budget",
+      "date": "2026-11-17",
+      "date_precision": "day",
+      "type": "site",
+      "site": "spruce-street-village",
+      "title": "King County budget documents list $4M for Spruce Street Tiny House Village; opening given as early 2027",
+      "short": "Spruce St county budget",
+      "detail": "The 80-unit Spruce Street Tiny House Village is planned for county-owned land in the Central District, on the Judge Patricia H. Clark Children and Family Justice Center campus. LIHI is the operator. The county executive announced a $5 million commitment in September. County Council budget documents list a $4 million appropriation for development. The King County Council's final budget vote is scheduled for November 24. Construction is to move forward after that approval, with an opening expected in early 2027.",
+      "sources": [
+        {
+          "title": "King County's 2027 budget includes plans for a new $4M tiny house village in the Central District (CHS Capitol Hill Seattle News)",
+          "url": "https://www.capitolhillseattle.com/2026/11/king-countys-2027-budget-includes-plans-for-a-new-4m-tiny-house-village-in-the-central-district/"
+        },
+        {
+          "title": "Zahilay Announces More Than $19.5 Million in New Housing Investments (The Urbanist)",
+          "url": "https://www.theurbanist.org/zahilay-announces-more-than-19-5-million-in-new-housing-investments/"
         }
       ]
     }
