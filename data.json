@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19",
+  "updated": "2026-11-20",
   "baseline_date": "2026-01-01",
   "sites": [
     {
@@ -1042,6 +1042,29 @@
         {
           "title": "Zahilay Announces More Than $19.5 Million in New Housing Investments (The Urbanist)",
           "url": "https://www.theurbanist.org/zahilay-announces-more-than-19-5-million-in-new-housing-investments/"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-budget-committee-vote",
+      "date": "2026-11-19",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Council budget committee approves 2027–28 budget, keeping $37M for shelter expansion",
+      "short": "Budget committee OKs",
+      "detail": "The council's Select Budget Committee approved the 2027–28 budget on a 7-2 vote. Councilmembers Maritza Rivera and Alexis Mercedes Rinck voted no. The package keeps the $37 million the mayor proposed for adding nearly 1,000 shelter beds by the end of 2027. It also funds a second RV safe lot and services and outreach for people living in vehicles. The full council is scheduled to vote at 1 p.m. on Friday, Nov. 20. If it passes, the budget goes to the mayor for approval and signature.",
+      "sources": [
+        {
+          "title": "Seattle advances 2027-28 spending plan: Focus on housing, shelter beds, gendered violence (KOMO)",
+          "url": "https://komonews.com/news/local/seattle-advances-2027-28-spending-plan-focus-on-housing-shelter-beds-gendered-violence-firefighters-funding-taxpayers-construction-levy-mayor-katie-wilson-city-council-rv-camping-homelessness-resources-crime-backlog-schools-transportation"
+        },
+        {
+          "title": "FOLLOWUP: City Council's almost-final budget vote. Here's how they changed the mayor's proposal (West Seattle Blog)",
+          "url": "https://westseattleblog.com/2026/11/followup-city-councils-almost-final-budget-vote-heres-how-they-changed-the-mayors-proposal/"
+        },
+        {
+          "title": "City Council moves balanced budget forward, boosting support for public safety and affordability (Seattle City Council)",
+          "url": "https://council.seattle.gov/2026/11/19/city-council-moves-balanced-budget-forward-boosting-support-for-public-safety-and-affordability/"
         }
       ]
     }
