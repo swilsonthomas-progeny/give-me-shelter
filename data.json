@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-21",
+  "updated": "2026-11-22",
   "baseline_date": "2026-01-01",
   "sites": [
     {
@@ -1096,6 +1096,44 @@
         {
           "title": "Mayor Wilson Responds to City Council Approval of the 2027 Budget",
           "url": "http://wilson.seattle.gov/2026/11/21/mayor-wilson-responds-to-city-council-approval-of-the-2027-budget/"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-budget-mayor-response",
+      "date": "2026-11-21",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Mayor responds to council's budget vote; signature not yet announced",
+      "short": "Mayor on budget vote",
+      "detail": "After the council's 7–2 vote on Nov. 20, Mayor Wilson issued a statement saying she is pleased the council kept funding for shelter expansion and other shared priorities. She also said the council's one-time spending additions leave more work to reach long-term fiscal sustainability. A spokesperson told KUOW on Nov. 20 that she \"will review\" the budget and had not said whether she would sign it. The mayor cannot veto individual line items. She must accept or reject the whole budget.",
+      "sources": [
+        {
+          "title": "Mayor Wilson Responds to City Council Approval of the 2027 Budget",
+          "url": "https://wilson.seattle.gov/2026/11/21/mayor-wilson-responds-to-city-council-approval-of-the-2027-budget/"
+        },
+        {
+          "title": "Seattle City Council approves budget despite concerns from mayor, some members (KUOW)",
+          "url": "https://www.kuow.org/governing/2026-11-20/seattle-city-council-approves-budget-despite-concerns-from-mayor-some-members"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-veterans-shelter-planning",
+      "date": "2026-11-20",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Adopted budget funds planning for a West Seattle veterans' shelter",
+      "short": "Veterans' shelter plan",
+      "detail": "The adopted 2027–28 budget includes Council Budget Action HSD-021-B: $250,000 in 2028 (one-time General Fund) for an operational and funding plan for a permanent veterans' shelter and service campus in West Seattle. The Human Services Department is to prepare an implementation roadmap for siting it. No site, unit count or opening date has been announced.",
+      "sources": [
+        {
+          "title": "Seattle City Council passes $9.14 billion budget for 2027-2028, securing key investments for West Seattle",
+          "url": "https://www.westsideseattle.com/robinson-papers/2026/11/20/seattle-city-council-passes-914-billion-budget-2027-2028-securing-key"
+        },
+        {
+          "title": "West Seattle neighborhoods win targeted funding in Seattle budget package as residents rally at City Hall hearing",
+          "url": "https://www.westsideseattle.com/robinson-papers/2026/11/05/west-seattle-neighborhoods-win-targeted-funding-seattle-budget-package"
         }
       ]
     }
