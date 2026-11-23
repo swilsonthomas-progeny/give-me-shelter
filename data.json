@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-22",
+  "updated": "2026-11-23",
   "baseline_date": "2026-01-01",
   "sites": [
     {
@@ -266,6 +266,41 @@
         {
           "title": "Zahilay Announces More Than $19.5 Million in New Housing Investments (The Urbanist, Sept. 22, 2026)",
           "url": "https://www.theurbanist.org/zahilay-announces-more-than-19-5-million-in-new-housing-investments/"
+        }
+      ]
+    },
+    {
+      "id": "westside-neighbors-shelter",
+      "name": "Westside Neighbors Shelter",
+      "neighborhood": "West Seattle (The Triangle)",
+      "address": "3618 SW Alaska St",
+      "operator": "Westside Neighbors Shelter board, with staffing and guidance from SHARE/WHEEL; building owned through the West Seattle Veterans Center",
+      "units": {
+        "shelter": 25,
+        "pallet": 0,
+        "tiny_house": 0,
+        "emergency_housing": 0,
+        "rv": 0
+      },
+      "status": "announced",
+      "program": "other",
+      "program_note": "Privately owned, volunteer-run cold-weather shelter. It is not described as part of the mayor's shelter acceleration effort.",
+      "dates": {
+        "announced": "2026-11-23",
+        "opened": null,
+        "closed": null,
+        "expected": "2026-12-01",
+        "construction": null
+      },
+      "notes": "The shelter has been closed since June 2026. The board says it will reopen December 1 with 25 people overnight to start, fewer than half the number served before. It plans to see how that goes before increasing the number. SHARE/WHEEL will provide staffing and guidance under a three-way agreement with the shelter board and the building owner. The board says case management will be active in the shelter. The shelter before the closure had room for about 35 people per night.",
+      "sources": [
+        {
+          "title": "FOLLOWUP: Westside Neighbors Shelter to reopen, with changes (West Seattle Blog)",
+          "url": "https://westseattleblog.com/2026/11/followup-westside-neighbors-shelter-to-reopen-with-changes/"
+        },
+        {
+          "title": "'This model is no longer sustainable': West Seattle's only shelter will remain closed (West Seattle Blog)",
+          "url": "https://westseattleblog.com/2026/06/this-model-is-no-longer-sustainable-west-seattles-only-shelter-will-remain-closed-until-the-next-chapter-is-determined/"
         }
       ]
     }
@@ -1134,6 +1169,22 @@
         {
           "title": "West Seattle neighborhoods win targeted funding in Seattle budget package as residents rally at City Hall hearing",
           "url": "https://www.westsideseattle.com/robinson-papers/2026/11/05/west-seattle-neighborhoods-win-targeted-funding-seattle-budget-package"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-westside-neighbors-reopen",
+      "date": "2026-11-23",
+      "date_precision": "day",
+      "type": "site",
+      "site": "westside-neighbors-shelter",
+      "title": "Westside Neighbors Shelter announces December 1 reopening with 25 overnight spaces",
+      "short": "West Seattle shelter",
+      "detail": "The Westside Neighbors Shelter board announced that the shelter at 3618 SW Alaska St, closed since June, will reopen on December 1. It will start with 25 people overnight. SHARE/WHEEL will provide staffing and guidance.",
+      "sources": [
+        {
+          "title": "FOLLOWUP: Westside Neighbors Shelter to reopen, with changes (West Seattle Blog)",
+          "url": "https://westseattleblog.com/2026/11/followup-westside-neighbors-shelter-to-reopen-with-changes/"
         }
       ]
     }
