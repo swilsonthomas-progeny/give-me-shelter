@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23",
+  "updated": "2026-11-24",
   "baseline_date": "2026-01-01",
   "sites": [
     {
@@ -1185,6 +1185,29 @@
         {
           "title": "FOLLOWUP: Westside Neighbors Shelter to reopen, with changes (West Seattle Blog)",
           "url": "https://westseattleblog.com/2026/11/followup-westside-neighbors-shelter-to-reopen-with-changes/"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-kcrha-interim-ceo",
+      "date": "2026-11-23",
+      "date_precision": "day",
+      "type": "context",
+      "title": "Mayor and County Executive recommend interim CEO for KCRHA",
+      "short": "KCRHA interim CEO named",
+      "detail": "Mayor Wilson and King County Executive Girmay Zahilay recommended Mark Ellerbrook as interim CEO of the King County Regional Homelessness Authority. Ellerbrook is the Director of City Governance & Human Services in the mayor's office and would take a leave of absence from the city. The KCRHA Governing Board is scheduled to consider his appointment on Dec. 4. If it approves, he would start Dec. 7. His priorities would include overseeing the transfer of locally funded contracts from KCRHA back to King County and the City of Seattle, which is scheduled for Jan. 1, 2027.",
+      "sources": [
+        {
+          "title": "Mayor Wilson and Executive Zahilay announce King County Regional Homeless Authority interim CEO",
+          "url": "https://wilson.seattle.gov/2026/11/23/mayor-wilson-and-executive-zahilay-announce-king-county-regional-homeless-authority-interim-ceo/"
+        },
+        {
+          "title": "Mayor Wilson and Executive Zahilay nominate interim CEO for King County homelessness agency - MyNorthwest.com",
+          "url": "https://mynorthwest.com/mynorthwest-politics/king-county-agency-2/4303862"
+        },
+        {
+          "title": "Seattle mayor's top aide selected to lead embattled homeless authority - The Center Square",
+          "url": "https://www.yahoo.com/news/us/articles/seattle-mayors-top-aide-selected-004500030.html"
         }
       ]
     }
