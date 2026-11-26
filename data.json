@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24",
+  "updated": "2026-11-26",
   "baseline_date": "2026-01-01",
   "sites": [
     {
@@ -1208,6 +1208,21 @@
         {
           "title": "Seattle mayor's top aide selected to lead embattled homeless authority - The Center Square",
           "url": "https://www.yahoo.com/news/us/articles/seattle-mayors-top-aide-selected-004500030.html"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-budget-to-mayor",
+      "date": "2026-11-23",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Adopted 2027–28 budget goes to the mayor for signature",
+      "short": "Budget to mayor",
+      "detail": "After the council's 7–2 vote on Nov. 20, the budget goes to Mayor Wilson. She has 10 days after receiving it to sign it, veto it or let it become law without her signature. The budget keeps the $37M for shelter expansion and funds a second RV safe lot. No signature or veto had been announced as of Nov. 26.",
+      "sources": [
+        {
+          "title": "Seattle City Council approves $9.1B budget for 2027 - Axios Seattle",
+          "url": "https://axios.com/local/seattle/2026/11/23/seattle-city-council-2027-budget-approved-spending"
         }
       ]
     }
