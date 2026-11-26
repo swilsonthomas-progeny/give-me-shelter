@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07",
+  "updated": "2026-11-26",
   "baseline_date": "2026-01-01",
   "sites": [
     {
@@ -268,6 +268,41 @@
           "url": "https://www.theurbanist.org/zahilay-announces-more-than-19-5-million-in-new-housing-investments/"
         }
       ]
+    },
+    {
+      "id": "westside-neighbors-shelter",
+      "name": "Westside Neighbors Shelter",
+      "neighborhood": "West Seattle (The Triangle)",
+      "address": "3618 SW Alaska St",
+      "operator": "Westside Neighbors Shelter board, with staffing and guidance from SHARE/WHEEL; building owned through the West Seattle Veterans Center",
+      "units": {
+        "shelter": 25,
+        "pallet": 0,
+        "tiny_house": 0,
+        "emergency_housing": 0,
+        "rv": 0
+      },
+      "status": "announced",
+      "program": "other",
+      "program_note": "Privately owned, volunteer-run cold-weather shelter. It is not described as part of the mayor's shelter acceleration effort.",
+      "dates": {
+        "announced": "2026-11-23",
+        "opened": null,
+        "closed": null,
+        "expected": "2026-12-01",
+        "construction": null
+      },
+      "notes": "The shelter has been closed since June 2026. The board says it will reopen December 1 with 25 people overnight to start, fewer than half the number served before. It plans to see how that goes before increasing the number. SHARE/WHEEL will provide staffing and guidance under a three-way agreement with the shelter board and the building owner. The board says case management will be active in the shelter. The shelter before the closure had room for about 35 people per night.",
+      "sources": [
+        {
+          "title": "FOLLOWUP: Westside Neighbors Shelter to reopen, with changes (West Seattle Blog)",
+          "url": "https://westseattleblog.com/2026/11/followup-westside-neighbors-shelter-to-reopen-with-changes/"
+        },
+        {
+          "title": "'This model is no longer sustainable': West Seattle's only shelter will remain closed (West Seattle Blog)",
+          "url": "https://westseattleblog.com/2026/06/this-model-is-no-longer-sustainable-west-seattles-only-shelter-will-remain-closed-until-the-next-chapter-is-determined/"
+        }
+      ]
     }
   ],
   "watch": [
@@ -513,23 +548,27 @@
     {
       "id": "p-rv-workgroup",
       "made": "2026-11-03",
-      "made_label": "Nov. 3, 2026",
+      "made_label": "Nov. 3, 2026 (Executive Order 2026-09)",
       "text": "A work group of city departments and community partners will recommend changes to the city's RV programs, policies and laws within 60 days. Any legislation goes to the council by March 31, 2027.",
       "short": "RV work group, 60 days",
       "status": "in_progress",
-      "status_note": "Recommendations due in early January 2027.",
+      "status_note": "The council voted 5-4 on Nov. 12 not to override the mayor's veto of the RV permit bill (CB 121283), so the work group is now the main next step on RV policy. The executive order sets a 60-day window for recommendations. Councilmember Strauss has said he expects a report by Jan. 15. He also wants the group's recommendations released before about $800,000 a year in related funds is unlocked, which would take another council vote.",
       "sources": [
         {
-          "title": "Seattle Mayor Katie Wilson orders new approach to RV homelessness after vetoing permit program - MyNorthwest.com",
-          "url": "https://mynorthwest.com/mynorthwest-politics/seattle-wilson-rv-executive/4294279"
+          "title": "Wilson Makes First Veto As Mayor Count, Tweaking RV Parking Reform (The Urbanist)",
+          "url": "https://www.theurbanist.org/wilson-makes-first-veto-as-mayor-count/"
         },
         {
-          "title": "Seattle doesn't know how many RVs line its streets - KVI",
-          "url": "https://kvi.com/2026/11/05/seattle-doesnt-know-how-many-rvs-line-its-streets-but-katie-wilson-insists-nurses-veterans-and-tourists-are-inside"
+          "title": "Katie Wilson's RV Ban Veto Survives! (The Stranger)",
+          "url": "https://www.thestranger.com/news/katie-wilsons-rv-ban-veto-survives/"
+        },
+        {
+          "title": "Seattle council falls 1 vote short of overriding mayor's veto of RV permit program (KOMO)",
+          "url": "https://komonews.com/newsletter-daily/seattle-council-falls-short-of-votes-to-override-mayors-veto-of-rv-permit-program-katie-wilson-homelessness-crime-drug-use-addiction-mental-health-encampment-shelter-reources-nonprofit-funding"
         }
       ],
       "by": "2027-01-02",
-      "headline": "RV work group recommendations in 60 days"
+      "headline": "RV work group to report within 60 days"
     }
   ],
   "events": [
@@ -945,6 +984,245 @@
         {
           "title": "King County Regional Homelessness Authority CEO resigns amid agency reset - KING5.com",
           "url": "https://www.yahoo.com/news/us/articles/king-county-regional-homelessness-authority-191959111.html"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-rv-override-vote-set",
+      "date": "2026-11-11",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Council schedules vote on overriding the RV permit veto for Thursday, Nov. 12",
+      "short": "Override vote Nov 12",
+      "detail": "The Seattle City Council has scheduled a vote on Thursday, Nov. 12 on whether to override Mayor Wilson's veto of Council Bill 121283, the RV permit program. An override needs a two-thirds majority. Wilson signed the other four bills in the RV package, including one that expands the city's authority to open safe parking lots and storage sites. Councilmember Dan Strauss, the bill's sponsor, has said he will seek the override. Council members have until Dec. 2 to vote on an override.",
+      "sources": [
+        {
+          "title": "Seattle council to vote on overriding Wilson's RV permit veto Thursday - MyNorthwest.com",
+          "url": "https://mynorthwest.com/mynorthwest-politics/rv-permit-program-2/4297915"
+        },
+        {
+          "title": "Councilmember Rob Saka Backs Katie Wilson's RV Ban Veto - The Stranger",
+          "url": "https://www.thestranger.com/news/councilmember-rob-saka-backs-katie-wilsons-rv-ban-veto/"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-rv-veto-sustained",
+      "date": "2026-11-12",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Council fails to override mayor's RV permit veto",
+      "short": "RV veto upheld",
+      "detail": "The City Council voted 5-4 on Nov. 12 to override Mayor Wilson's veto of CB 121283, the RV permit bill. Six votes were needed, so the veto stands. Councilmember Rob Saka had voted for the bill in October and did not vote to override. The other four bills in the Vehicle Resident Assistance Program package were signed on Nov. 2 and remain in effect. They include CB 121279, which lets the Finance and Administrative Services director sign leases for safe lots, safe storage and other resources for vehicle residents. The mayor's Nov. 3 executive order stays in place. It directs outreach funding, the opening of two RV safe lots for 182 vehicle residents, and a working group with recommendations due in 60 days. The mayor's office says it will send any needed legislation to the council by March 31, 2027. Councilmember Strauss, the bill's sponsor, said the city is 'on track' to add two safe lots.",
+      "sources": [
+        {
+          "title": "Seattle City Council's vote sustains Mayor Wilson's veto of RV permit bill - KOMO",
+          "url": "https://komonews.com/news/local/seattle-city-council-rv-permit-program-homelessness-crisis-mayor-katie-wilson-veto-overide-72-hour-limit-ownership-proof-noise-trash"
+        },
+        {
+          "title": "Wilson's veto stands as Seattle City Council tussles over flipped vote - Capitol Hill Seattle Blog",
+          "url": "https://www.capitolhillseattle.com/2026/11/wilsons-veto-stands-as-seattle-city-council-tussles-over-flipped-vote/"
+        },
+        {
+          "title": "Seattle City Councilmember Dan Strauss statement after council upholds mayor veto of RV legislation",
+          "url": "https://council.seattle.gov/2026/11/12/seattle-city-councilmember-dan-strauss-statement-after-council-upholds-mayor-veto-of-rv-legislation/"
+        },
+        {
+          "title": "Seattle council falls 1 vote short of overriding mayor's veto of RV permit program - KOMO",
+          "url": "https://komonews.com/news/local/seattle-council-falls-short-of-votes-to-override-mayors-veto-of-rv-permit-program-katie-wilson-homelessness-crime-drug-use-addiction-mental-health-encampment-shelter-reources-nonprofit-funding"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-budget-pension-suit",
+      "date": "2026-11-13",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Firefighters' pension lawsuit disrupts council budget schedule; final vote set for Nov. 20",
+      "short": "Budget vote delayed",
+      "detail": "The Seattle Firefighters' Pension Board sued the city over budget changes that would close a pension reserve account and use part of it for general spending. The council budget chair's plan to finish the budget on Friday, Nov. 13 did not go ahead, and he said he hoped to finish on Monday, Nov. 16. A final adoption vote is set for Nov. 20. The council's Balancing Package includes funding for a second RV safe lot. A council budget provision also keeps roughly $800,000 a year in vehicle-resident program funding from being spent on other purposes until the RV work group releases its recommendations. Releasing that money would take another council vote.",
+      "sources": [
+        {
+          "title": "Firefighters' Union Throws $22 Million Wrench Into Council Plan to Fund New Spending by Lowering Pension Contributions (PubliCola)",
+          "url": "https://ericacbarnett.substack.com/p/firefighters-union-throws-22-million"
+        },
+        {
+          "title": "Seattle council preps for final vote on plan to close $175M deficit (The Center Square)",
+          "url": "https://justthenews.com/nation/states/center-square/seattle-council-preps-final-vote-plan-close-175m-deficit"
+        },
+        {
+          "title": "Katie Wilson's RV Ban Veto Survives! (The Stranger)",
+          "url": "https://www.thestranger.com/news/katie-wilsons-rv-ban-veto-survives/"
+        },
+        {
+          "title": "Budget Chair Strauss releases balanced budget proposal focused on public safety and affordability (Seattle City Council)",
+          "url": "https://council.seattle.gov/2026/11/03/budget-chair-strauss-releases-balanced-budget-proposal-focused-on-public-safety-and-affordability/"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-spruce-county-budget",
+      "date": "2026-11-17",
+      "date_precision": "day",
+      "type": "site",
+      "site": "spruce-street-village",
+      "title": "King County budget documents list $4M for Spruce Street Tiny House Village; opening given as early 2027",
+      "short": "Spruce St county budget",
+      "detail": "The 80-unit Spruce Street Tiny House Village is planned for county-owned land in the Central District, on the Judge Patricia H. Clark Children and Family Justice Center campus. LIHI is the operator. The county executive announced a $5 million commitment in September. County Council budget documents list a $4 million appropriation for development. The King County Council's final budget vote is scheduled for November 24. Construction is to move forward after that approval, with an opening expected in early 2027.",
+      "sources": [
+        {
+          "title": "King County's 2027 budget includes plans for a new $4M tiny house village in the Central District (CHS Capitol Hill Seattle News)",
+          "url": "https://www.capitolhillseattle.com/2026/11/king-countys-2027-budget-includes-plans-for-a-new-4m-tiny-house-village-in-the-central-district/"
+        },
+        {
+          "title": "Zahilay Announces More Than $19.5 Million in New Housing Investments (The Urbanist)",
+          "url": "https://www.theurbanist.org/zahilay-announces-more-than-19-5-million-in-new-housing-investments/"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-budget-committee-vote",
+      "date": "2026-11-19",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Council budget committee approves 2027–28 budget, keeping $37M for shelter expansion",
+      "short": "Budget committee OKs",
+      "detail": "The council's Select Budget Committee approved the 2027–28 budget on a 7-2 vote. Councilmembers Maritza Rivera and Alexis Mercedes Rinck voted no. The package keeps the $37 million the mayor proposed for adding nearly 1,000 shelter beds by the end of 2027. It also funds a second RV safe lot and services and outreach for people living in vehicles. The full council is scheduled to vote at 1 p.m. on Friday, Nov. 20. If it passes, the budget goes to the mayor for approval and signature.",
+      "sources": [
+        {
+          "title": "Seattle advances 2027-28 spending plan: Focus on housing, shelter beds, gendered violence (KOMO)",
+          "url": "https://komonews.com/news/local/seattle-advances-2027-28-spending-plan-focus-on-housing-shelter-beds-gendered-violence-firefighters-funding-taxpayers-construction-levy-mayor-katie-wilson-city-council-rv-camping-homelessness-resources-crime-backlog-schools-transportation"
+        },
+        {
+          "title": "FOLLOWUP: City Council's almost-final budget vote. Here's how they changed the mayor's proposal (West Seattle Blog)",
+          "url": "https://westseattleblog.com/2026/11/followup-city-councils-almost-final-budget-vote-heres-how-they-changed-the-mayors-proposal/"
+        },
+        {
+          "title": "City Council moves balanced budget forward, boosting support for public safety and affordability (Seattle City Council)",
+          "url": "https://council.seattle.gov/2026/11/19/city-council-moves-balanced-budget-forward-boosting-support-for-public-safety-and-affordability/"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-budget-final-vote",
+      "date": "2026-11-20",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Council passes 2027–28 budget 7–2, keeping $37M for shelter expansion and funding a second RV safe lot",
+      "short": "Council passes budget",
+      "detail": "The full City Council voted 7–2 on Friday, Nov. 20 to adopt the 2027 budget and endorse a 2028 spending plan. Councilmembers Rivera and Rinck voted no. The adopted budget keeps the mayor's $37 million to add nearly 1,000 shelter beds by the end of 2027. It also funds a second RV safe lot. A committee amendment set aside $3.5 million for the new lot, with a slight increase in the second year. The budget also directs the Human Services Department to draft a roadmap for siting a permanent veterans' shelter and service campus in West Seattle, with $250,000 in 2028 for an operational and funding plan. In a Nov. 21 statement, Mayor Wilson said the Council maintained funding for shelter expansion and other priorities. She also said the Council's one-time spending additions mean more work remains on long-term fiscal sustainability. A mayor's office spokesperson told KUOW that she will review the budget. The mayor cannot veto individual line items.",
+      "sources": [
+        {
+          "title": "Seattle City Council approves 2027 budget 7-2; Rivera, Rinck vote no - KOMO",
+          "url": "https://komonews.com/news/local/seattle-council-approves-2027-budget-7-2-rivera-and-alexis-mercedes-rinck-progressive-mayor-katie-wilson-affordable-housing-public-discussion-homelessness-emergency-needs"
+        },
+        {
+          "title": "Seattle City Council passes $9.14 billion budget for 2027-2028 - West Seattle Herald",
+          "url": "https://www.westsideseattle.com/robinson-papers/2026/11/20/seattle-city-council-passes-914-billion-budget-2027-2028-securing-key"
+        },
+        {
+          "title": "Seattle City Council approves final 2027-2028 budget - FOX 13",
+          "url": "https://www.yahoo.com/news/politics/articles/seattle-city-council-nears-final-183322389.html"
+        },
+        {
+          "title": "Seattle City Council approves budget despite concerns from mayor, some members - KUOW",
+          "url": "https://www.kuow.org/governing/2026-11-20/seattle-city-council-approves-budget-despite-concerns-from-mayor-some-members"
+        },
+        {
+          "title": "Mayor Wilson Responds to City Council Approval of the 2027 Budget",
+          "url": "http://wilson.seattle.gov/2026/11/21/mayor-wilson-responds-to-city-council-approval-of-the-2027-budget/"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-budget-mayor-response",
+      "date": "2026-11-21",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Mayor responds to council's budget vote; signature not yet announced",
+      "short": "Mayor on budget vote",
+      "detail": "After the council's 7–2 vote on Nov. 20, Mayor Wilson issued a statement saying she is pleased the council kept funding for shelter expansion and other shared priorities. She also said the council's one-time spending additions leave more work to reach long-term fiscal sustainability. A spokesperson told KUOW on Nov. 20 that she \"will review\" the budget and had not said whether she would sign it. The mayor cannot veto individual line items. She must accept or reject the whole budget.",
+      "sources": [
+        {
+          "title": "Mayor Wilson Responds to City Council Approval of the 2027 Budget",
+          "url": "https://wilson.seattle.gov/2026/11/21/mayor-wilson-responds-to-city-council-approval-of-the-2027-budget/"
+        },
+        {
+          "title": "Seattle City Council approves budget despite concerns from mayor, some members (KUOW)",
+          "url": "https://www.kuow.org/governing/2026-11-20/seattle-city-council-approves-budget-despite-concerns-from-mayor-some-members"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-veterans-shelter-planning",
+      "date": "2026-11-20",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Adopted budget funds planning for a West Seattle veterans' shelter",
+      "short": "Veterans' shelter plan",
+      "detail": "The adopted 2027–28 budget includes Council Budget Action HSD-021-B: $250,000 in 2028 (one-time General Fund) for an operational and funding plan for a permanent veterans' shelter and service campus in West Seattle. The Human Services Department is to prepare an implementation roadmap for siting it. No site, unit count or opening date has been announced.",
+      "sources": [
+        {
+          "title": "Seattle City Council passes $9.14 billion budget for 2027-2028, securing key investments for West Seattle",
+          "url": "https://www.westsideseattle.com/robinson-papers/2026/11/20/seattle-city-council-passes-914-billion-budget-2027-2028-securing-key"
+        },
+        {
+          "title": "West Seattle neighborhoods win targeted funding in Seattle budget package as residents rally at City Hall hearing",
+          "url": "https://www.westsideseattle.com/robinson-papers/2026/11/05/west-seattle-neighborhoods-win-targeted-funding-seattle-budget-package"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-westside-neighbors-reopen",
+      "date": "2026-11-23",
+      "date_precision": "day",
+      "type": "site",
+      "site": "westside-neighbors-shelter",
+      "title": "Westside Neighbors Shelter announces December 1 reopening with 25 overnight spaces",
+      "short": "West Seattle shelter",
+      "detail": "The Westside Neighbors Shelter board announced that the shelter at 3618 SW Alaska St, closed since June, will reopen on December 1. It will start with 25 people overnight. SHARE/WHEEL will provide staffing and guidance.",
+      "sources": [
+        {
+          "title": "FOLLOWUP: Westside Neighbors Shelter to reopen, with changes (West Seattle Blog)",
+          "url": "https://westseattleblog.com/2026/11/followup-westside-neighbors-shelter-to-reopen-with-changes/"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-kcrha-interim-ceo",
+      "date": "2026-11-23",
+      "date_precision": "day",
+      "type": "context",
+      "title": "Mayor and County Executive recommend interim CEO for KCRHA",
+      "short": "KCRHA interim CEO named",
+      "detail": "Mayor Wilson and King County Executive Girmay Zahilay recommended Mark Ellerbrook as interim CEO of the King County Regional Homelessness Authority. Ellerbrook is the Director of City Governance & Human Services in the mayor's office and would take a leave of absence from the city. The KCRHA Governing Board is scheduled to consider his appointment on Dec. 4. If it approves, he would start Dec. 7. His priorities would include overseeing the transfer of locally funded contracts from KCRHA back to King County and the City of Seattle, which is scheduled for Jan. 1, 2027.",
+      "sources": [
+        {
+          "title": "Mayor Wilson and Executive Zahilay announce King County Regional Homeless Authority interim CEO",
+          "url": "https://wilson.seattle.gov/2026/11/23/mayor-wilson-and-executive-zahilay-announce-king-county-regional-homeless-authority-interim-ceo/"
+        },
+        {
+          "title": "Mayor Wilson and Executive Zahilay nominate interim CEO for King County homelessness agency - MyNorthwest.com",
+          "url": "https://mynorthwest.com/mynorthwest-politics/king-county-agency-2/4303862"
+        },
+        {
+          "title": "Seattle mayor's top aide selected to lead embattled homeless authority - The Center Square",
+          "url": "https://www.yahoo.com/news/us/articles/seattle-mayors-top-aide-selected-004500030.html"
+        }
+      ]
+    },
+    {
+      "id": "e-2026-budget-to-mayor",
+      "date": "2026-11-23",
+      "date_precision": "day",
+      "type": "policy",
+      "title": "Adopted 2027–28 budget goes to the mayor for signature",
+      "short": "Budget to mayor",
+      "detail": "After the council's 7–2 vote on Nov. 20, the budget goes to Mayor Wilson. She has 10 days after receiving it to sign it, veto it or let it become law without her signature. The budget keeps the $37M for shelter expansion and funds a second RV safe lot. No signature or veto had been announced as of Nov. 26.",
+      "sources": [
+        {
+          "title": "Seattle City Council approves $9.1B budget for 2027 - Axios Seattle",
+          "url": "https://axios.com/local/seattle/2026/11/23/seattle-city-council-2027-budget-approved-spending"
         }
       ]
     }
